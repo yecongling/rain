@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: rainpro-system
+  profiles:
+    active: @profile.name@

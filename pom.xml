@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>rainPro-boot</module>
+        <module>rainPro-boot-module-system</module>
     </modules>
 
     <parent>
