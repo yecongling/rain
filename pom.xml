@@ -21,6 +21,7 @@
     </parent>
 
     <properties>
+        <rainPro-boot-version>1.0-SNAPSHOT</rainPro-boot-version>
         <jeecgboot.version>3.0</jeecgboot.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -140,14 +141,14 @@
                 <groupId>org.jeecgframework.boot</groupId>
                 <artifactId>jeecg-boot-base-tools</artifactId>
                 <version>${jeecgboot.version}</version>
-            </dependency>
-            &lt;!&ndash; jeecg core &ndash;&gt;
+            </dependency>-->
+            <!-- jeecg core &ndash;&gt;-->
             <dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-boot-base-core</artifactId>
-                <version>${jeecgboot.version}</version>
+                <groupId>cn.soft</groupId>
+                <artifactId>rainPro-boot-base-core</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
-            &lt;!&ndash; system 单体 api &ndash;&gt;
+            <!--&lt;!&ndash; system 单体 api &ndash;&gt;
             <dependency>
                 <groupId>org.jeecgframework.boot</groupId>
                 <artifactId>jeecg-system-local-api</artifactId>

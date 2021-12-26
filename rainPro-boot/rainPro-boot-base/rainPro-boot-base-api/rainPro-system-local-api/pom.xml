@@ -3,24 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>rainPro-boot-base</artifactId>
+        <artifactId>rainPro-boot-base-api</artifactId>
         <groupId>cn.soft</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rainPro-boot-base-api</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>rainPro-system-local-api</module>
-    </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>cn.soft</groupId>
-            <artifactId>rainPro-boot-base-core</artifactId>
-        </dependency>
-    </dependencies>
+    <artifactId>rainPro-system-local-api</artifactId>
 
 
 </project>
