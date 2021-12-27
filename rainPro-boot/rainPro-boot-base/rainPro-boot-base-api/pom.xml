@@ -10,6 +10,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>rainPro-boot-base-api</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>rainPro-system-local-api</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.soft</groupId>
+            <artifactId>rainPro-boot-base-core</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>
