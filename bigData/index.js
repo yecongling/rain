@@ -20,10 +20,10 @@
          * 创建雨滴背景
          */
         rainBg() {
-            var c = document.querySelector(".rain");
-            var ctx = c.getContext("2d");//获取canvas上下文
-            var w = c.width = document.querySelector('.main').clientWidth;
-            var h = c.height = document.querySelector('.main').clientHeight;
+            let c = document.querySelector(".rain");
+            let ctx = c.getContext("2d");//获取canvas上下文
+            let w = c.width = document.querySelector('.main').clientWidth;
+            let h = c.height = document.querySelector('.main').clientHeight;
             //设置canvas宽、高
 
             function random(min, max) {
@@ -43,7 +43,7 @@
                 },
                 draw: function () {
                     if (this.y > this.hit) {
-                        var linearGradient = ctx.createLinearGradient(this.x, this.y, this.x, this.y + this.size * 30)
+                        let linearGradient = ctx.createLinearGradient(this.x, this.y, this.x, this.y + this.size * 30)
                         // 设置起始颜色
                         linearGradient.addColorStop(0, '#14789c')
                         // 设置终止颜色
@@ -70,10 +70,10 @@
 
             //初始化一个雨滴
 
-            var rs = []
-            for (var i = 0; i < 10; i++) {
+            let rs = []
+            for (let i = 0; i < 10; i++) {
                 setTimeout(function () {
-                    var r = new RainDrop();
+                    let r = new RainDrop();
                     r.init();
                     rs.push(r);
                 }, i * 300)
@@ -81,7 +81,7 @@
 
             function anim() {
                 ctx.clearRect(0, 0, w, h);//填充背景色，注意不要用clearRect，否则会清空前面的雨滴，导致不能产生叠加的效果
-                for (var i = 0; i < rs.length; i++) {
+                for (let i = 0; i < rs.length; i++) {
                     rs[i].draw();//绘制雨滴
                 }
                 requestAnimationFrame(anim);//控制动画帧
@@ -103,11 +103,11 @@
          * 初始化饼图
          */
         initPieChart() {
-            var $this = this;
-            var ctx = document.getElementById('pieChart');
+            let $this = this;
+            let ctx = document.getElementById('pieChart');
             $this.pieChart = echarts.init(ctx);
 
-            var option = {
+            let option = {
                 tooltip: {
                     trigger: 'item'
                 },
