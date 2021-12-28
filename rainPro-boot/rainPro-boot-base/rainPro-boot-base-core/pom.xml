@@ -12,4 +12,176 @@
     <artifactId>rainPro-boot-base-core</artifactId>
 
 
+    <dependencies>
+        <!--集成springmvc框架并实现自动配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- websocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--springboot2.3+ 需引入validation对应的包-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- commons -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
+        <!-- freemarker -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <!-- mybatis-plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+
+        <!-- 动态数据源 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dynamic-datasource-spring-boot-starter.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>hibernate-re</artifactId>
+            <version>3.0.02</version>
+        </dependency>
+
+        <!-- 数据库驱动 -->
+        <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!--  sqlserver-->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>${sqljdbc4.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- oracle驱动 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${ojdbc6.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- postgresql驱动 -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Quartz定时任务 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+
+        <!--JWT-->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
+
+        <!--shiro-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-starter</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <!-- shiro-redis -->
+        <dependency>
+            <groupId>org.crazycake</groupId>
+            <artifactId>shiro-redis</artifactId>
+            <version>${shiro-redis.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- knife4j -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>${knife4j-spring-boot-starter.version}</version>
+        </dependency>
+
+        <!-- 代码生成器 -->
+        <!-- 如下载失败，请参考此文档  http://doc.jeecg.com/2043876 -->
+        <dependency>
+            <groupId>org.jeecgframework.boot</groupId>
+            <artifactId>codegenerate</artifactId>
+            <version>${codegenerate.version}</version>
+        </dependency>
+
+        <!-- AutoPoi Excel工具类-->
+        <dependency>
+            <groupId>org.jeecgframework</groupId>
+            <artifactId>autopoi-web</artifactId>
+            <version>${autopoi-web.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
 </project>
