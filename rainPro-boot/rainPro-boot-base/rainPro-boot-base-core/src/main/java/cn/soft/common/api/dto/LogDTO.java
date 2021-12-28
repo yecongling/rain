@@ -1,7 +1,7 @@
 package cn.soft.common.api.dto;
 
 import cn.soft.common.system.vo.LoginUser;
-import org.omg.CORBA.INTERNAL;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  * 日志对象
  */
+@Data
 public class LogDTO implements Serializable {
 
     private static final long serialVersionUID = -443260975545114535L;
@@ -67,5 +68,22 @@ public class LogDTO implements Serializable {
      * 操作人用户账户
      */
     private String userid;
+
+    public LogDTO(){
+
+    }
+
+    public LogDTO(String logContent, Integer logType, Integer operateType){
+        this.logContent = logContent;
+        this.logType = logType;
+        this.operateType = operateType;
+    }
+
+    public LogDTO(String logContent, Integer logType, Integer operateType, LoginUser loginUser){
+        this.logContent = logContent;
+        this.logType = logType;
+        this.operateType = operateType;
+        this.loginUser = loginUser;
+    }
 
 }
