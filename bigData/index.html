@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>大屏设计</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <!-- 顶部标题项 -->
+        <div class="header">
+            <!-- 标题 -->
+            <span class="title">集成平台</span>
+        </div>
+        <!-- 中间主题部分 -->
+        <div class="main">
+            <!-- 雨滴 -->
+            <canvas class="rain" width="1920" height="929"></canvas>
+            <!-- 左边的数据区域 -->
+            <div class="areaLeft">
+                <!-- 第一个内容区域 -->
+                <div class="content1">
+                    <!-- 标题 -->
+                    <div class="subTitle">概况统计</div>
+                    <!-- 所属内容边框 -->
+                    <div class="content1Block">
+                        <!-- 接入商数目 -->
+                        <div class="dataBlock">
+                            <!-- 四个角 -->
+                            <div class="angleBorder angleLeftTop"></div>
+                            <div class="angleBorder angleLeftBottom"></div>
+                            <div class="angleBorder angleRightTop"></div>
+                            <div class="angleBorder angleRightBottom"></div>
+                            <div class="dataTitle">接入商数目</div>
+                            <div class="dataNumber">30</div>
+                        </div>
+                        <!-- 应用系统数 -->
+                        <div class="dataBlock">
+                            <!-- 四个角 -->
+                            <div class="angleBorder angleLeftTop"></div>
+                            <div class="angleBorder angleLeftBottom"></div>
+                            <div class="angleBorder angleRightTop"></div>
+                            <div class="angleBorder angleRightBottom"></div>
+                            <div class="dataTitle">应用系统数</div>
+                            <div class="dataNumber">30</div>
+                        </div>
+                        <!-- 项目总数 -->
+                        <div class="dataBlock">
+                            <!-- 四个角 -->
+                            <div class="angleBorder angleLeftTop"></div>
+                            <div class="angleBorder angleLeftBottom"></div>
+                            <div class="angleBorder angleRightTop"></div>
+                            <div class="angleBorder angleRightBottom"></div>
+                            <div class="dataTitle">项目总数</div>
+                            <div class="dataNumber">30</div>
+                        </div>
+                        <!-- 未发布数 -->
+                        <div class="dataBlock">
+                            <!-- 四个角 -->
+                            <div class="angleBorder angleLeftTop"></div>
+                            <div class="angleBorder angleLeftBottom"></div>
+                            <div class="angleBorder angleRightTop"></div>
+                            <div class="angleBorder angleRightBottom"></div>
+                            <div class="dataTitle">未发布数</div>
+                            <div class="dataNumber">30</div>
+                        </div>
+                        <!-- 服务总数 -->
+                        <div class="dataBlock">
+                            <!-- 四个角 -->
+                            <div class="angleBorder angleLeftTop"></div>
+                            <div class="angleBorder angleLeftBottom"></div>
+                            <div class="angleBorder angleRightTop"></div>
+                            <div class="angleBorder angleRightBottom"></div>
+                            <div class="dataTitle">服务总数</div>
+                            <div class="dataNumber">30</div>
+                        </div>
+                        <!-- 标志服务数 -->
+                        <div class="dataBlock">
+                            <!-- 四个角 -->
+                            <div class="angleBorder angleLeftTop"></div>
+                            <div class="angleBorder angleLeftBottom"></div>
+                            <div class="angleBorder angleRightTop"></div>
+                            <div class="angleBorder angleRightBottom"></div>
+                            <div class="dataTitle">标志服务数</div>
+                            <div class="dataNumber">30</div>
+                        </div>
+                        <!-- 订阅服务 -->
+                        <div class="dataBlock">
+                            <!-- 四个角 -->
+                            <div class="angleBorder angleLeftTop"></div>
+                            <div class="angleBorder angleLeftBottom"></div>
+                            <div class="angleBorder angleRightTop"></div>
+                            <div class="angleBorder angleRightBottom"></div>
+                            <div class="dataTitle">订阅服务</div>
+                            <div class="dataNumber">30</div>
+                        </div>
+                        <!-- 服务异常数 -->
+                        <div class="dataBlock">
+                            <!-- 四个角 -->
+                            <div class="angleBorder angleLeftTop"></div>
+                            <div class="angleBorder angleLeftBottom"></div>
+                            <div class="angleBorder angleRightTop"></div>
+                            <div class="angleBorder angleRightBottom"></div>
+                            <div class="dataTitle">服务异常数</div>
+                            <div class="dataNumber">30</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第一个内容区域 -->
+                <div class="content2">
+                    <!-- 标题 -->
+                    <div class="subTitle">接入商接口分布</div>
+                    <!-- 所属内容边框 -->
+                    <div class="content2Block">
+                        <!-- 左边饼图区域 -->
+                        <div class="pieChart" id="pieChart"></div>
+                        <!-- 右边数据 -->
+                        <div class="pieDataArea">
+                            <div class="pieData">
+                                <div class="pieItem">
+                                    <!-- 颜色 -->
+                                    <div class="pieDiv"></div>
+                                    <!-- 数据名 -->
+                                    <div class="pieTitle">成都九天智信</div>
+                                    <!-- 数据值 -->
+                                    <div class="pieNum">40</div>
+                                </div>
+                                <div class="pieItem">
+                                    <!-- 颜色 -->
+                                    <div class="pieDiv"></div>
+                                    <!-- 数据名 -->
+                                    <div class="pieTitle">成都九天智信</div>
+                                    <!-- 数据值 -->
+                                    <div class="pieNum">40</div>
+                                </div>
+                                <div class="pieItem">
+                                    <!-- 颜色 -->
+                                    <div class="pieDiv"></div>
+                                    <!-- 数据名 -->
+                                    <div class="pieTitle">成都九天智信</div>
+                                    <!-- 数据值 -->
+                                    <div class="pieNum">40</div>
+                                </div>
+                        </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- 第一个内容区域 -->
+                <div class="content3">
+                    <!-- 标题 -->
+                    <div class="subTitle">服务调用分析</div>
+                    <!-- 所属内容边框 -->
+                    <div class="content3Block">
+                        
+                    </div>
+                </div>
+                <!-- 第一个内容区域 -->
+                <div class="content4">
+                    <!-- 标题 -->
+                    <div class="subTitle">消息处理监控</div>
+                    <!-- 所属内容边框 -->
+                    <div class="content4Block">
+
+                    </div>
+                </div>
+            </div>
+            <!-- 中间的整个图标区域 -->
+            <div class="areaCenter">
+                <!-- 第一排  两个div  编号1、2 -->
+                <div class="line1">
+                    <!-- 集成引擎 -->
+                    <div class="blockDiv1">
+                        <!-- 方块区域标题 -->
+                        <div class="blockTitle">集成引擎</div>
+                        <!-- 第一块div展示区域 -->
+                        <div class="div1">
+                            <!-- 圈 -->
+                            <div class="circle"></div>
+                            <!-- 编号 -->
+                            <div class="number">
+                                <div class="numberTitle">1</div>
+                            </div>
+                            <!-- 内容区域 -->
+                            <div class="content">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 预警动态 -->
+                    <div class="blockDiv2">
+                        <!-- 方块区域标题 -->
+                        <div class="blockTitle">预警动态</div>
+                        <!-- 第一块div展示区域 -->
+                        <div class="div2">
+                            <!-- 圈 -->
+                            <div class="circle"></div>
+                            <!-- 编号 -->
+                            <div class="number">
+                                <div class="numberTitle">2</div>
+                            </div>
+                            <!-- 内容区域 -->
+                            <div class="content">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第二排  三个div 编号3、4  中间配置球 -->
+                <div class="line2">
+                    <!-- 单点登录 -->
+                    <div class="blockDiv3">
+                        <!-- 方块区域标题 -->
+                        <div class="blockTitle">单点登录</div>
+                        <!-- 第一块div展示区域 -->
+                        <div class="div3">
+                            <!-- 圈 -->
+                            <div class="circle"></div>
+                            <!-- 编号 -->
+                            <div class="number">
+                                <div class="numberTitle">3</div>
+                            </div>
+                            <!-- 内容区域 -->
+                            <div class="content">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 中间球体区域 -->
+                    <div class="blockCenter">
+                        <!-- 最外层圈 -->
+                        <div class="outerCircle">
+                            <div class="circle2">
+                                <!-- 内层球 -->
+                                <div class="innerBal"></div>
+                            </div>
+                        </div>
+                        <!-- 文字 -->
+                        <div class="title">集成平台</div>
+                        
+                    </div>
+                    <!-- 接口服务 -->
+                    <div class="blockDiv4">
+                        <!-- 方块区域标题 -->
+                        <div class="blockTitle">接口服务</div>
+                        <!-- 第一块div展示区域 -->
+                        <div class="div4">
+                            <!-- 圈 -->
+                            <div class="circle"></div>
+                            <!-- 编号 -->
+                            <div class="number">
+                                <div class="numberTitle">4</div>
+                            </div>
+                            <!-- 内容区域 -->
+                            <div class="content">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 第三排  两个div 编号5、6 -->
+                <div class="line3">
+                    <!-- 订阅服务 -->
+                    <div class="blockDiv5">
+                        <!-- 方块区域标题 -->
+                        <div class="blockTitle">订阅服务</div>
+                        <!-- 第一块div展示区域 -->
+                        <div class="div5">
+                            <!-- 圈 -->
+                            <div class="circle"></div>
+                            <!-- 编号 -->
+                            <div class="number">
+                                <div class="numberTitle">5</div>
+                            </div>
+                            <!-- 内容区域 -->
+                            <div class="content">
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 安全审计 -->
+                    <div class="blockDiv6">
+                        <!-- 方块区域标题 -->
+                        <div class="blockTitle">安全审计</div>
+                        <!-- 第一块div展示区域 -->
+                        <div class="div6">
+                            <!-- 圈 -->
+                            <div class="circle"></div>
+                            <!-- 编号 -->
+                            <div class="number">
+                                <div class="numberTitle">6</div>
+                            </div>
+                            <!-- 内容区域 -->
+                            <div class="content">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 右边的内容区域 -->
+            <div class="areaRight">
+                <div class="content5">
+                    <!-- 标题 -->
+                    <div class="subTitle">平台运行监控</div>
+                    <!-- 所属内容边框 -->
+                    <div class="content5Block">
+
+                    </div>
+                </div>
+                
+                <div class="content6">
+                    <!-- 标题 -->
+                    <div class="subTitle">平台引擎负载</div>
+                    <!-- 所属内容边框 -->
+                    <div class="content6Block">
+
+                    </div>
+                </div>
+                
+                <div class="content7">
+                    <!-- 标题 -->
+                    <div class="subTitle">监控预警提示</div>
+                    <!-- 所属内容边框 -->
+                    <div class="content7Block">
+
+                    </div>
+                </div>
+                <!-- 链接跳转 -->
+                <div class="drop">
+                    
+                </div>
+                
+            </div>
+        </div>
+        <script src="jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="echarts.min.js" type="text/javascript"></script>
+        <script src="index.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.index.init();
+            });
+        </script>
+    </body>
+</html>

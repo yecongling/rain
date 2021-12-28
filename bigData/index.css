@@ -1,0 +1,572 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.rain {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -10;
+}
+
+@-webkit-keyframes rotate{
+    0%{-webkit-transform: rotate(0deg)}
+    25%{-webkit-transform: rotate(90deg)}
+    50%{-webkit-transform: rotate(180deg)}
+    75%{-webkit-transform: rotate(270deg)}
+    100%{-webkit-transform: rotate(360deg)}
+}
+
+@-webkit-keyframes rotate2{
+    0%{-webkit-transform: rotate(360deg)}
+    25%{-webkit-transform: rotate(270deg)}
+    50%{-webkit-transform: rotate(180deg)}
+    75%{-webkit-transform: rotate(90deg)}
+    100%{-webkit-transform: rotate(0deg)}
+}
+
+/* 1920x1080分辨率下的显示 */
+body {
+    background-image: url('images/background.png');
+}
+
+div.header {
+    background-image: url('images/header.png');
+    width: 100%;
+    height: 10%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-align: center;
+}
+
+span.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 10px;
+    display: inline-block;
+    background-image: -webkit-gradient( linear, 0 0, 0 bottom, from(rgb(25, 247, 228)), to(#d4fff7) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+div.main {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0 1.5%;
+}
+
+div.areaLeft {
+    width: 25%;
+    float: left;
+    height: 100%;
+    position: relative;
+}
+
+div.areaLeft div.subTitle, div.areaRight div.subTitle {
+    color: #d4fff7;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+div.areaLeft div.content1Block, div.areaLeft div.content2Block, 
+div.areaLeft div.content3Block, div.areaLeft div.content4Block,
+div.areaRight div.content5Block,div.areaRight div.content6Block,
+div.areaRight div.content7Block {
+    width: 100%;
+    height: calc(100% - 50px);
+    border: 3px solid #20a3f580;
+    border-radius: 6px;
+    background-image: url(images/blockBack.png);
+    background-repeat: no-repeat;
+    padding-top: 10px;
+    background-size: contain;
+}
+
+div.content1Block::after, div.content2Block::after, div.content3Block::after, 
+div.content4Block::after,div.content5Block::after,div.content6Block::after,div.content7Block::after {
+    content: url(images/blockTitle.png);
+    position: absolute;
+    top: 11px;
+    left: calc(50% - 116px);
+    float: left;
+}
+
+div.areaCenter {
+    width: calc(50% - 130px);
+    float: left;
+    height: calc(100% - 40px);
+    padding: 90px 60px;
+    position: relative;
+}
+
+div.areaRight {
+    width: 25%;
+    float: left;
+    height: 100%;
+    position: relative;
+}
+
+div.content1, div.content2, div.content3, div.content4 {
+    width: 100%;
+    min-height: 210px;
+    height: calc(25% - 8px);
+    margin-top: 6px;
+    position: relative;
+}
+
+div.content5 {
+    width: 100%;
+    min-height: 210px;
+    height: calc(28% - 8px);
+    margin-top: 6px;
+    position: relative;
+}
+
+div.content6 {
+    width: 100%;
+    min-height: 210px;
+    height: calc(30% - 8px);
+    margin-top: 6px;
+    position: relative;
+}
+
+div.content7 {
+    width: 100%;
+    min-height: 210px;
+    height: calc(35% - 8px);
+    margin-top: 6px;
+    position: relative;
+}
+
+div.areaCenter div.line1, div.areaCenter div.line3 {
+    width: 100%;
+    height: 25%;
+}
+
+div.areaCenter div.line2 {
+    width: 100%;
+    height: calc(36% - 32px);
+}
+
+div.blockTitle {
+    color: #d4fff7;
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+div.blockDiv2 div.blockTitle {
+    text-align: right;
+    padding-right: 28%;
+}
+
+div.blockDiv1 div.blockTitle {
+    padding-left: 28%;
+}
+
+div.blockDiv3 div.blockTitle {
+    text-align: right;
+}
+
+div.blockDiv4 div.blockTitle {
+    text-align: left;
+}
+
+div.blockDiv5 div.blockTitle {
+    padding-left: 10%;
+}
+
+div.blockDiv6 div.blockTitle {
+    padding-right: 10%;
+}
+
+div.areaCenter div.line1 div.blockDiv1, div.areaCenter div.line3 div.blockDiv5 {
+    width: 50%;
+    float: left;
+    height: calc(100% - 12px);
+}
+
+div.areaCenter div.line1 div.blockDiv1 div.div1 {
+    background-image: url('images/div1.png');
+    width: 80%;
+    height: calc(100% - 30px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    margin-left: 10%;
+    position: relative;
+}
+
+div.circle {
+    width: 6.5rem;
+    height: 6.5rem;
+    z-index: -1;
+    background-image: url(images/scannerCircle.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+div.areaCenter div.line1 div.blockDiv1 div.div1 div.circle {
+    position: absolute;
+    left: -8%;
+    top: -8%;
+    float: left;
+}
+
+div.areaCenter div.line1 div.blockDiv2 div.div2 div.circle {
+    right: -6%;
+    top: -6%;
+    float: right;
+    position: relative;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.circle {
+    left: -14%;
+    top: 68%;
+    float: left;
+    position: absolute;
+}
+
+div.areaCenter div.line2 div.blockDiv4 div.div4 div.circle {
+    right: -14%;
+    top: 68%;
+    float: right;
+    position: absolute;
+}
+
+div.areaCenter div.line3 div.blockDiv5 div.div5 div.circle {
+    left: -6%;
+    top: 50%;
+    float: left;
+    position: absolute;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.div6 div.circle {
+    right: -5%;
+    top: 50%;
+    float: right;
+    position: absolute;
+}
+
+div.number {
+    width: 6rem;
+    height: 6rem;
+    background-image: url(images/scanner.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation: rotate 5s linear infinite;
+    display: inline-block;
+}
+
+div.areaCenter div.line1 div.blockDiv1 div.div1 div.number {
+    position: absolute;
+    left: -7%;
+    top: -7%;
+}
+
+div.areaCenter div.line1 div.blockDiv2 div.div2 div.number {
+    position: absolute;
+    right: -5%;
+    top: -4%;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.number {
+    position: relative;
+    top: 70%;
+    left: -12%;
+}
+
+div.areaCenter div.line2 div.blockDiv4 div.div4 div.number {
+    position: absolute;
+    top: 70%;
+    right: -12%;
+}
+
+div.areaCenter div.line3 div.blockDiv5 div.div5 div.number {
+    position: relative;
+    left: -5%;
+    top: 52%;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.div6 div.number {
+    position: absolute;
+    top: 52%;
+    right: -4%;
+}
+
+div.areaCenter div.line3 div.blockDiv5 div.div5 {
+    background-image: url('images/div5.png');
+    width: 80%;
+    height: calc(100% - 30px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    position: relative;
+    margin-left: 10%;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.div6 {
+    background-image: url('images/div6.png');
+    width: 80%;
+    height: calc(100% - 30px);
+    float: right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    margin-right: 10%;
+    position: relative;
+}
+
+div.areaCenter div.line1 div.blockDiv2, div.areaCenter div.line3 div.blockDiv6 {
+    width: 50%;
+    height: calc(100% - 12px);
+    float: right;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.blockTitle {
+    text-align: right;
+}
+
+div.areaCenter div.line1 div.blockDiv2 div.div2 {
+    background-image: url(images/div2.png);
+    width: 80%;
+    float: right;
+    height: calc(100% - 30px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    position: relative;
+    margin-right: 10%;
+}
+/* 中间部分 */
+div.areaCenter div.line2 div.blockDiv3 {
+    width: 31%;
+    height: calc(100% - 72px);
+    float: left;
+    padding-top: 20px;
+}
+
+div.blockCenter {
+    width: 38%;
+    height: 100%;
+    float: left;
+    position: relative;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 {
+    background-image: url('images/div3.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: calc(100% - 30px);
+    position: relative;
+    background-position: center;
+}
+
+div.areaCenter div.line2 div.blockDiv4 {
+    width: 31%;
+    height: calc(100% - 72px);
+    float: right;
+    padding-top: 20px;
+}
+
+div.areaCenter div.line2 div.blockDiv4 div.div4 {
+    background-image: url('images/div4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: calc(100% - 30px);
+    position: relative;
+    background-position: center;
+}
+
+div.areaCenter div.outerCircle {
+    background-image: url(images/circle3.png);
+    width: 100%;
+    background-size: contain;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    -webkit-animation: rotate2 10s linear infinite;
+    animation: rotate2 10s linear infinite;
+}
+
+div.areaCenter div.circle2 {
+    background-image: url(images/circle2.png);
+    width: 80%;
+    background-size: contain;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    -webkit-animation: rotate 5s linear infinite;
+    animation: rotate 5s linear infinite;
+}
+
+div.areaCenter div.innerBal {
+    background-image: url(images/bal.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 85%;
+    background-position: center;
+    height: 100%;
+    margin: 0 auto;
+    -webkit-animation: rotate2 10s linear infinite;
+    animation: rotate2 10s linear infinite;
+}
+
+div.areaCenter div.title {
+    font-size: 2rem;
+    font-weight: 700;
+    width: 100%;
+    top: calc(50% - 21px);
+    position: absolute;
+    text-align: center;
+    background-image: -webkit-gradient( linear, 0 0, 0 bottom, from(rgb(25, 247, 228)), to(#d4fff7) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+div.numberTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    width: 100%;
+    top: calc(50% - 21px);
+    position: relative;
+    text-align: center;
+    background-image: -webkit-gradient( linear, 0 0, 0 bottom, from(rgb(25, 247, 228)), to(#d4fff7) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rotate2 5s linear infinite;
+}
+
+div.drop {
+    width: 100%;
+    height: 70px;
+}
+
+/* 内容设置 */
+
+div.dataBlock {
+    width: calc(25% - 20px);
+    float: left;
+    height: calc(50% - 30px);
+    margin: 10px;
+    text-align: center;
+    background-color: #054072;
+    position: relative;
+    padding-top: 10px;
+}
+
+div.angleBorder {
+    z-index: 2500;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(0,0,0,0);
+    border: 2px solid #23d5ff;
+}
+
+div.angleLeftTop {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+}
+
+div.angleLeftBottom {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 4px;
+}
+
+div.angleRightTop {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 4px;
+}
+
+div.angleRightBottom {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 4px;
+}
+
+div.dataBlock div.dataTitle {
+    font-size: 16px;
+    color: #fff;
+}
+
+div.dataBlock div.dataNumber {
+    font-size: 28px;
+    color: #1bb0d3;
+}
+
+div.pieChart {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+div.pieDataArea {
+    width: 50%;
+    height: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.pieData {
+    width: 100%;
+    height: auto;
+}
+
+div.pieData div.pieItem {
+    width: 100%;
+    display: inline-block;
+}
+
+div.pieData div.pieDiv {
+    width: 40px;
+    height: 20px;
+    display: inline-block;
+    background-color: #80ebd790;
+}
+
+div.pieData div.pieTitle {
+    width: calc(70% - 40px);
+    height: auto;
+    min-height: 20px;
+    display: inline-block;
+    font-size: 18px;
+    color: #cbc1c1;
+}
+
+div.pieData div.pieNum {
+    width: calc(30% - 40px);
+    height: auto;
+    min-height: 20px;
+    display: inline-block;
+    font-size: 20px;
+    color: #cbc1c1;
+}
