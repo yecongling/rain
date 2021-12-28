@@ -154,13 +154,13 @@
                     <div class="content3Block">
                         <!-- 筛选条件 -->
                         <div class="queryCondition">
-                            <select class="query" id="query">
+                            <select class="query" id="queryService">
                                 <option value="1">前五位</option>
                                 <option value="2">前十位</option>
                             </select>
                         </div>
                         <!-- 服务的柱形图 -->
-                        <div class="ServiceBar">
+                        <div class="serviceBar" id="serviceBar">
 
                         </div>
                     </div>
@@ -171,7 +171,15 @@
                     <div class="subTitle">消息处理监控</div>
                     <!-- 所属内容边框 -->
                     <div class="content4Block">
-
+                        <!-- 筛选条件 -->
+                        <div class="queryCondition">
+                            <select class="query" id="queryMsg">
+                                <option value="1">近30分钟</option>
+                                <option value="2">近一天</option>
+                            </select>
+                        </div>
+                        <!-- 消息处理监控的折线图 -->
+                        <div class="msgLine" id="msgLine"></div>
                     </div>
                 </div>
             </div>

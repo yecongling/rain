@@ -120,10 +120,17 @@ div.areaRight {
 
 div.content1, div.content2, div.content3, div.content4 {
     width: 100%;
-    min-height: 210px;
+    min-height: 186px;
     height: calc(25% - 8px);
     margin-top: 6px;
     position: relative;
+}
+
+div.content4 {
+    height: calc(30% - 8px);
+}
+div.content3 {
+    height: calc(20% - 8px);
 }
 
 div.content5 {
@@ -573,7 +580,7 @@ div.pieData div.pieNum {
 }
 
 div.queryCondition {
-    float: right;
+    text-align: right;
     margin-right: 20px;
     background-color: #071d3a;
     color: #fff;
@@ -594,4 +601,14 @@ div.queryCondition select:focus {
 div.queryCondition select:active {
     border: none;
     outline: none;
+}
+
+div.serviceBar {
+    width: 100%;
+    height: calc(100% - 25px);
+}
+
+div.msgLine {
+    width: 100%;
+    height: calc(100% - 25px);
 }
