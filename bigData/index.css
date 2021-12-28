@@ -612,3 +612,38 @@ div.msgLine {
     width: 100%;
     height: calc(100% - 25px);
 }
+
+div.monitorTitle {
+    padding-left: 20px;
+}
+
+div.monitorTitle div.title {
+    display: inline-block;
+    font-size: 18px;
+    color: #fff;
+}
+
+div.monitorTitle div.count {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+div.monitorTitle div.count div {
+    display: inline-block;
+}
+
+div.monitorTitle div.count div.allCount {
+    font-size: 20px;
+    color: #00A0E9;
+}
+
+div.monitorTitle div.count div.errCount {
+    font-size: 20px;
+    color: #e83b3b;
+}
+
+div.monitorTitle div.count div.divide {
+    width: 1px;
+    height: 14px;
+    border-right: 2px solid #00A0E9;
+}

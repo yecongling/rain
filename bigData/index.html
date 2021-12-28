@@ -155,8 +155,8 @@
                         <!-- 筛选条件 -->
                         <div class="queryCondition">
                             <select class="query" id="queryService">
-                                <option value="1">前五位</option>
-                                <option value="2">前十位</option>
+                                <option value="1">前三位</option>
+                                <option value="2">前五位</option>
                             </select>
                         </div>
                         <!-- 服务的柱形图 -->
@@ -323,7 +323,33 @@
                     <div class="subTitle">平台运行监控</div>
                     <!-- 所属内容边框 -->
                     <div class="content5Block">
-
+                        <!-- 监控标题和基础数据 -->
+                        <div class="monitorTitle">
+                            <!-- 三角图标 -->
+                            <span style="color: #fff">（图标）</span>
+                            <!-- 标题 -->
+                            <div class="title">监控对象种类（4种）</div>
+                            <!-- 总计数 -->
+                            <div class="count">
+                                <div class="allCount">1200</div>
+                                <div class="divide"></div>
+                                <div class="errCount">8</div>
+                            </div>
+                        </div>
+                        <!-- 监控种类 -->
+                        <div class="monitorType"></div>
+                        <!-- 监控数据 -->
+                        <div class="monitorData">
+                            <!-- 分四个种类 -->
+                            <!-- 监控服务器 -->
+                            <div class="monitorItem monitorServer"></div>
+                            <!-- 监控应用服务 -->
+                            <div class="monitorItem monitorApplication"></div>
+                            <!-- 监控数据库 -->
+                            <div class="monitorItem monitorDatabase"></div>
+                            <!-- 监控引擎 -->
+                            <div class="monitorItem monitorEngine"></div>
+                        </div>
                     </div>
                 </div>
                 
