@@ -571,3 +571,27 @@ div.pieData div.pieNum {
     font-size: 20px;
     color: #cbc1c1;
 }
+
+div.queryCondition {
+    float: right;
+    margin-right: 20px;
+    background-color: #071d3a;
+    color: #fff;
+    border: none;
+}
+
+div.queryCondition select {
+    background-color: #071d3a;
+    color: #fff;
+    border: none;
+}
+
+div.queryCondition select:focus {
+    border: none;
+    outline: none;
+}
+
+div.queryCondition select:active {
+    border: none;
+    outline: none;
+}
