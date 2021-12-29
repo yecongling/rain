@@ -11,6 +11,8 @@
         serviceBar: null,
         // 消息处理折线图
         msgLine: null,
+        // 引擎负载折线图
+        engineLine: null,
         /**
          * 初始化
          */
@@ -20,6 +22,8 @@
             this.initPieChart();
             this.initServiceBar();
             this.initMsgLine();
+            this.initEngineLine();
+            this.initEvent();
         },
 
         /**
@@ -253,6 +257,110 @@
                     ]
                 });
             }, 1000);
+        },
+
+        /**
+         * 初始化引擎负载折线图
+         */
+        initEngineLine() {
+            let $this = this;
+            let ctx = document.getElementById('engineLine');
+            $this.engineLine = echarts.init(ctx);
+            function randomData() {
+                now = new Date(+now + oneDay);
+                value = value + Math.random() * 21 - 10;
+                return {
+                    name: now.toString(),
+                    value: [
+                        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                        Math.round(value)
+                    ]
+                };
+            }
+            let data = [];
+            let now = new Date(1997, 9, 3);
+            let oneDay = 24 * 3600 * 1000;
+            let value = Math.random() * 1000;
+            for (let i = 0; i < 1000; i++) {
+                data.push(randomData());
+            }
+            let option = {
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        params = params[0];
+                        let date = new Date(params.name);
+                        return (
+                            date.getDate() +
+                            '/' +
+                            (date.getMonth() + 1) +
+                            '/' +
+                            date.getFullYear() +
+                            ' : ' +
+                            params.value[1]
+                        );
+                    },
+                    axisPointer: {
+                        animation: false
+                    }
+                },
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        color: '#fff'
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, '100%'],
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        color: '#fff'
+                    }
+                },
+                series: [
+                    {
+                        name: 'Fake Data',
+                        type: 'line',
+                        showSymbol: false,
+                        data: data,
+                        itemStyle: {
+                            color: '#fff'
+                        }
+                    }
+                ]
+            };
+            $this.engineLine.setOption(option);
+            setInterval(function () {
+                for (let i = 0; i < 5; i++) {
+                    data.shift();
+                    data.push(randomData());
+                }
+                $this.engineLine.setOption({
+                    series: [
+                        {
+                            data: data
+                        }
+                    ]
+                });
+            }, 1000);
+        },
+        /**
+         * 初始化时间
+         */
+        initEvent() {
+            let $this = this;
+            // 绑定echarts resize事件
+            window.onresize = function () {
+                $this.pieChart && $this.pieChart.resize();
+                $this.msgLine && $this.msgLine.resize();
+                $this.engineLine && $this.engineLine.resize();
+            }
         }
 
     });
