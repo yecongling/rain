@@ -17,7 +17,7 @@
          * 初始化
          */
         init() {
-            this.rainBg();
+            // this.rainBg();
             this.initWebSocket();
             this.initPieChart();
             this.initServiceBar();

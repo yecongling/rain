@@ -31,7 +31,7 @@
                             <div class="angleBorder angleLeftBottom"></div>
                             <div class="angleBorder angleRightTop"></div>
                             <div class="angleBorder angleRightBottom"></div>
-                            <div class="dataTitle">接入商数目</div>
+                            <div class="dataTitle">接入商</div>
                             <div class="dataNumber">30</div>
                         </div>
                         <!-- 应用系统数 -->
@@ -41,8 +41,8 @@
                             <div class="angleBorder angleLeftBottom"></div>
                             <div class="angleBorder angleRightTop"></div>
                             <div class="angleBorder angleRightBottom"></div>
-                            <div class="dataTitle">应用系统数</div>
-                            <div class="dataNumber">30</div>
+                            <div class="dataTitle">应用系统</div>
+                            <div class="dataNumber">10</div>
                         </div>
                         <!-- 项目总数 -->
                         <div class="dataBlock">
@@ -51,8 +51,8 @@
                             <div class="angleBorder angleLeftBottom"></div>
                             <div class="angleBorder angleRightTop"></div>
                             <div class="angleBorder angleRightBottom"></div>
-                            <div class="dataTitle">项目总数</div>
-                            <div class="dataNumber">30</div>
+                            <div class="dataTitle">项目数</div>
+                            <div class="dataNumber">45</div>
                         </div>
                         <!-- 未发布数 -->
                         <div class="dataBlock">
@@ -61,8 +61,8 @@
                             <div class="angleBorder angleLeftBottom"></div>
                             <div class="angleBorder angleRightTop"></div>
                             <div class="angleBorder angleRightBottom"></div>
-                            <div class="dataTitle">未发布数</div>
-                            <div class="dataNumber">30</div>
+                            <div class="dataTitle">未发布</div>
+                            <div class="dataNumber">12</div>
                         </div>
                         <!-- 服务总数 -->
                         <div class="dataBlock">
@@ -72,7 +72,7 @@
                             <div class="angleBorder angleRightTop"></div>
                             <div class="angleBorder angleRightBottom"></div>
                             <div class="dataTitle">服务总数</div>
-                            <div class="dataNumber">30</div>
+                            <div class="dataNumber">112</div>
                         </div>
                         <!-- 标志服务数 -->
                         <div class="dataBlock">
@@ -81,8 +81,8 @@
                             <div class="angleBorder angleLeftBottom"></div>
                             <div class="angleBorder angleRightTop"></div>
                             <div class="angleBorder angleRightBottom"></div>
-                            <div class="dataTitle">标志服务数</div>
-                            <div class="dataNumber">30</div>
+                            <div class="dataTitle">标准服务</div>
+                            <div class="dataNumber">3</div>
                         </div>
                         <!-- 订阅服务 -->
                         <div class="dataBlock">
@@ -92,7 +92,7 @@
                             <div class="angleBorder angleRightTop"></div>
                             <div class="angleBorder angleRightBottom"></div>
                             <div class="dataTitle">订阅服务</div>
-                            <div class="dataNumber">30</div>
+                            <div class="dataNumber">23</div>
                         </div>
                         <!-- 服务异常数 -->
                         <div class="dataBlock">
@@ -101,7 +101,7 @@
                             <div class="angleBorder angleLeftBottom"></div>
                             <div class="angleBorder angleRightTop"></div>
                             <div class="angleBorder angleRightBottom"></div>
-                            <div class="dataTitle">服务异常数</div>
+                            <div class="dataTitle">异常服务</div>
                             <div class="dataNumber">30</div>
                         </div>
                     </div>
@@ -149,16 +149,16 @@
                 <!-- 第一个内容区域 -->
                 <div class="content3">
                     <!-- 标题 -->
-                    <div class="subTitle">服务调用分析</div>
+                    <div class="subTitle">服务调用前五位分析</div>
                     <!-- 所属内容边框 -->
                     <div class="content3Block">
                         <!-- 筛选条件 -->
-                        <div class="queryCondition">
+                        <!--<div class="queryCondition">
                             <select class="query" id="queryService">
                                 <option value="1">前三位</option>
                                 <option value="2" selected>前五位</option>
                             </select>
-                        </div>
+                        </div>-->
                         <!-- 服务的柱形图 -->
                         <div class="serviceBar" id="serviceBar">
                             <!-- 单个服务的显示 -->
@@ -175,7 +175,7 @@
                                 <!-- 标题 -->
                                 <div class="serviceTitle">患者查询服务</div>
                                 <!-- 柱状 -->
-                                <div class="serviceColumn"></div>
+                                <div class="serviceColumn" style="width: 15%;"></div>
                                 <!-- 数据 -->
                                 <div class="serviceCount">200</div>
                             </div>
@@ -193,7 +193,7 @@
                                 <!-- 标题 -->
                                 <div class="serviceTitle">患者信息2</div>
                                 <!-- 柱状 -->
-                                <div class="serviceColumn"></div>
+                                <div class="serviceColumn" style="width: 10%"></div>
                                 <!-- 数据 -->
                                 <div class="serviceCount">100</div>
                             </div>
@@ -202,9 +202,9 @@
                                 <!-- 标题 -->
                                 <div class="serviceTitle">患者信息服务</div>
                                 <!-- 柱状 -->
-                                <div class="serviceColumn"></div>
+                                <div class="serviceColumn" style="width: 25%"></div>
                                 <!-- 数据 -->
-                                <div class="serviceCount">1800</div>
+                                <div class="serviceCount">1400</div>
                             </div>
                         </div>
                     </div>
@@ -244,11 +244,25 @@
                                 <div class="numberTitle">1</div>
                             </div>
                             <!-- 内容区域 -->
-                            <div class="content">
-                                <ul>
-                                    <li class="text">集成项目数</li>
-                                    <li class="data">43</li>
-                                </ul>
+                            <div class="contentBlock content">
+                                <div class="contentDiv">
+                                    <ul>
+                                        <li class="text">集成项目数</li>
+                                        <li class="data">43</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">终端数</li>
+                                        <li class="data">143</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">发送消息数</li>
+                                        <li class="data">1244343</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">接收消息数</li>
+                                        <li class="data">4342343</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -265,8 +279,21 @@
                                 <div class="numberTitle">2</div>
                             </div>
                             <!-- 内容区域 -->
-                            <div class="content">
-
+                            <div class="contentBlock content">
+                                <div class="contentDiv">
+                                    <ul>
+                                        <li class="text">未处理</li>
+                                        <li class="data">43</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">已处理</li>
+                                        <li class="data">144543</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">延时/超时</li>
+                                        <li class="data">343</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -286,8 +313,25 @@
                                 <div class="numberTitle">3</div>
                             </div>
                             <!-- 内容区域 -->
-                            <div class="content">
-
+                            <div class="contentBlock content">
+                                <div class="contentDiv">
+                                    <ul>
+                                        <li class="text">应用系统</li>
+                                        <li class="data">43</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">权限组</li>
+                                        <li class="data">143</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">医务人员</li>
+                                        <li class="data">14343</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">在线人数</li>
+                                        <li class="data">2343</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -317,8 +361,25 @@
                                 <div class="numberTitle">4</div>
                             </div>
                             <!-- 内容区域 -->
-                            <div class="content">
-
+                            <div class="contentBlock content">
+                                <div class="contentDiv">
+                                    <ul>
+                                        <li class="text">应用系统</li>
+                                        <li class="data">43</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">权限组</li>
+                                        <li class="data">143</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">医务人员</li>
+                                        <li class="data">14343</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">在线人数</li>
+                                        <li class="data">2343</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -338,8 +399,21 @@
                                 <div class="numberTitle">5</div>
                             </div>
                             <!-- 内容区域 -->
-                            <div class="content">
-
+                            <div class="contentBlock content">
+                                <div class="contentDiv">
+                                    <ul>
+                                        <li class="text">订阅目录</li>
+                                        <li class="data">43</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">订阅服务</li>
+                                        <li class="data">143</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">被订阅数</li>
+                                        <li class="data">0</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -356,8 +430,21 @@
                                 <div class="numberTitle">6</div>
                             </div>
                             <!-- 内容区域 -->
-                            <div class="content">
-
+                            <div class="contentBlock content">
+                                <div class="contentDiv">
+                                    <ul>
+                                        <li class="text">注册用户</li>
+                                        <li class="data">43</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">锁定用户</li>
+                                        <li class="data">143</li>
+                                    </ul>
+                                    <ul>
+                                        <li class="text">活跃用户</li>
+                                        <li class="data">0</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -373,7 +460,7 @@
                         <!-- 监控标题和基础数据 -->
                         <div class="monitorTitle">
                             <!-- 三角图标 -->
-                            <span style="color: #fff">（图标）</span>
+                            <span class="monitorAngle"></span>
                             <!-- 标题 -->
                             <div class="title">监控对象种类（4种）</div>
                             <!-- 总计数 -->
@@ -413,7 +500,7 @@
                             <div class="monitorItem monitorServer">
                                 <!-- 分三块 -->
                                 <!-- 图标 -->
-                                <div class="monitorIcon">
+                                <div class="monitorIcon serverIcon">
                                     <!-- 四个角 -->
                                     <div class="angle leftTop"></div>
                                     <div class="angle leftBottom"></div>
@@ -438,7 +525,7 @@
                             <div class="monitorItem monitorApplication">
                                 <!-- 分三块 -->
                                 <!-- 图标 -->
-                                <div class="monitorIcon">
+                                <div class="monitorIcon applicationIcon">
                                     <!-- 四个角 -->
                                     <div class="angle leftTop"></div>
                                     <div class="angle leftBottom"></div>
@@ -462,7 +549,7 @@
                             <div class="monitorItem monitorDatabase">
                                 <!-- 分三块 -->
                                 <!-- 图标 -->
-                                <div class="monitorIcon">
+                                <div class="monitorIcon databaseIcon">
                                     <!-- 四个角 -->
                                     <div class="angle leftTop"></div>
                                     <div class="angle leftBottom"></div>
@@ -487,7 +574,7 @@
                             <div class="monitorItem monitorEngine">
                                 <!-- 分三块 -->
                                 <!-- 图标 -->
-                                <div class="monitorIcon">
+                                <div class="monitorIcon engineIcon">
                                     <!-- 四个角 -->
                                     <div class="angle leftTop"></div>
                                     <div class="angle leftBottom"></div>
@@ -605,7 +692,14 @@
                 </div>
                 <!-- 链接跳转 -->
                 <div class="drop">
-                    
+                    <!-- 集成平台 -->
+                    <div class="leftDivide"></div>
+                    <div class="engineHref">
+                        <span class="engineTitle">集成平台展示</span>
+                        <span class="triangle"></span>
+                    </div>
+                    <!-- 地球 -->
+                    <div class="global"></div>
                 </div>
                 
             </div>

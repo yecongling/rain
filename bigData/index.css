@@ -170,10 +170,10 @@ div.content1, div.content2, div.content3, div.content4 {
 }
 
 div.content4 {
-    height: calc(30% - 8px);
+    height: calc(28% - 8px);
 }
 div.content3 {
-    height: calc(20% - 8px);
+    height: calc(22% - 8px);
 }
 
 div.content5 {
@@ -256,6 +256,112 @@ div.areaCenter div.line1 div.blockDiv1 div.div1 {
     background-position: left;
     margin-left: 10%;
     position: relative;
+}
+
+div.areaCenter div.contentBlock {
+    font-size: 18px;
+    color: #e1e1e1;
+}
+
+div.areaCenter div.contentBlock div.contentDiv {
+    width: 100%;
+}
+
+div.areaCenter div.contentBlock ul {
+    width: 100%;
+    padding-bottom: 0;
+    overflow: hidden;
+    display: flex;
+}
+
+div.areaCenter div.contentBlock ul li {
+    float: left;
+    padding: 2px 0;
+    margin-right: 6px;
+    text-align: left;
+    list-style: none;
+}
+
+div.areaCenter div.contentBlock ul li.text {
+    width: 50%;
+}
+
+div.areaCenter div.contentBlock ul li.data {
+    width: 35%;
+    text-align: right;
+}
+
+div.areaCenter div.line1 div.blockDiv1 div.div1 div.content{
+    margin-left: 6rem;
+    width: calc(100% - 6rem);
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line1 div.blockDiv2 div.div2 div.content{
+    margin-right: 6rem;
+    margin-left: 2rem;
+    width: calc(100% - 6rem);
+    height: 100%;
+    float: left;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.content {
+    margin-left: -5rem;
+    width: calc(100% - 1rem);
+    height: 100%;
+    display: inline-flex;
+    align-items: start;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line2 div.blockDiv4 div.div4 div.content {
+    margin-right: 1rem;
+    margin-left: 2rem;
+    width: calc(100% - 6rem);
+    height: 100%;
+    float: right;
+    display: inline-flex;
+    align-items: start;
+    justify-content: center;
+}
+
+div.areaCenter div.line3 div.blockDiv5 div.div5 div.content {
+    width: calc(100% - 6rem);
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.div6 div.content {
+    margin-right: 6rem;
+    margin-left: 2rem;
+    width: calc(100% - 6rem);
+    height: 100%;
+    float: left;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.content ul li.text {
+    width: 35%;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.content div.contentDiv,
+div.areaCenter div.line2 div.blockDiv4 div.div4 div.content div.contentDiv{
+    margin-top: 1rem;
 }
 
 div.circle {
@@ -381,7 +487,7 @@ div.areaCenter div.line3 div.blockDiv6 div.div6 {
 div.areaCenter div.line1 div.blockDiv2, div.areaCenter div.line3 div.blockDiv6 {
     width: 50%;
     height: calc(100% - 12px);
-    float: right;
+    float: left;
 }
 
 div.areaCenter div.line3 div.blockDiv6 div.blockTitle {
@@ -464,7 +570,7 @@ div.areaCenter div.circle2 {
 }
 
 div.areaCenter div.innerBal {
-    background-image: url(images/bal.png);
+    background-image: url(images/bal1.png);
     background-repeat: no-repeat;
     background-size: contain;
     width: 85%;
@@ -505,6 +611,9 @@ div.numberTitle {
 div.drop {
     width: 100%;
     height: 70px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* 内容设置 */
@@ -563,7 +672,7 @@ div.angleRightBottom {
 
 div.dataBlock div.dataTitle {
     font-size: 16px;
-    color: #fff;
+    color: #e1e1e1;
 }
 
 div.dataBlock div.dataNumber {
@@ -626,13 +735,13 @@ div.queryCondition {
     text-align: right;
     margin-right: 20px;
     background-color: #071d3a;
-    color: #fff;
+    color: #e1e1e1;
     border: none;
 }
 
 div.queryCondition select {
     background-color: #071d3a;
-    color: #fff;
+    color: #e1e1e1;
     border: none;
 }
 
@@ -648,20 +757,20 @@ div.queryCondition select:active {
 
 div.serviceBar {
     width: 100%;
-    height: calc(100% - 25px);
+    height: 100%;
     overflow: hidden;
+    margin-top: 4px;
 }
 
 div.serviceBar div.serviceItem {
     width: 100%;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: 0 10px;
-    font-size: 18px;
-    color: #fff;
+    font-size: 16px;
+    color: #e1e1e1;
     margin: 4px 0;
     top: 0;
-    -webkit-animation:scrollText1 8s infinite;
-    animation:scrollText1 8s infinite;
 }
 
 div.serviceBar div.serviceItem div {
@@ -678,7 +787,7 @@ div.serviceBar div.serviceItem div.serviceTitle {
 
 div.serviceBar div.serviceItem div.serviceColumn {
     width: 40%;
-    height: 20px;
+    height: 14px;
     border-radius: 10px;
     background-image: linear-gradient(to right, rgb(10 203 186), #adede1);
 }
@@ -695,7 +804,7 @@ div.monitorTitle {
 div.monitorTitle div.title {
     display: inline-block;
     font-size: 20px;
-    color: #fff;
+    color: #e1e1e1;
 }
 
 div.monitorTitle div.count {
@@ -720,6 +829,7 @@ div.monitorTitle div.count div.errCount {
 div.monitorTitle div.count div.divide {
     width: 1px;
     height: 14px;
+    margin: 0 4px;
     border-right: 2px solid #00A0E9;
 }
 
@@ -802,6 +912,24 @@ div.content5Block div.monitorData div.monitorItem div.monitorIcon {
     height: 40px;
     display: inline-block;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+div.content5Block div.monitorData div.monitorItem div.serverIcon {
+    background-image: url("images/server.png");
+}
+
+div.content5Block div.monitorData div.monitorItem div.applicationIcon {
+    background-image: url("images/application.png");
+}
+
+div.content5Block div.monitorData div.monitorItem div.databaseIcon {
+    background-image: url("images/database.png");
+}
+
+div.content5Block div.monitorData div.monitorItem div.engineIcon {
+    background-image: url("images/engine.png");
 }
 
 /* cube中的四个角 */
@@ -848,13 +976,13 @@ div.content5Block div.monitorData div.monitorItem div.monitorIcon div.rightBotto
 }
 div.content5Block div.monitorData div.monitorItem div.content {
     width: calc(100% - 70px);
-    height: calc(100% - 20px);
     display: inline-block;
     padding: 0 10px;
 }
 
 div.content5Block div.monitorData div.monitorItem div.content div.description {
-    color: #fff;
+    color: #e1e1e1;
+    font-size: 14px;
 }
 
 div.content5Block div.monitorData div.monitorItem div.content div.data {
@@ -940,12 +1068,12 @@ div.content7Block div.warningContent ul.rolling li.warningLevel {
 div.content7Block div.warningContent ul.rolling li.warningLevel div.levelDiv {
     width: 40px;
     height: 25px;
-    color: #fff;
+    color: #e1dede;
     font-size: 14px;
 }
 
 div.content7Block div.warningContent ul.rolling li.warningLevel div.levelDiv.error {
-    background-color: #d53131;
+    background-color: #871313;
     border-radius: 6px;
     text-align: center;
     line-height: 25px;
@@ -954,4 +1082,59 @@ div.content7Block div.warningContent ul.rolling li.warningLevel div.levelDiv.err
 div.content7Block div.warningContent ul.rolling li.warningText{
     width: 50%;
     text-align: left;
+}
+
+div.drop div.leftDivide {
+    height: 50%;
+    width: 2px;
+    float: left;
+    border-left: 3px solid #0a5e87;
+}
+
+div.drop div.engineHref {
+    padding: 5px;
+    float: left;
+    line-height: 25px;
+    display: inline-flex;
+    align-items: center;
+    border-left: 3px solid #0a5e87;
+    border-bottom: 3px solid #0a5e87;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+div.drop div.engineHref span.engineTitle {
+    font-size: 24px;
+    color: #d3d3d3;
+    margin-left: 20px;
+}
+
+div.areaRight span.monitorAngle {
+    width: 25px;
+    height: 25px;
+    float: left;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(images/angle.png);
+}
+
+div.drop div.engineHref span.triangle {
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    margin-left: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(images/angle.png);
+}
+
+div.drop div.global {
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(images/global.png);
+
 }
