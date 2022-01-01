@@ -130,9 +130,9 @@
 
             <!-- system 模块-->
             <dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-boot-module-system</artifactId>
-                <version>${jeecgboot.version}</version>
+                <groupId>cn.soft</groupId>
+                <artifactId>rainPro-boot-module-system</artifactId>
+                <version>${rainPro-boot.version}</version>
             </dependency>
 
             <!--rainPro tools -->
