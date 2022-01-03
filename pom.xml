@@ -10,7 +10,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>rainPro-boot</module>
-        <module>rainPro-boot-module-system</module>
     </modules>
 
     <parent>
@@ -21,7 +20,7 @@
     </parent>
 
     <properties>
-        <rainPro-boot-version>1.0-SNAPSHOT</rainPro-boot-version>
+        <rainPro-boot.version>1.0-SNAPSHOT</rainPro-boot.version>
         <jeecgboot.version>3.0</jeecgboot.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -130,31 +129,31 @@
             </dependency>
 
             <!-- system 模块-->
-            <!--<dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-boot-module-system</artifactId>
-                <version>${jeecgboot.version}</version>
+            <dependency>
+                <groupId>cn.soft</groupId>
+                <artifactId>rainPro-boot-module-system</artifactId>
+                <version>${rainPro-boot.version}</version>
             </dependency>
 
-            &lt;!&ndash; jeecg tools &ndash;&gt;
+            <!--rainPro tools -->
             <dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-boot-base-tools</artifactId>
-                <version>${jeecgboot.version}</version>
-            </dependency>-->
-            <!-- jeecg core &ndash;&gt;-->
+                <groupId>cn.soft</groupId>
+                <artifactId>rainPro-boot-base-tools</artifactId>
+                <version>${rainPro-boot.version}</version>
+            </dependency>
+            <!-- rainPro core -->
             <dependency>
                 <groupId>cn.soft</groupId>
                 <artifactId>rainPro-boot-base-core</artifactId>
+                <version>${rainPro-boot.version}</version>
+            </dependency>
+            <!--system 单体 api -->
+            <dependency>
+                <groupId>cn.soft</groupId>
+                <artifactId>rainPro-system-local-api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
-            <!--&lt;!&ndash; system 单体 api &ndash;&gt;
-            <dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-system-local-api</artifactId>
-                <version>${jeecgboot.version}</version>
-            </dependency>
-            &lt;!&ndash; system 微服务 api &ndash;&gt;
+            <!--&lt;!&ndash; system 微服务 api &ndash;&gt;
             <dependency>
                 <groupId>org.jeecgframework.boot</groupId>
                 <artifactId>jeecg-system-cloud-api</artifactId>
@@ -210,11 +209,11 @@
             </dependency>
             <!-- redisson -->
             <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
-            <dependency>
+            <!--<dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>3.16.6</version>
-            </dependency>
+            </dependency>-->
 
 
             <!-- guava工具类 -->
@@ -362,7 +361,7 @@
                 <!--当前环境-->
                 <profile.name>dev</profile.name>
                 <!--配置文件前缀-->
-                <prefix.name>jeecg</prefix.name>
+                <prefix.name>rainpro</prefix.name>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -380,7 +379,7 @@
                 <!--当前环境-->
                 <profile.name>test</profile.name>
                 <!--配置文件前缀-->
-                <prefix.name>jeecg</prefix.name>
+                <prefix.name>rainpro</prefix.name>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
@@ -398,7 +397,7 @@
                 <!--当前环境,生产环境为空-->
                 <profile.name>prod</profile.name>
                 <!--配置文件前缀-->
-                <prefix.name>jeecg</prefix.name>
+                <prefix.name>rainpro</prefix.name>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->

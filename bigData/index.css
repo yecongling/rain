@@ -1,0 +1,1148 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.rain {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -10;
+}
+/* 转动动画 */
+@-webkit-keyframes rotate{
+    0%{-webkit-transform: rotate(0deg)}
+    25%{-webkit-transform: rotate(90deg)}
+    50%{-webkit-transform: rotate(180deg)}
+    75%{-webkit-transform: rotate(270deg)}
+    100%{-webkit-transform: rotate(360deg)}
+}
+
+@-webkit-keyframes rotate2{
+    0%{-webkit-transform: rotate(360deg)}
+    25%{-webkit-transform: rotate(270deg)}
+    50%{-webkit-transform: rotate(180deg)}
+    75%{-webkit-transform: rotate(90deg)}
+    100%{-webkit-transform: rotate(0deg)}
+}
+
+/* 滚动动画 */
+@-webkit-keyframes scrollText1 {
+    0%{
+        -webkit-transform: translateY(0px);
+    }
+    20%{
+        -webkit-transform: translateY(-20px);
+    }
+    40%{
+        -webkit-transform: translateY(-40px);
+    }
+    60%{
+        -webkit-transform: translateY(-60px);
+    }
+    80%{
+        -webkit-transform: translateY(-80px);
+    }
+    100%{
+        -webkit-transform: translateY(-100px);
+    }
+}
+
+@keyframes scrollText1 {
+    0%{
+        transform: translateY(0px);
+    }
+    20%{
+        transform: translateY(-20px);
+    }
+    40%{
+        transform: translateY(-40px);
+    }
+    60%{
+        transform: translateY(-60px);
+    }
+    80%{
+        transform: translateY(-80px);
+    }
+    100%{
+        transform: translateY(-100px);
+    }
+}
+
+/* 1920x1080分辨率下的显示 */
+body {
+    background-image: url('images/background.png');
+}
+
+div.header {
+    background-image: url('images/header.png');
+    width: 100%;
+    height: 10%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-align: center;
+}
+
+div.header div.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 10px;
+    display: inline-block;
+    background-image: -webkit-gradient( linear, 0 0, 0 bottom, from(rgb(25, 247, 228)), to(#d4fff7) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+div.header div.currentTime {
+    text-align: right;
+    color: #cdcbcb;
+    font-size: 18px;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+div.main {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0 1.5%;
+}
+
+div.areaLeft {
+    width: 25%;
+    float: left;
+    height: 100%;
+    position: relative;
+}
+
+div.areaLeft div.subTitle, div.areaRight div.subTitle {
+    color: #d4fff7;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+div.areaLeft div.content1Block, div.areaLeft div.content2Block, 
+div.areaLeft div.content3Block, div.areaLeft div.content4Block,
+div.areaRight div.content5Block,div.areaRight div.content6Block,
+div.areaRight div.content7Block {
+    width: 100%;
+    height: calc(100% - 50px);
+    border: 3px solid #20a3f580;
+    border-radius: 6px;
+    background-image: url(images/blockBack.png);
+    background-repeat: no-repeat;
+    padding-top: 10px;
+    background-size: contain;
+}
+
+div.content1Block::after, div.content2Block::after, div.content3Block::after, 
+div.content4Block::after,div.content5Block::after,div.content6Block::after,div.content7Block::after {
+    content: url(images/blockTitle.png);
+    position: absolute;
+    top: 11px;
+    left: calc(50% - 116px);
+    float: left;
+}
+
+div.areaCenter {
+    width: calc(50% - 130px);
+    float: left;
+    height: calc(100% - 40px);
+    padding: 90px 60px;
+    position: relative;
+}
+
+div.areaRight {
+    width: 25%;
+    float: left;
+    height: 100%;
+    position: relative;
+}
+
+div.content1, div.content2, div.content3, div.content4 {
+    width: 100%;
+    min-height: 186px;
+    height: calc(25% - 8px);
+    margin-top: 6px;
+    position: relative;
+}
+
+div.content4 {
+    height: calc(28% - 8px);
+}
+div.content3 {
+    height: calc(22% - 8px);
+}
+
+div.content5 {
+    width: 100%;
+    min-height: 210px;
+    height: calc(28% - 8px);
+    margin-top: 6px;
+    position: relative;
+}
+
+div.content6 {
+    width: 100%;
+    min-height: 210px;
+    height: calc(30% - 8px);
+    margin-top: 6px;
+    position: relative;
+}
+
+div.content7 {
+    width: 100%;
+    min-height: 210px;
+    height: calc(35% - 8px);
+    margin-top: 6px;
+    position: relative;
+}
+
+div.areaCenter div.line1, div.areaCenter div.line3 {
+    width: 100%;
+    height: 25%;
+}
+
+div.areaCenter div.line2 {
+    width: 100%;
+    height: calc(36% - 32px);
+}
+
+div.blockTitle {
+    color: #d4fff7;
+    font-size: 20px;
+    margin-bottom: 6px;
+}
+
+div.blockDiv2 div.blockTitle {
+    text-align: right;
+    padding-right: 28%;
+}
+
+div.blockDiv1 div.blockTitle {
+    padding-left: 28%;
+}
+
+div.blockDiv3 div.blockTitle {
+    text-align: right;
+}
+
+div.blockDiv4 div.blockTitle {
+    text-align: left;
+}
+
+div.blockDiv5 div.blockTitle {
+    padding-left: 10%;
+}
+
+div.blockDiv6 div.blockTitle {
+    padding-right: 10%;
+}
+
+div.areaCenter div.line1 div.blockDiv1, div.areaCenter div.line3 div.blockDiv5 {
+    width: 50%;
+    float: left;
+    height: calc(100% - 12px);
+}
+
+div.areaCenter div.line1 div.blockDiv1 div.div1 {
+    background-image: url('images/div1.png');
+    width: 80%;
+    height: calc(100% - 30px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    margin-left: 10%;
+    position: relative;
+}
+
+div.areaCenter div.contentBlock {
+    font-size: 18px;
+    color: #e1e1e1;
+}
+
+div.areaCenter div.contentBlock div.contentDiv {
+    width: 100%;
+}
+
+div.areaCenter div.contentBlock ul {
+    width: 100%;
+    padding-bottom: 0;
+    overflow: hidden;
+    display: flex;
+}
+
+div.areaCenter div.contentBlock ul li {
+    float: left;
+    padding: 2px 0;
+    margin-right: 6px;
+    text-align: left;
+    list-style: none;
+}
+
+div.areaCenter div.contentBlock ul li.text {
+    width: 50%;
+}
+
+div.areaCenter div.contentBlock ul li.data {
+    width: 35%;
+    text-align: right;
+}
+
+div.areaCenter div.line1 div.blockDiv1 div.div1 div.content{
+    margin-left: 6rem;
+    width: calc(100% - 6rem);
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line1 div.blockDiv2 div.div2 div.content{
+    margin-right: 6rem;
+    margin-left: 2rem;
+    width: calc(100% - 6rem);
+    height: 100%;
+    float: left;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.content {
+    margin-left: -5rem;
+    width: calc(100% - 1rem);
+    height: 100%;
+    display: inline-flex;
+    align-items: start;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line2 div.blockDiv4 div.div4 div.content {
+    margin-right: 1rem;
+    margin-left: 2rem;
+    width: calc(100% - 6rem);
+    height: 100%;
+    float: right;
+    display: inline-flex;
+    align-items: start;
+    justify-content: center;
+}
+
+div.areaCenter div.line3 div.blockDiv5 div.div5 div.content {
+    width: calc(100% - 6rem);
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.div6 div.content {
+    margin-right: 6rem;
+    margin-left: 2rem;
+    width: calc(100% - 6rem);
+    height: 100%;
+    float: left;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.content ul li.text {
+    width: 35%;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.content div.contentDiv,
+div.areaCenter div.line2 div.blockDiv4 div.div4 div.content div.contentDiv{
+    margin-top: 1rem;
+}
+
+div.circle {
+    width: 6.5rem;
+    height: 6.5rem;
+    z-index: -1;
+    background-image: url(images/scannerCircle.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+div.areaCenter div.line1 div.blockDiv1 div.div1 div.circle {
+    position: absolute;
+    left: -8%;
+    top: -8%;
+    float: left;
+}
+
+div.areaCenter div.line1 div.blockDiv2 div.div2 div.circle {
+    right: -6%;
+    top: -6%;
+    float: right;
+    position: relative;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.circle {
+    left: -14%;
+    top: 68%;
+    float: left;
+    position: absolute;
+}
+
+div.areaCenter div.line2 div.blockDiv4 div.div4 div.circle {
+    right: -14%;
+    top: 68%;
+    float: right;
+    position: absolute;
+}
+
+div.areaCenter div.line3 div.blockDiv5 div.div5 div.circle {
+    left: -6%;
+    top: 50%;
+    float: left;
+    position: absolute;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.div6 div.circle {
+    right: -5%;
+    top: 50%;
+    float: right;
+    position: absolute;
+}
+
+div.number {
+    width: 6rem;
+    height: 6rem;
+    background-image: url(images/scanner.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation: rotate 5s linear infinite;
+    display: inline-block;
+}
+
+div.areaCenter div.line1 div.blockDiv1 div.div1 div.number {
+    position: absolute;
+    left: -7%;
+    top: -7%;
+}
+
+div.areaCenter div.line1 div.blockDiv2 div.div2 div.number {
+    position: absolute;
+    right: -5%;
+    top: -4%;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 div.number {
+    position: relative;
+    top: 70%;
+    left: -12%;
+}
+
+div.areaCenter div.line2 div.blockDiv4 div.div4 div.number {
+    position: absolute;
+    top: 70%;
+    right: -12%;
+}
+
+div.areaCenter div.line3 div.blockDiv5 div.div5 div.number {
+    position: relative;
+    left: -5%;
+    top: 52%;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.div6 div.number {
+    position: absolute;
+    top: 52%;
+    right: -4%;
+}
+
+div.areaCenter div.line3 div.blockDiv5 div.div5 {
+    background-image: url('images/div5.png');
+    width: 80%;
+    height: calc(100% - 30px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    position: relative;
+    margin-left: 10%;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.div6 {
+    background-image: url('images/div6.png');
+    width: 80%;
+    height: calc(100% - 30px);
+    float: right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    margin-right: 10%;
+    position: relative;
+}
+
+div.areaCenter div.line1 div.blockDiv2, div.areaCenter div.line3 div.blockDiv6 {
+    width: 50%;
+    height: calc(100% - 12px);
+    float: left;
+}
+
+div.areaCenter div.line3 div.blockDiv6 div.blockTitle {
+    text-align: right;
+}
+
+div.areaCenter div.line1 div.blockDiv2 div.div2 {
+    background-image: url(images/div2.png);
+    width: 80%;
+    float: right;
+    height: calc(100% - 30px);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+    position: relative;
+    margin-right: 10%;
+}
+/* 中间部分 */
+div.areaCenter div.line2 div.blockDiv3 {
+    width: 31%;
+    height: calc(100% - 72px);
+    float: left;
+    padding-top: 20px;
+}
+
+div.blockCenter {
+    width: 38%;
+    height: 100%;
+    float: left;
+    position: relative;
+}
+
+div.areaCenter div.line2 div.blockDiv3 div.div3 {
+    background-image: url('images/div3.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: calc(100% - 30px);
+    position: relative;
+    background-position: center;
+}
+
+div.areaCenter div.line2 div.blockDiv4 {
+    width: 31%;
+    height: calc(100% - 72px);
+    float: right;
+    padding-top: 20px;
+}
+
+div.areaCenter div.line2 div.blockDiv4 div.div4 {
+    background-image: url('images/div4.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: calc(100% - 30px);
+    position: relative;
+    background-position: center;
+}
+
+div.areaCenter div.outerCircle {
+    background-image: url(images/circle3.png);
+    width: 100%;
+    background-size: contain;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    -webkit-animation: rotate2 10s linear infinite;
+    animation: rotate2 10s linear infinite;
+}
+
+div.areaCenter div.circle2 {
+    background-image: url(images/circle2.png);
+    width: 80%;
+    background-size: contain;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+    -webkit-animation: rotate 5s linear infinite;
+    animation: rotate 5s linear infinite;
+}
+
+div.areaCenter div.innerBal {
+    background-image: url(images/bal1.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 85%;
+    background-position: center;
+    height: 100%;
+    margin: 0 auto;
+    -webkit-animation: rotate2 10s linear infinite;
+    animation: rotate2 10s linear infinite;
+}
+
+div.areaCenter div.title {
+    font-size: 2rem;
+    font-weight: 700;
+    width: 100%;
+    top: calc(50% - 21px);
+    position: absolute;
+    text-align: center;
+    background-image: -webkit-gradient( linear, 0 0, 0 bottom, from(rgb(25, 247, 228)), to(#d4fff7) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+div.numberTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    width: 100%;
+    top: calc(50% - 21px);
+    position: relative;
+    text-align: center;
+    background-image: -webkit-gradient( linear, 0 0, 0 bottom, from(rgb(25, 247, 228)), to(#d4fff7) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rotate2 5s linear infinite;
+}
+
+div.drop {
+    width: 100%;
+    height: 70px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: end;
+}
+
+/* 内容设置 */
+
+div.dataBlock {
+    width: calc(25% - 20px);
+    float: left;
+    height: calc(50% - 30px);
+    margin: 10px;
+    text-align: center;
+    background-color: #054072;
+    position: relative;
+    padding-top: 10px;
+}
+
+div.angleBorder {
+    z-index: 2500;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(0,0,0,0);
+    border: 2px solid #23d5ff;
+}
+
+div.angleLeftTop {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+}
+
+div.angleLeftBottom {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 4px;
+}
+
+div.angleRightTop {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 4px;
+}
+
+div.angleRightBottom {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 4px;
+}
+
+div.dataBlock div.dataTitle {
+    font-size: 16px;
+    color: #e1e1e1;
+}
+
+div.dataBlock div.dataNumber {
+    font-size: 1.5rem;
+    color: #1bb0d3;
+}
+
+div.pieChart {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+div.pieDataArea {
+    width: 50%;
+    height: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.pieData {
+    width: 100%;
+    height: auto;
+}
+
+div.pieData div.pieItem {
+    width: 100%;
+    display: inline-block;
+}
+
+div.pieData div.pieDiv {
+    width: 30px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #80ebd790;
+}
+
+div.pieData div.pieTitle {
+    width: calc(70% - 40px);
+    height: auto;
+    min-height: 20px;
+    display: inline-block;
+    font-size: 18px;
+    color: #cbc1c1;
+}
+
+div.pieData div.pieNum {
+    width: calc(30% - 40px);
+    height: auto;
+    min-height: 20px;
+    display: inline-block;
+    font-size: 20px;
+    color: #cbc1c1;
+}
+
+div.queryCondition {
+    text-align: right;
+    margin-right: 20px;
+    background-color: #071d3a;
+    color: #e1e1e1;
+    border: none;
+}
+
+div.queryCondition select {
+    background-color: #071d3a;
+    color: #e1e1e1;
+    border: none;
+}
+
+div.queryCondition select:focus {
+    border: none;
+    outline: none;
+}
+
+div.queryCondition select:active {
+    border: none;
+    outline: none;
+}
+
+div.serviceBar {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+div.serviceBar div.serviceItem {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 16px;
+    color: #e1e1e1;
+    margin: 4px 0;
+    top: 0;
+}
+
+div.serviceBar div.serviceItem div {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+div.serviceBar div.serviceItem div.serviceTitle {
+    width: 110px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+div.serviceBar div.serviceItem div.serviceColumn {
+    width: 40%;
+    height: 14px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, rgb(10 203 186), #adede1);
+}
+
+div.msgLine {
+    width: 100%;
+    height: calc(100% - 25px);
+}
+
+div.monitorTitle {
+    padding-left: 20px;
+}
+
+div.monitorTitle div.title {
+    display: inline-block;
+    font-size: 20px;
+    color: #e1e1e1;
+}
+
+div.monitorTitle div.count {
+    display: inline-block;
+    float: right;
+    margin-right: 40px;
+}
+div.monitorTitle div.count div {
+    display: inline-block;
+}
+
+div.monitorTitle div.count div.allCount {
+    font-size: 20px;
+    color: #00A0E9;
+}
+
+div.monitorTitle div.count div.errCount {
+    font-size: 20px;
+    color: #e83b3b;
+}
+
+div.monitorTitle div.count div.divide {
+    width: 1px;
+    height: 14px;
+    margin: 0 4px;
+    border-right: 2px solid #00A0E9;
+}
+
+div.content5Block div.monitorType {
+    width: 100%;
+    display: inline-flex;
+    margin: 6px 0;
+}
+
+div.content5Block div.monitorType>div {
+    width: 25%;
+    font-size: 16px;
+    text-align: center;
+    display: inline-block;
+}
+
+div.content5Block div.monitorType div.registerCount div.cube{
+    background-color: #2a8dbb;
+}
+
+div.content5Block div.monitorType div.registerCount div.description, div.content5Block div.monitorData div.monitorItem div.content div.data>div.allCount  {
+    color: #2a8dbb;
+}
+
+div.content5Block div.monitorType div.monitorObj div.cube{
+    background-color: #22c54d;
+
+}
+
+div.content5Block div.monitorType div.monitorObj div.description, div.content5Block div.monitorData div.monitorItem div.content div.data>div.objCount  {
+    color: #22c54d;
+}
+
+div.content5Block div.monitorType div.disConnect div.cube {
+    background-color: #d39406;
+
+}
+
+div.content5Block div.monitorType div.disConnect div.description, div.content5Block div.monitorData div.monitorItem div.content div.data>div.disconnectCount{
+    color: #d39406;
+}
+
+div.content5Block div.monitorType div.exception div.cube {
+    background-color: #d53131;
+
+}
+
+div.content5Block div.monitorType div.exception div.description, div.content5Block div.monitorData div.monitorItem div.content div.data>div.exceptionCount  {
+    color: #d53131;
+}
+
+div.content5Block div.monitorType div.cube {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+}
+
+div.content5Block div.monitorType div.description {
+    display: inline-flex;
+    margin-right: 4px;
+}
+
+div.content5Block div.monitorData {
+    width: 100%;
+    height: calc(100% - 64px);
+}
+
+div.content5Block div.monitorData>div {
+    width: calc(50% - 15px);
+    float: left;
+    height: calc(50% - 12px);
+    padding: 4px 4px 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+div.content5Block div.monitorData div.monitorItem div.monitorIcon {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+div.content5Block div.monitorData div.monitorItem div.serverIcon {
+    background-image: url("images/server.png");
+}
+
+div.content5Block div.monitorData div.monitorItem div.applicationIcon {
+    background-image: url("images/application.png");
+}
+
+div.content5Block div.monitorData div.monitorItem div.databaseIcon {
+    background-image: url("images/database.png");
+}
+
+div.content5Block div.monitorData div.monitorItem div.engineIcon {
+    background-image: url("images/engine.png");
+}
+
+/* cube中的四个角 */
+
+div.content5Block div.monitorData div.monitorItem div.monitorIcon div.angle {
+    z-index: 2500;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(0,0,0,0);
+    border: 2px solid #d1d0d0;
+}
+
+div.content5Block div.monitorData div.monitorItem div.monitorIcon div.leftTop{
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 6px;
+}
+
+div.content5Block div.monitorData div.monitorItem div.monitorIcon div.rightTop{
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 6px;
+}
+
+div.content5Block div.monitorData div.monitorItem div.monitorIcon div.leftBottom{
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 6px;
+}
+
+div.content5Block div.monitorData div.monitorItem div.monitorIcon div.rightBottom{
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 6px;
+}
+div.content5Block div.monitorData div.monitorItem div.content {
+    width: calc(100% - 70px);
+    display: inline-block;
+    padding: 0 10px;
+}
+
+div.content5Block div.monitorData div.monitorItem div.content div.description {
+    color: #e1e1e1;
+    font-size: 14px;
+}
+
+div.content5Block div.monitorData div.monitorItem div.content div.data {
+    width: 100%;
+}
+
+div.content5Block div.monitorData div.monitorItem div.content div.data>div {
+    width: 20%;
+    display: inline-block;
+}
+
+/* 引擎负载折线图 */
+
+div.content6Block div.engineLine {
+    width: 100%;
+    height: 100%;
+}
+
+/* 监控预警提示 */
+div.content7Block ul.headerTitle {
+    width: 100%;
+    padding-bottom: 0;
+    overflow: hidden;
+    display: flex;
+}
+
+div.content7Block ul.headerTitle li{
+    float: left;
+    width: 20%;
+    font-size: 18px;
+    color: #00A0E9;
+    padding: 10px 0;
+    margin-right: 6px;
+    text-align: center;
+    list-style: none;
+}
+
+div.content7Block ul.headerTitle li.active {
+    color: #66dffb;
+}
+
+div.content7Block div.warningContent {
+    width: 100%;
+    height: calc(100% - 46px);
+    overflow: hidden;
+}
+
+div.content7Block div.warningContent ul.rolling {
+    width: 100%;
+    padding-bottom: 0;
+    overflow: hidden;
+    display: flex;
+    animation: scrollText1 10s infinite  cubic-bezier(1, 0, 0.5, 0);
+}
+
+div.content7Block div.warningContent ul:nth-child(odd) {
+    color: #3e90f7;
+}
+
+div.content7Block div.warningContent ul:nth-child(even) {
+    color: #8ec0ff;
+}
+
+div.content7Block div.warningContent ul.rolling li {
+    float: left;
+    font-size: 16px;
+    padding: 4px;
+    text-align: center;
+    list-style: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+div.content7Block div.warningContent ul.rolling li.warningTime {
+    width: 32%;
+}
+
+div.content7Block div.warningContent ul.rolling li.warningLevel {
+    width: 10%;
+}
+
+div.content7Block div.warningContent ul.rolling li.warningLevel div.levelDiv {
+    width: 40px;
+    height: 25px;
+    color: #e1dede;
+    font-size: 14px;
+}
+
+div.content7Block div.warningContent ul.rolling li.warningLevel div.levelDiv.error {
+    background-color: #871313;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 25px;
+}
+
+div.content7Block div.warningContent ul.rolling li.warningText{
+    width: 50%;
+    text-align: left;
+}
+
+div.drop div.leftDivide {
+    height: 50%;
+    width: 2px;
+    float: left;
+    border-left: 3px solid #0a5e87;
+}
+
+div.drop div.engineHref {
+    padding: 5px;
+    float: left;
+    line-height: 25px;
+    display: inline-flex;
+    align-items: center;
+    border-left: 3px solid #0a5e87;
+    border-bottom: 3px solid #0a5e87;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+div.drop div.engineHref span.engineTitle {
+    font-size: 24px;
+    color: #d3d3d3;
+    margin-left: 20px;
+}
+
+div.areaRight span.monitorAngle {
+    width: 25px;
+    height: 25px;
+    float: left;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(images/angle.png);
+}
+
+div.drop div.engineHref span.triangle {
+    width: 25px;
+    height: 25px;
+    background-size: contain;
+    margin-left: 20px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(images/angle.png);
+}
+
+div.drop div.global {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(images/global.png);
+
+}
