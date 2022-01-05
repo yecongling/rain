@@ -2,8 +2,6 @@ package cn.soft.common.modules.redis.writer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.PessimisticLockingFailureException;
-import org.springframework.data.redis.cache.CacheStatistics;
-import org.springframework.data.redis.cache.CacheStatisticsCollector;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -139,16 +137,6 @@ public class RainProRedisCacheWriter implements RedisCacheWriter {
         });
     }
 
-    @Override
-    public void clearStatistics(String name) {
-
-    }
-
-    @Override
-    public RedisCacheWriter withStatisticsCollector(CacheStatisticsCollector cacheStatisticsCollector) {
-        return this;
-    }
-
     /**
      * 上锁（调用Redis的方法  有这个可以则设置值  没有不操作）
      * @param name 名
@@ -245,10 +233,5 @@ public class RainProRedisCacheWriter implements RedisCacheWriter {
      */
     private static byte[] createCacheLockKey(String name) {
         return (name + "~lock").getBytes(StandardCharsets.UTF_8);
-    }
-
-    @Override
-    public CacheStatistics getCacheStatistics(String cacheName) {
-        return null;
     }
 }
