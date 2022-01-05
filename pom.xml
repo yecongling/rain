@@ -60,7 +60,7 @@
         <log4j2.version>2.17.0</log4j2.version>
     </properties>
 
-    <!--<distributionManagement>
+    <distributionManagement>
         <repository>
             <id>jeecg</id>
             <name>jeecg Repository</name>
@@ -89,7 +89,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-    </repositories>-->
+    </repositories>
 
 
     <dependencies>
@@ -362,11 +362,11 @@
 
     <build>
         <plugins>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-             指定JDK编译版本 -->
+            <!--指定JDK编译版本 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
