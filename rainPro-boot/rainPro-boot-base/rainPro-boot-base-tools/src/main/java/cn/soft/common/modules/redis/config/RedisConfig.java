@@ -1,6 +1,8 @@
 package cn.soft.common.modules.redis.config;
 
 import cn.soft.common.constant.CacheConstant;
+import cn.soft.common.constant.GlobalConstants;
+import cn.soft.common.modules.redis.receiver.RedisReceiver;
 import cn.soft.common.modules.redis.writer.RainProRedisCacheWriter;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -14,8 +16,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -81,6 +87,32 @@ public class RedisConfig extends CachingConfigurerSupport {
                 .withInitialCacheConfigurations(singletonMap(CacheConstant.PLUGIN_MALL_RANKING, RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)).disableCachingNullValues()))
                 .withInitialCacheConfigurations(singletonMap(CacheConstant.PLUGIN_MALL_PAGE_LIST, RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(24)).disableCachingNullValues()))
                 .transactionAware().build();
+    }
+
+    /**
+     * redis 监听配置
+     *
+     * @param redisConnectionFactory redis 配置
+     * @return /
+     */
+    @Bean
+    public RedisMessageListenerContainer redisContainer(RedisConnectionFactory redisConnectionFactory, RedisReceiver redisReceiver, MessageListenerAdapter commonListenerAdapter) {
+        RedisMessageListenerContainer container = new RedisMessageListenerContainer();
+        container.setConnectionFactory(redisConnectionFactory);
+        container.addMessageListener(commonListenerAdapter, new ChannelTopic(GlobalConstants.REDIS_TOPIC_NAME));
+        return container;
+    }
+
+    /**
+     * 常规监听适配器
+     * @param redisReceiver
+     * @return
+     */
+    @Bean
+    MessageListenerAdapter commonListenerAdapter(RedisReceiver redisReceiver) {
+        MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(redisReceiver, "onMessage");
+        messageListenerAdapter.setSerializer(jacksonSerializer());
+        return messageListenerAdapter;
     }
 
     /**

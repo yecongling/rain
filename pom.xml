@@ -1,17 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>cn.soft</groupId>
     <artifactId>rainPro</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>rainPro-boot</module>
-        <module>rainPro-camel</module>
-    </modules>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -21,14 +13,13 @@
     </parent>
 
     <properties>
-        <rainPro-boot.version>1.0-SNAPSHOT</rainPro-boot.version>
-        <jeecgboot.version>3.0</jeecgboot.version>
+        <rainPro.version>1.0-SNAPSHOT</rainPro.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
         <xxl-job-core.version>2.2.0</xxl-job-core.version>
-        <fastjson.version>1.2.78</fastjson.version>
+        <fastjson.version>1.2.79</fastjson.version>
         <knife4j-spring-boot-starter.version>2.0.9</knife4j-spring-boot-starter.version>
         <knife4j-spring-ui.version>2.0.9</knife4j-spring-ui.version>
         <!-- 数据库驱动 -->
@@ -57,8 +48,15 @@
         <dom4j.version>1.6.1</dom4j.version>
         <qiniu-java-sdk.version>7.4.0</qiniu-java-sdk.version>
         <!-- Log4j2惊爆0Day漏洞-->
-        <log4j2.version>2.17.0</log4j2.version>
+        <log4j2.version>2.15.0</log4j2.version>
     </properties>
+
+    <modules>
+        <module>rainPro-boot</module>
+        <!--需要微服务，请打开
+        <module>jeecg-boot-starter</module>
+        <module>jeecg-cloud-module</module>-->
+    </modules>
 
     <distributionManagement>
         <repository>
@@ -91,72 +89,7 @@
         </repository>
     </repositories>
 
-
     <dependencies>
-
-        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc4 -->
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>sqljdbc4</artifactId>
-            <version>4.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-core -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-core</artifactId>
-            <version>3.14.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-http -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-http</artifactId>
-            <version>3.14.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-servlet -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-servlet</artifactId>
-            <version>3.14.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-http-common -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-http-common</artifactId>
-            <version>3.14.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-log -->
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-log</artifactId>
-            <version>3.14.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.17.1</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-
-
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -198,57 +131,57 @@
             <dependency>
                 <groupId>cn.soft</groupId>
                 <artifactId>rainPro-boot-module-system</artifactId>
-                <version>${rainPro-boot.version}</version>
+                <version>${rainPro.version}</version>
             </dependency>
 
-            <!--rainPro tools -->
+            <!-- jeecg tools -->
             <dependency>
                 <groupId>cn.soft</groupId>
                 <artifactId>rainPro-boot-base-tools</artifactId>
-                <version>${rainPro-boot.version}</version>
+                <version>${rainPro.version}</version>
             </dependency>
-            <!-- rainPro core -->
+            <!-- jeecg core -->
             <dependency>
                 <groupId>cn.soft</groupId>
                 <artifactId>rainPro-boot-base-core</artifactId>
-                <version>${rainPro-boot.version}</version>
+                <version>${rainPro.version}</version>
             </dependency>
-            <!--system 单体 api -->
+            <!-- system 单体 api -->
             <dependency>
                 <groupId>cn.soft</groupId>
                 <artifactId>rainPro-system-local-api</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${rainPro.version}</version>
             </dependency>
-            <!--&lt;!&ndash; system 微服务 api &ndash;&gt;
+            <!-- system 微服务 api -->
             <dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-system-cloud-api</artifactId>
-                <version>${jeecgboot.version}</version>
-            </dependency>-->
+                <groupId>cn.soft</groupId>
+                <artifactId>rainPro-system-cloud-api</artifactId>
+                <version>${rainPro.version}</version>
+            </dependency>
 
             <!--微服务模块-->
             <!--<dependency>
                 <groupId>org.jeecgframework.boot</groupId>
                 <artifactId>jeecg-boot-starter-cloud</artifactId>
                 <version>${jeecgboot.version}</version>
-            </dependency>
+            </dependency>-->
 
-            &lt;!&ndash;xxl-job定时任务&ndash;&gt;
-            <dependency>
+            <!--xxl-job定时任务-->
+            <!--<dependency>
                 <groupId>org.jeecgframework.boot</groupId>
                 <artifactId>jeecg-boot-starter-job</artifactId>
                 <version>${jeecgboot.version}</version>
-            </dependency>
+            </dependency>-->
 
-            &lt;!&ndash;redis分布式锁&ndash;&gt;
-            <dependency>
+            <!--redis分布式锁-->
+            <!--<dependency>
                 <groupId>org.jeecgframework.boot</groupId>
                 <artifactId>jeecg-boot-starter-lock</artifactId>
                 <version>${jeecgboot.version}</version>
-            </dependency>
+            </dependency>-->
 
-            &lt;!&ndash;rabbitmq消息队列&ndash;&gt;
-            <dependency>
+            <!--rabbitmq消息队列-->
+            <!--<dependency>
                 <groupId>org.jeecgframework.boot</groupId>
                 <artifactId>jeecg-boot-starter-rabbitmq</artifactId>
                 <version>${jeecgboot.version}</version>
@@ -274,13 +207,11 @@
                 <version>${dom4j.version}</version>
             </dependency>
             <!-- redisson -->
-            <!-- https://mvnrepository.com/artifact/org.redisson/redisson -->
             <!--<dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
-                <version>3.16.6</version>
+                <version>${redisson.version}</version>
             </dependency>-->
-
 
             <!-- guava工具类 -->
             <dependency>
@@ -362,11 +293,11 @@
 
     <build>
         <plugins>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!--指定JDK编译版本 -->
+             指定JDK编译版本 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -427,11 +358,11 @@
                 <!--当前环境-->
                 <profile.name>dev</profile.name>
                 <!--配置文件前缀-->
-                <prefix.name>rainpro</prefix.name>
+                <prefix.name>jeecg</prefix.name>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <config.namespace/>
+                <config.namespace></config.namespace>
                 <!--Nacos配置分组名称-->
                 <config.group>DEFAULT_GROUP</config.group>
                 <!--Nacos服务发现地址-->
@@ -445,11 +376,11 @@
                 <!--当前环境-->
                 <profile.name>test</profile.name>
                 <!--配置文件前缀-->
-                <prefix.name>rainpro</prefix.name>
+                <prefix.name>jeecg</prefix.name>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <config.namespace/>
+                <config.namespace></config.namespace>
                 <!--Nacos配置分组名称-->
                 <config.group>DEFAULT_GROUP</config.group>
                 <!--Nacos服务发现地址-->
@@ -463,11 +394,11 @@
                 <!--当前环境,生产环境为空-->
                 <profile.name>prod</profile.name>
                 <!--配置文件前缀-->
-                <prefix.name>rainpro</prefix.name>
+                <prefix.name>jeecg</prefix.name>
                 <!--Nacos配置中心地址-->
                 <config.server-addr>127.0.0.1:8848</config.server-addr>
                 <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
-                <config.namespace/>
+                <config.namespace></config.namespace>
                 <!--Nacos配置分组名称-->
                 <config.group>DEFAULT_GROUP</config.group>
                 <!--Nacos服务发现地址-->
@@ -475,5 +406,4 @@
             </properties>
         </profile>
     </profiles>
-
 </project>
