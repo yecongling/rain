@@ -1,11 +1,19 @@
 package cn.soft.common.aspect;
 
+import cn.soft.common.api.dto.LogDTO;
 import cn.soft.common.api.vo.Result;
+import cn.soft.common.aspect.annotation.AutoLog;
 import cn.soft.common.constant.CommonConstant;
+import cn.soft.common.constant.enums.ModuleType;
+import cn.soft.common.system.vo.LoginUser;
+import cn.soft.common.util.IPUtils;
+import cn.soft.common.util.SpringContextUtils;
 import cn.soft.common.util.oConvertUtils;
 import cn.soft.modules.base.mapper.BaseCommonMapper;
+import cn.soft.modules.base.service.BaseCommonService;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.PropertyFilter;
+import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -22,6 +30,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * 系统日志  切面处理类
@@ -31,7 +40,7 @@ import java.lang.reflect.Method;
 public class AutoLogAspect {
 
     @Resource
-    private BaseCommonMapper baseCommonMapper;
+    private BaseCommonService baseCommonService;
 
     /**
      * 定义切入点
@@ -55,7 +64,7 @@ public class AutoLogAspect {
         // 执行时长
         long time = System.currentTimeMillis() - beginTime;
         // 保存日志
-        saveLog(point, time, result);
+        saveSysLog(point, time, result);
         return result;
     }
 
@@ -65,8 +74,45 @@ public class AutoLogAspect {
      * @param time 时长
      * @param obj 执行结果
      */
-    private void saveLog(ProceedingJoinPoint joinPoint, long time, Object obj) {
-
+    private void saveSysLog(ProceedingJoinPoint joinPoint, long time, Object obj) {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        Method method = signature.getMethod();
+        LogDTO dto = new LogDTO();
+        AutoLog sysLog = method.getAnnotation(AutoLog.class);
+        if (sysLog != null) {
+            String content = sysLog.value();
+            if (sysLog.module() == ModuleType.ONLINE) {
+                content = getOnlineLogContent(obj, content);
+            }
+            // 注解上面的描述，操作日志内容
+            dto.setLogType(sysLog.logType());
+            dto.setLogContent(content);
+        }
+        // 请求的方法名
+        String className = joinPoint.getTarget().getClass().getName();
+        String methodName = signature.getName();
+        dto.setMethod(className + "." + methodName + "()");
+        // 设置操作类型
+        if (dto.getLogType() == CommonConstant.LOG_TYPE_2) {
+            dto.setOperateType(getOperateType(methodName, sysLog.operateType()));
+        }
+        // 获取request
+        HttpServletRequest request = SpringContextUtils.getHttpServletRequest();
+        // 请求的参数
+        dto.setRequestParam(getRequestParams(request, joinPoint));
+        // 设置ip地址
+        dto.setIp(IPUtils.getIpAddr(request));
+        // 获取登录用户信息
+        LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+        if (sysUser != null) {
+            dto.setUserid(sysUser.getUsername());
+            dto.setUsername(sysUser.getRealname());
+        }
+        // 耗时
+        dto.setCostTime(time);
+        dto.setCreateTime(new Date());
+        // 保存系统日志
+        baseCommonService.addLog(dto);
     }
 
     /**

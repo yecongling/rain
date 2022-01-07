@@ -18,19 +18,19 @@ public interface BaseCommonService {
     /**
      * 保存日志
      *
-     * @param LogContent
+     * @param logContent
      * @param logType
      * @param operateType
      * @param user
      */
-    void addLog(String LogContent, Integer logType, Integer operateType, LoginUser user);
+    void addLog(String logContent, Integer logType, Integer operateType, LoginUser user);
 
     /**
      * 保存日志
      *
-     * @param LogContent
+     * @param logContent
      * @param logType
      * @param operateType
      */
-    void addLog(String LogContent, Integer logType, Integer operateType);
+    void addLog(String logContent, Integer logType, Integer operateType);
 }
