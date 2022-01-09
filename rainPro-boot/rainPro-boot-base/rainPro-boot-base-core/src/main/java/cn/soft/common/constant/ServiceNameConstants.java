@@ -26,8 +26,8 @@ public interface ServiceNameConstants {
 	/**
 	 * 系统管理 admin
 	 */
-	String SYSTEM_SERVICE = "rainpro-system";
-	String SYSTEM_ONLINE = "rainpro-online";
+	String SYSTEM_SERVICE = "rainPro-system";
+	String SYSTEM_ONLINE = "rainPro-online";
 
 	/**
 	 * gateway通过header传递根路径 basePath
