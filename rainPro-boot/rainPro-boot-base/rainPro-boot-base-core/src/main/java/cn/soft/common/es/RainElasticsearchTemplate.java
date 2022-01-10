@@ -41,7 +41,7 @@ public class RainElasticsearchTemplate {
      */
     public static final int ES_MAX_SIZE = 10000;
 
-    public RainElasticsearchTemplate(@Value("${rainPro..elasticsearch.cluster-nodes}") String baseUrl, @Value("${rainPro.elasticsearch.check-enabled}") boolean checkEnabled) {
+    public RainElasticsearchTemplate(@Value("${rainPro.elasticsearch.cluster-nodes}") String baseUrl, @Value("${rainPro.elasticsearch.check-enabled}") boolean checkEnabled) {
         log.debug("RainProElasticsearchTemplate BaseURL：" + baseUrl);
         if (StringUtils.isNotEmpty(baseUrl)) {
             this.baseUrl = baseUrl;

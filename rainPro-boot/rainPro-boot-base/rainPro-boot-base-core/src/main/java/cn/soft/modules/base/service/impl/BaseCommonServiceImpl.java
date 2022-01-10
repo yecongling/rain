@@ -10,6 +10,7 @@ import cn.soft.modules.base.service.BaseCommonService;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,8 +24,12 @@ import java.util.Date;
 @Slf4j
 public class BaseCommonServiceImpl implements BaseCommonService {
 
-    @Resource
+
     private BaseCommonMapper baseCommonMapper;
+    @Autowired
+    public void setBaseCommonMapper(BaseCommonMapper baseCommonMapper) {
+        this.baseCommonMapper = baseCommonMapper;
+    }
 
     /**
      * 保存系统日志

@@ -20,6 +20,12 @@ import org.springframework.stereotype.Service;
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements ISysUserService {
 
 
+    private SysUserMapper userMapper;
+    @Autowired
+    public void setUserMapper(SysUserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
     private BaseCommonService baseCommonService;
     @Autowired
     public void setBaseCommonService(BaseCommonService baseCommonService) {
@@ -52,6 +58,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             result.error500("该用户已冻结");
             return result;
         }
-        return null;
+        return result;
     }
 }
