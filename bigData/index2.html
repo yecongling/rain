@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>临床数据中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index2.css">
+</head>
+<body>
+    <!-- 顶部标题区域 -->
+    <div class="header">
+        <!-- 标题 -->
+        <div class="title">临床数据中心</div>
+        <div class="currentTime">2022-01-10 12:23:23</div>
+    </div>
+    <!-- 下面主体部分 -->
+    <div class="main">
+        <!-- 左边区域 -->
+        <div class="areaLeft">
+            <!-- 数据中心概况 -->
+            <div class="content1">
+                <div class="subTitle">数据中心概况</div>
+                <div class="content1Block">
+                    <!-- CDR的信息 -->
+                    <div class="CDRInfo">
+                        <div class="CDRTitle">CDR</div>
+                        <!-- 内容 -->
+                        <div class="CDRContent">
+                            <div class="CDRItem">
+                                <div class="title">IP地址：</div>
+                                <div class="content">192.168.100.137</div>
+                            </div>
+                            <div class="CDRItem">
+                                <div class="title">数据库类型：</div>
+                                <div class="content">SQLServer</div>
+                            </div>
+                            <div class="CDRItem">
+                                <div class="title">抽取数据量：</div>
+                                <div class="content"><span style="color: red;">3</span>/458245</div>
+                            </div>
+                            <div class="CDRItem">
+                                <div class="title">成功率：</div>
+                                <div class="content">99%</div>
+                            </div>
+                            <div class="CDRItem">
+                                <div class="title">数据来源：</div>
+                                <div class="content">8</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 系统信息 -->
+                    <div class="systemInfo">
+                        <div class="systemItem">
+                            <!-- 环形图显示 -->
+                            <div class="circleChart"></div>
+                            <div class="systemTitle">CPU</div>
+                        </div>
+                        <div class="systemItem">
+                            <!-- 环形图显示 -->
+                            <div class="circleChart"></div>
+                            <div class="systemTitle">内存</div>
+                        </div>
+                        <div class="systemItem">
+                            <!-- 环形图显示 -->
+                            <div class="circleChart"></div>
+                            <div class="systemTitle">磁盘</div>
+                        </div>
+                        <div class="systemItem">
+                            <!-- 环形图显示 -->
+                            <div class="circleChart"></div>
+                            <div class="systemTitle">数据库</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ETL作业平均执行时长 -->
+            <div class="content2">
+                <div class="subTitle">ETL作业平均执行时长</div>
+                <div class="content2Block">
+                    <div class="queryCondition">
+                        <span>前五位</span>
+                        <select class="query" id="queryMsg">
+                            <option value="1">近30分钟</option>
+                            <option value="2" selected>近一天</option>
+                        </select>
+                    </div>
+                    <div class="ETLContent">
+                        <!-- 单个服务的显示 -->
+                        <div class="serviceItem rolling">
+                            <!-- 标题 -->
+                            <div class="serviceTitle">患者信息服务</div>
+                            <!-- 柱状 -->
+                            <div class="serviceColumn"></div>
+                            <!-- 数据 -->
+                            <div class="serviceCount">1800</div>
+                        </div>
+                        <!-- 单个服务的显示 -->
+                        <div class="serviceItem rolling">
+                            <!-- 标题 -->
+                            <div class="serviceTitle">患者查询服务</div>
+                            <!-- 柱状 -->
+                            <div class="serviceColumn" style="width: 15%;"></div>
+                            <!-- 数据 -->
+                            <div class="serviceCount">200</div>
+                        </div>
+                        <!-- 单个服务的显示 -->
+                        <div class="serviceItem rolling">
+                            <!-- 标题 -->
+                            <div class="serviceTitle">患者信息服务</div>
+                            <!-- 柱状 -->
+                            <div class="serviceColumn"></div>
+                            <!-- 数据 -->
+                            <div class="serviceCount">1800</div>
+                        </div>
+                        <!-- 单个服务的显示 -->
+                        <div class="serviceItem rolling">
+                            <!-- 标题 -->
+                            <div class="serviceTitle">患者信息2</div>
+                            <!-- 柱状 -->
+                            <div class="serviceColumn" style="width: 10%"></div>
+                            <!-- 数据 -->
+                            <div class="serviceCount">100</div>
+                        </div>
+                        <!-- 单个服务的显示 -->
+                        <div class="serviceItem rolling">
+                            <!-- 标题 -->
+                            <div class="serviceTitle">患者信息服务</div>
+                            <!-- 柱状 -->
+                            <div class="serviceColumn" style="width: 25%"></div>
+                            <!-- 数据 -->
+                            <div class="serviceCount">1400</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 数据量占比分析 -->
+            <div class="content3">
+                <div class="subTitle">数据量占比分析</div>
+                <div class="content3Block"></div>
+            </div>
+        </div>
+        <!-- 中间区域 -->
+        <div class="areaCenter">
+            <!-- 竖向拆分三个区域 -->
+            <div class="left">
+                <!-- 主数据信息 -->
+                <div class="cardBlock">
+                    <div class="cardTitle">主数据信息</div>
+                    <div class="card">
+                        <div class="cardContent">
+                            <ul>
+                                <li class="text">医务人员数</li>
+                                <li class="data">832</li>
+                            </ul>
+                            <ul>
+                                <li class="text">科室注册数</li>
+                                <li class="data">67</li>
+                            </ul>
+                            <ul>
+                                <li class="text">病区注册数</li>
+                                <li class="data">65</li>
+                            </ul>
+                            <ul>
+                                <li class="text">主数据对象</li>
+                                <li class="data">6</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 患者主索引 -->
+                <div class="cardBlock masterIndexBlock">
+                    <div class="cardTitle">患者主索引</div>
+                    <div class="card masterIndex">
+                        <div class="cardContent">
+                            <ul>
+                                <li class="text">患者注册数</li>
+                                <li class="data">832</li>
+                            </ul>
+                            <ul>
+                                <li class="text">患者主索引数</li>
+                                <li class="data">67</li>
+                            </ul>
+                            <ul>
+                                <li class="text">患者合并数</li>
+                                <li class="data">65</li>
+                            </ul>
+                            <ul>
+                                <li class="text">疑似患者数</li>
+                                <li class="data">6</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="center">
+                <!-- 中间图片区域 需要三个div  装三个图片-->
+                <div class="centerImage">
+                    <div class="image1"></div>
+                    <div class="image2"></div>
+                    <div class="image3"></div>
+                </div>
+                <!-- 患者和病历数据 -->
+                <div class="cardBlock">
+                    <div class="card">
+                        <div class="cardContent">
+                            <ul>
+                                <li class="text">患者数量</li>
+                                <li class="data">832</li>
+                            </ul>
+                            <ul>
+                                <li class="text">病历数量</li>
+                                <li class="data">67</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <!-- 术语信息 -->
+                <div class="cardBlock">
+                    <div class="cardTitle">术语信息</div>
+                    <div class="card">
+                        <div class="cardContent">
+                            <ul>
+                                <li class="text">医疗术语</li>
+                                <li class="data">832</li>
+                            </ul>
+                            <ul>
+                                <li class="text">ICD-9诊断</li>
+                                <li class="data">67</li>
+                            </ul>
+                            <ul>
+                                <li class="text">ICD-10诊断</li>
+                                <li class="data">65</li>
+                            </ul>
+                            <ul>
+                                <li class="text">标准字典</li>
+                                <li class="data">6</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- CDA交换文档 -->
+                <div class="cardBlock CDADocumentBlock">
+                    <div class="cardTitle">CDA交换文档</div>
+                    <div class="card CDADocument">
+                        <div class="cardContent">
+                            <ul>
+                                <li class="text">数据集总数</li>
+                                <li class="data">832</li>
+                            </ul>
+                            <ul>
+                                <li class="text">CDA服务数</li>
+                                <li class="data">67</li>
+                            </ul>
+                            <ul>
+                                <li class="text">CDA文档数</li>
+                                <li class="data">65</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 右边区域 -->
+        <div class="areaRight">
+            <!-- EMPI -->
+            <div class="content4">
+                <div class="subTitle">EMPI</div>
+                <div class="content4Block">
+                    <!-- 左边数据 -->
+                    <div class="EMPIData">
+                        <div class="EMPIItem">
+                            <div class="data">5600</div>
+                            <div class="text">今日患者数</div>
+                        </div>
+                        <div class="EMPIItem">
+                            <div class="data">5600</div>
+                            <div class="text">历史患者数</div>
+                        </div>
+                        <div class="EMPIItem">
+                            <div class="data">5600</div>
+                            <div class="text">今日合并数</div>
+                        </div>
+                        <div class="EMPIItem">
+                            <div class="data">55%</div>
+                            <div class="text">今日合并率</div>
+                        </div>
+                        <div class="EMPIItem">
+                            <div class="data">5600</div>
+                            <div class="text">疑似患者数</div>
+                        </div>
+                        <div class="EMPIItem">
+                            <div class="data">21%</div>
+                            <div class="text">疑似患者率</div>
+                        </div>
+                    </div>
+                    <!-- 右边地图 -->
+                    <div class="EMPIMap">
+
+                    </div>
+                </div>
+            </div>
+            <!-- 共享交换文档 -->
+            <div class="content5">
+                <div class="subTitle">共享交换文档</div>
+                <div class="content5Block"></div>
+            </div>
+            <!-- 病历检索高频词分析 -->
+            <div class="content6">
+                <div class="subTitle">病历检索高频词分析</div>
+                <div class="content6Block">
+                    <div class="words">发热</div>
+                    <div class="words">发热</div>
+                    <div class="words">发热</div>
+                    <div class="words">发热</div>
+                    <div class="words">高血压</div>
+                    <div class="words">发热</div>
+                    <div class="words">发热</div>
+                    <div class="words">心肌梗塞</div>
+                    <div class="words">发热</div>
+                    <div class="words">发热</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="echarts.min.js" type="text/javascript"></script>
+    <script src="index2.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.index2.init();
+        });
+    </script>
+</body>
+</html>
