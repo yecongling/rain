@@ -1,5 +1,6 @@
 package cn.soft.modules.system.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.soft.common.api.vo.Result;
 import cn.soft.common.constant.CommonConstant;
 import cn.soft.common.system.vo.LoginUser;
@@ -10,6 +11,7 @@ import cn.soft.modules.base.service.BaseCommonService;
 import cn.soft.modules.system.entity.SysUser;
 import cn.soft.modules.system.model.SysLoginModel;
 import cn.soft.modules.system.service.*;
+import cn.soft.modules.system.util.RandImageUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.annotations.Api;
@@ -17,10 +19,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 用户登录controller
@@ -31,48 +32,72 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class SysLoginController {
 
+    /**
+     * 用户service
+     */
     private ISysUserService sysUserService;
     @Autowired
     public void setSysUserService(ISysUserService sysUserService) {
         this.sysUserService = sysUserService;
     }
 
+    /**
+     * 基础API
+     */
     private ISysBaseAPI sysBaseAPI;
     @Autowired
     public void setSysBaseAPI(ISysBaseAPI sysBaseAPI) {
         this.sysBaseAPI = sysBaseAPI;
     }
 
+    /**
+     * 系统日志服务实现
+     */
     private ISysLogService sysLogService;
     @Autowired
     public void setSysLogService(ISysLogService sysLogService) {
         this.sysLogService = sysLogService;
     }
 
+    /**
+     * Redis工具类
+     */
     private RedisUtil redisUtil;
     @Autowired
     public void setRedisUtil(RedisUtil redisUtil) {
         this.redisUtil = redisUtil;
     }
 
+    /**
+     * 部门服务实现类
+     */
     private ISysDepartService sysDepartService;
     @Autowired
     public void setSysDepartService(ISysDepartService sysDepartService) {
         this.sysDepartService = sysDepartService;
     }
 
+    /**
+     * 租户服务实现类
+     */
     private ISysTenantService sysTenantService;
     @Autowired
     public void setSysTenantService(ISysTenantService sysTenantService) {
         this.sysTenantService = sysTenantService;
     }
 
+    /**
+     * 字典服务实现类
+     */
     private ISysDictService sysDictService;
     @Autowired
     public void setSysDictService(ISysDictService sysDictService) {
         this.sysDictService = sysDictService;
     }
 
+    /**
+     * 基础通用服务实现
+     */
     private BaseCommonService baseCommonService;
     @Autowired
     public void setBaseCommonService(BaseCommonService baseCommonService) {
@@ -80,6 +105,30 @@ public class SysLoginController {
     }
 
     private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
+
+    /**
+     * 后台生成图形验证码
+     * @param key 时间key
+     * @return 返回结果
+     */
+    @ApiOperation("获取验证码")
+    @GetMapping(value = "/randomImage/{key}")
+    public Result<String> getRandomImage(@PathVariable String key) {
+        Result<String> result = new Result<>();
+        try {
+            String code = RandomUtil.randomString(BASE_CHECK_CODES, 4);
+            String lowerCase = code.toLowerCase();
+            String realKey = MD5Util.MD5Encode(lowerCase + key, "utf-8");
+            redisUtil.set(realKey, lowerCase, 60);
+            String base64 = RandImageUtil.generate(code);
+            result.setSuccess(true);
+            result.setResult(base64);
+        } catch (Exception e) {
+            result.error500("获取验证码出错" + e.getMessage());
+            log.error("获取验证码出错，原因：" + e.getMessage());
+        }
+        return result;
+    }
 
     /**
      * 登录入口
