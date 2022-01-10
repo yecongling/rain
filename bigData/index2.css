@@ -399,6 +399,11 @@ div.areaRight div.content4Block div.EMPIMap{
 }
 
 /* 病历检索高频词 */
+div.content6Block {
+    padding-top: 20px !important;
+    height: calc(100% - 70px) !important;
+}
+
 div.content6Block div.words {
     font-size: 18px;
     color: white;
