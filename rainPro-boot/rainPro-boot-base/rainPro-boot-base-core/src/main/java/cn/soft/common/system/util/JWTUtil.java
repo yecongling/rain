@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
@@ -46,9 +47,10 @@ public class JWTUtil {
         OutputStream os = null;
         try {
             os = httpServletResponse.getOutputStream();
+            httpServletResponse.setHeader("Content-type", "text/html;charset=UTF-8");
             httpServletResponse.setCharacterEncoding("UTF-8");
             httpServletResponse.setStatus(401);
-            os.write(new ObjectMapper().writeValueAsString(jsonResult).getBytes("UTF-8"));
+            os.write(new ObjectMapper().writeValueAsString(jsonResult).getBytes(StandardCharsets.UTF_8));
             os.flush();
             os.close();
         } catch (IOException e) {

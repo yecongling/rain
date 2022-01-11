@@ -22,10 +22,10 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
@@ -38,7 +38,7 @@ import java.util.*;
  * Shiro配置类
  */
 @Slf4j
-@Component
+@Configuration
 public class ShiroConfig {
 
     @Value("${rainPro.shiro.excludeUrls}")
@@ -56,6 +56,7 @@ public class ShiroConfig {
 
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+        log.info("===============加载shiro过滤器===============");
         CustomShiroFilterFactoryBean shiroFilterFactoryBean = new CustomShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 拦截器
