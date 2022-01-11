@@ -76,3 +76,34 @@ CREATE TABLE `sys_user`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 INSERT INTO `sys_user` VALUES ('a75d45a015c44384a04449ee80dc3503', 'jeecg', 'jeecg', '58a714412072f0b9', 'mIgiYJow', 'https://static.jeecg.com/temp/国炬软件logo_1606575029126.png', NULL, 1, NULL, NULL, 'A02A01', 1, 0, NULL, NULL, 1, '00002', 'devleader', NULL, 'admin', '2019-02-13 16:02:36', 'admin', '2020-11-26 15:16:05', 1, '', NULL, NULL);
+
+/* 3、 新建系统角色表  sys_role */
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
+     `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+     `role_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称',
+     `role_code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色编码',
+     `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+     `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+     `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+     `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
+     `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+     PRIMARY KEY (`id`) USING BTREE,
+     UNIQUE INDEX `uniq_sys_role_role_code`(`role_code`) USING BTREE,
+     INDEX `idx_sr_role_code`(`role_code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+
+/* 4、 新建用户角色表 用户和角色的关联表 */
+DROP TABLE IF EXISTS `sys_user_role`;
+CREATE TABLE `sys_user_role`  (
+      `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+      `user_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户id',
+      `role_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色id',
+      PRIMARY KEY (`id`) USING BTREE,
+      INDEX `index2_group_user_id`(`user_id`) USING BTREE,
+      INDEX `index2_group_ole_id`(`role_id`) USING BTREE,
+      INDEX `index2_group_useridandroleid`(`user_id`, `role_id`) USING BTREE,
+      INDEX `idx_sur_user_id`(`user_id`) USING BTREE,
+      INDEX `idx_sur_role_id`(`role_id`) USING BTREE,
+      INDEX `idx_sur_user_role_id`(`user_id`, `role_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;

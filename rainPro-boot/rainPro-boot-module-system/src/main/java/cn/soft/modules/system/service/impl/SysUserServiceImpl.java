@@ -2,9 +2,12 @@ package cn.soft.modules.system.service.impl;
 
 import cn.soft.common.api.vo.Result;
 import cn.soft.common.constant.CommonConstant;
+import cn.soft.common.util.oConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
 import cn.soft.modules.system.entity.SysUser;
+import cn.soft.modules.system.entity.SysUserRole;
 import cn.soft.modules.system.mapper.SysUserMapper;
+import cn.soft.modules.system.mapper.SysUserRoleMapper;
 import cn.soft.modules.system.service.ISysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -26,11 +29,18 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         this.userMapper = userMapper;
     }
 
+    private SysUserRoleMapper userRoleMapper;
+    @Autowired
+    public void setUserRoleMapper(SysUserRoleMapper userRoleMapper) {
+        this.userRoleMapper = userRoleMapper;
+    }
+
     private BaseCommonService baseCommonService;
     @Autowired
     public void setBaseCommonService(BaseCommonService baseCommonService) {
         this.baseCommonService = baseCommonService;
     }
+
 
     /**
      * 验证用户是否有效
@@ -59,5 +69,32 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             return result;
         }
         return result;
+    }
+
+    /**
+     * 根据用户名获取用户信息
+     * @param username 用户名
+     * @return /
+     */
+    @Override
+    public SysUser getUserByName(String username) {
+        return userMapper.getUserByName(username);
+    }
+
+    /**
+     * 添加用户角色关系
+     * @param user 用户
+     * @param roles 角色
+     */
+    @Override
+    public void addUserWithRole(SysUser user, String roles) {
+        this.save(user);
+        if (oConvertUtils.isNotEmpty(roles)) {
+            String[] arr = roles.split(",");
+            for (String roleId : arr) {
+                SysUserRole userRole = new SysUserRole(user.getId(), roleId);
+                userRoleMapper.insert(userRole);
+            }
+        }
     }
 }

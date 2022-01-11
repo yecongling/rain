@@ -97,10 +97,6 @@ spring:
   autoconfigure:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   datasource:
-#    url: jdbc:mysql://127.0.0.1:3306/rainpro?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
-#    username: root
-#    password: root
-#    driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       stat-view-servlet:
         enabled: true

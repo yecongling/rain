@@ -5,10 +5,10 @@
         <a-tab-pane key="tab1" tab="账号密码登录">
           <login-account ref="alogin" @validateFail="validateFail" @success="requestSuccess" @fail="requestFailed"></login-account>
         </a-tab-pane>
-
-        <a-tab-pane key="tab2" tab="手机号登录">
+        <!-- 暂时屏蔽掉手机登录 -->
+        <!--<a-tab-pane key="tab2" tab="手机号登录">
           <login-phone ref="plogin" @validateFail="validateFail" @success="requestSuccess" @fail="requestFailed"></login-phone>
-        </a-tab-pane>
+        </a-tab-pane>-->
       </a-tabs>
 
       <a-form-model-item>
@@ -16,7 +16,7 @@
         <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">
           忘记密码
         </router-link>
-        <router-link :to="{ name: 'register'}" class="forge-password" style="float: right;margin-right: 10px" >
+        <router-link :to="{ name: 'register'}" v-if="register" class="forge-password" style="float: right;margin-right: 10px" >
           注册账户
         </router-link>
       </a-form-model-item>
@@ -30,7 +30,8 @@
 
     <two-step-captcha v-if="requiredTwoStepCaptcha" :visible="stepCaptchaVisible" @success="stepCaptchaSuccess" @cancel="stepCaptchaCancel"></two-step-captcha>
     <login-select-tenant ref="loginSelect" @success="loginSelectOk"></login-select-tenant>
-    <third-login ref="thirdLogin"></third-login>
+    <!-- 暂时不使用三方登录方式 -->
+    <!--<third-login ref="thirdLogin"></third-login>-->
   </div>
 </template>
 
@@ -61,6 +62,8 @@ export default {
         loginBtn: false,
         requiredTwoStepCaptcha: false,
         stepCaptchaVisible: false,
+        // 开启注册功能
+        register: true,
         encryptedString:{
           key:"",
           iv:"",

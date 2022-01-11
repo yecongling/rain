@@ -17,7 +17,6 @@
       //update-begin--Author:scott  Date:20201015 for：路由缓存问题，关闭了tab页时再打开就不刷新 #842
       includedComponents() {
         const includedRouters = Vue.ls.get(CACHE_INCLUDED_ROUTES)
-        console.log("includedRouters：" + includedRouters)
 
         //如果是缓存路由，则加入到 cache_included_routes
         if (this.$route.meta.keepAlive && this.$route.meta.componentName) {
