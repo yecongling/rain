@@ -52,22 +52,22 @@
                     <div class="systemInfo">
                         <div class="systemItem">
                             <!-- 环形图显示 -->
-                            <div class="circleChart"></div>
+                            <div class="circleChart" id="CPUChart"></div>
                             <div class="systemTitle">CPU</div>
                         </div>
                         <div class="systemItem">
                             <!-- 环形图显示 -->
-                            <div class="circleChart"></div>
+                            <div class="circleChart" id="memoryChart"></div>
                             <div class="systemTitle">内存</div>
                         </div>
                         <div class="systemItem">
                             <!-- 环形图显示 -->
-                            <div class="circleChart"></div>
+                            <div class="circleChart" id="diskChart"></div>
                             <div class="systemTitle">磁盘</div>
                         </div>
                         <div class="systemItem">
                             <!-- 环形图显示 -->
-                            <div class="circleChart"></div>
+                            <div class="circleChart" id="databaseChart"></div>
                             <div class="systemTitle">数据库</div>
                         </div>
                     </div>
@@ -137,7 +137,9 @@
             <!-- 数据量占比分析 -->
             <div class="content3">
                 <div class="subTitle">数据量占比分析</div>
-                <div class="content3Block"></div>
+                <div class="content3Block">
+                    <div class="dataChart" id="dataChart"></div>
+                </div>
             </div>
         </div>
         <!-- 中间区域 -->
@@ -297,7 +299,7 @@
                         </div>
                     </div>
                     <!-- 右边地图 -->
-                    <div class="EMPIMap">
+                    <div class="EMPIMap" id="EMPIMap">
 
                     </div>
                 </div>
@@ -305,7 +307,23 @@
             <!-- 共享交换文档 -->
             <div class="content5">
                 <div class="subTitle">共享交换文档</div>
-                <div class="content5Block"></div>
+                <div class="content5Block">
+                    <div class="numberInfoTitle">
+                        <div class="docItem">
+                            <div class="num">56</div>
+                            <div class="text">数据集总数</div>
+                        </div>
+                        <div class="docItem">
+                            <div class="num">5</div>
+                            <div class="text">共享文档总数</div>
+                        </div>
+                        <div class="docItem">
+                            <div class="num">12</div>
+                            <div class="text">数据集总数</div>
+                        </div>
+                    </div>
+                    <div class="docChart" id="docChart"></div>
+                </div>
             </div>
             <!-- 病历检索高频词分析 -->
             <div class="content6">
