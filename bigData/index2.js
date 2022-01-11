@@ -328,16 +328,20 @@
          */
         initWordCloud() {
             let arr = [
-                {text: '高血压', weight: 34},
-                {text: '脑死亡', weight: 24},
-                {text: '股骨头', weight: 12},
-                {text: '血透', weight: 22},
-                {text: '脱发', weight: 17},
-                {text: '颈动脉', weight: 17},
-                {text: '新冠病毒', weight: 43},
-                {text: '血液', weight: 14},
+                {text: '高血压', weight: 34, html: {title: '检索次数：34次'}},
+                {text: '脑死亡', weight: 24, html: {title: '检索次数：24次'}},
+                {text: '股骨头', weight: 12, html: {title: '检索次数：12次'}},
+                {text: '血透', weight: 22, html: {title: '检索次数：22次'}},
+                {text: '脱发', weight: 17, html: {title: '检索次数：17次'}},
+                {text: '颈动脉', weight: 17, html: {title: '检索次数：17次'}},
+                {text: '新冠病毒', weight: 43, html: {title: '检索次数：43次'}},
+                {text: '血液', weight: 14, html: {title: '检索次数：14次'}},
             ];
-            $('#wordCloud').jQCloud(arr);
+            $('#wordCloud').jQCloud(arr, {
+                removeOverflowing: true
+            });
+            // 用于更新数据
+            // $('#keywords').jQCloud('update', arr);
         },
 
         /**

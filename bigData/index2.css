@@ -446,3 +446,7 @@ div.content6Block {
     height: calc(100% - 70px) !important;
 }
 
+.jqcloud-word {
+    cursor: pointer;
+}
+
