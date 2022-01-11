@@ -11,11 +11,11 @@ import { ACCESS_TOKEN, TENANT_ID } from "@/store/mutation-types"
  * 则映射后端域名，通过 vue.config.js
  * @type {*|string}
  */
-let apiBaseUrl = window._CONFIG['domianURL'] || "/jeecg-boot";
+let apiBaseUrl = "/rainpro-boot";
 //console.log("apiBaseUrl= ",apiBaseUrl)
 // 创建 axios 实例
 const service = axios.create({
-  //baseURL: '/jeecg-boot',
+  //baseURL: '/rainpro-boot',
   baseURL: apiBaseUrl, // api base_url
   timeout: 9000 // 请求超时时间
 })
