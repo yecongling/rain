@@ -41,6 +41,7 @@
             this.initEMPIMap();
             this.initDocChart();
             this.initEvent();
+            this.initWordCloud();
             this.initInterval();
         },
 
@@ -321,6 +322,24 @@
                 ]
             };
         },
+
+        /**
+         * 初始化词云
+         */
+        initWordCloud() {
+            let arr = [
+                {text: '高血压', weight: 34},
+                {text: '脑死亡', weight: 24},
+                {text: '股骨头', weight: 12},
+                {text: '血透', weight: 22},
+                {text: '脱发', weight: 17},
+                {text: '颈动脉', weight: 17},
+                {text: '新冠病毒', weight: 43},
+                {text: '血液', weight: 14},
+            ];
+            $('#wordCloud').jQCloud(arr);
+        },
+
         /**
          * 初始化事件
          */
