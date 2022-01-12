@@ -6,4 +6,9 @@
         select * from sys_user where username = #{username} and del_flag = 0
     </select>
 
+    <!-- 修改用户部门code -->
+    <update id="updateUserDepart">
+        update sys_user set org_code = #{orgCode} where username = #{username}
+    </update>
+
 </mapper>

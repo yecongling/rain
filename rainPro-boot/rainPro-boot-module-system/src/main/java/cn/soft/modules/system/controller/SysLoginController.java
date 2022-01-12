@@ -3,11 +3,15 @@ package cn.soft.modules.system.controller;
 import cn.hutool.core.util.RandomUtil;
 import cn.soft.common.api.vo.Result;
 import cn.soft.common.constant.CommonConstant;
+import cn.soft.common.system.util.JWTUtil;
 import cn.soft.common.system.vo.LoginUser;
 import cn.soft.common.util.MD5Util;
 import cn.soft.common.util.PasswordUtil;
 import cn.soft.common.util.RedisUtil;
+import cn.soft.common.util.oConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
+import cn.soft.modules.system.entity.SysDepart;
+import cn.soft.modules.system.entity.SysTenant;
 import cn.soft.modules.system.entity.SysUser;
 import cn.soft.modules.system.model.SysLoginModel;
 import cn.soft.modules.system.service.*;
@@ -20,6 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * 用户登录controller
@@ -173,7 +180,7 @@ public class SysLoginController {
         LoginUser loginUser = new LoginUser();
         BeanUtils.copyProperties(sysUser, loginUser);
         baseCommonService.addLog("用户名：" + username + "，登录成功！", CommonConstant.LOG_TYPE_1, null, loginUser);
-        return null;
+        return result;
     }
 
     /**
@@ -183,6 +190,52 @@ public class SysLoginController {
      * @return /
      */
     private Result<JSONObject> userInfo(SysUser sysUser, Result<JSONObject> result) {
+        String password = sysUser.getPassword();
+        String username = sysUser.getUsername();
+        // 获取用户部门信息
+        JSONObject object = new JSONObject();
+        // 获取用户部门
+        List<SysDepart> departs = sysDepartService.queryUserDeparts(sysUser.getId());
+        object.put("departs", departs);
+        if (departs == null || departs.size() == 0) {
+            // 设置不是多部门
+            object.put("multi_depart", 0);
+        } else if (departs.size() == 1) {
+            // 单部门
+            sysUserService.updateUserDepart(username, departs.get(0).getOrgCode());
+            object.put("multi_depart", 1);
+        } else {
+            // 查询当前是否有登录部门
+            SysUser sysUserById = sysUserService.getById(sysUser.getId());
+            if (oConvertUtils.isEmpty(sysUserById.getOrgCode())) {
+                sysUserService.updateUserDepart(username, departs.get(0).getOrgCode());
+                object.put("multi_depart", 2);
+            }
+        }
+        // 获取用户租户信息
+        String tenantIds = sysUser.getRelTenantIds();
+        if (oConvertUtils.isNotEmpty(tenantIds)) {
+            List<String> tenantIdList = Arrays.asList(tenantIds.split(","));
+            // 该方法仅查询有效租户，如果返回0就说嘛所有租户均无效
+            List<SysTenant> tenantList = sysTenantService.queryEffectiveTenant(tenantIdList);
+            if (tenantList.size() == 0) {
+                /* 目前不考虑租户模块  先注释 */
+                //result.error500("与该用户关联的租户均已被冻结，无法登录!");
+                //return result;
+            } else {
+                object.put("tenantList", tenantList);
+            }
+        }
+        // 生成token
+        String token = JWTUtil.sign(username, password);
+        // 设置token缓存有效时间
+        redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
+        redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JWTUtil.EXPIRE_TIME * 2 / 1000);
+        object.put("token", token);
+        object.put("userInfo", sysUser);
+        object.put("sysAllDictItems", sysDictService.queryAllDictItems());
+        result.setResult(object);
+        result.success("登录成功");
         return result;
     }
 }

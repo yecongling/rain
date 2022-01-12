@@ -56,10 +56,10 @@ const err = (error) => {
                     let path = window.document.location.pathname
                     console.log('location pathname -> ' + path)
                     if (path != '/' && path.indexOf('/user/login') == -1) {
-                      window.location.reload()
+                      // window.location.reload()
                     }
                   } catch (e) {
-                    window.location.reload()
+                    // window.location.reload()
                   }
                 })
               }
@@ -79,7 +79,7 @@ const err = (error) => {
         if (token) {
           store.dispatch('Logout').then(() => {
             setTimeout(() => {
-              window.location.reload()
+              // window.location.reload()
             }, 1500)
           })
         }

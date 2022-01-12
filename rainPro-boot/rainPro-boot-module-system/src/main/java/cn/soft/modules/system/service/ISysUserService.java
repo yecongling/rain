@@ -30,4 +30,11 @@ public interface ISysUserService extends IService<SysUser> {
      */
     public void addUserWithRole(SysUser user,String roles);
 
+    /**
+     * 根据用户ID设置部门ID
+     * @param username 用户名
+     * @param orgCode 部门
+     */
+    void updateUserDepart(String username, String orgCode);
+
 }

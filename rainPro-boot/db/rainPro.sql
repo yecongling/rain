@@ -93,7 +93,7 @@ CREATE TABLE `sys_role`  (
      INDEX `idx_sr_role_code`(`role_code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
-/* 4、 新建用户角色表 用户和角色的关联表 */
+/* 4、 新建用户角色表 用户和角色的关联表 sys_user_role */
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
       `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
@@ -107,3 +107,107 @@ CREATE TABLE `sys_user_role`  (
       INDEX `idx_sur_role_id`(`role_id`) USING BTREE,
       INDEX `idx_sur_user_role_id`(`user_id`, `role_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;
+
+/* 5、新建系统部门表  sys_depart */
+DROP TABLE IF EXISTS `sys_depart`;
+CREATE TABLE `sys_depart`  (
+       `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ID',
+       `parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父机构ID',
+       `depart_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '机构/部门名称',
+       `depart_name_en` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '英文名',
+       `depart_name_abbr` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '缩写',
+       `depart_order` int(11) NULL DEFAULT 0 COMMENT '排序',
+       `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+       `org_category` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '1' COMMENT '机构类别 1公司，2组织机构，2岗位',
+       `org_type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '机构类型 1一级部门 2子部门',
+       `org_code` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '机构编码',
+       `mobile` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
+       `fax` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '传真',
+       `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
+       `memo` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+       `status` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态（1启用，0不启用）',
+       `del_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '删除状态（0，正常，1已删除）',
+       `qywx_identifier` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '对接企业微信的ID',
+       `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+       `create_time` datetime NULL DEFAULT NULL COMMENT '创建日期',
+       `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
+       `update_time` datetime NULL DEFAULT NULL COMMENT '更新日期',
+       PRIMARY KEY (`id`) USING BTREE,
+       UNIQUE INDEX `uniq_depart_org_code`(`org_code`) USING BTREE,
+       INDEX `index_depart_parent_id`(`parent_id`) USING BTREE,
+       INDEX `index_depart_depart_order`(`depart_order`) USING BTREE,
+       INDEX `index_depart_org_code`(`org_code`) USING BTREE,
+       INDEX `idx_sd_parent_id`(`parent_id`) USING BTREE,
+       INDEX `idx_sd_depart_order`(`depart_order`) USING BTREE,
+                               INDEX `idx_sd_org_code`(`org_code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '组织机构表' ROW_FORMAT = Dynamic;
+
+/* 6、新建用户部门关系表  sys_user_depart */
+DROP TABLE IF EXISTS `sys_user_depart`;
+CREATE TABLE `sys_user_depart`  (
+        `ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'id',
+        `user_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户id',
+        `dep_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '部门id',
+        PRIMARY KEY (`ID`) USING BTREE,
+        INDEX `index_depart_groupk_userid`(`user_id`) USING BTREE,
+        INDEX `index_depart_groupkorgid`(`dep_id`) USING BTREE,
+        INDEX `index_depart_groupk_uidanddid`(`user_id`, `dep_id`) USING BTREE,
+        INDEX `idx_sud_user_id`(`user_id`) USING BTREE,
+        INDEX `idx_sud_dep_id`(`dep_id`) USING BTREE,
+        INDEX `idx_sud_user_dep_id`(`user_id`, `dep_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+/* 7、创建系统租户表 sys_tenant  */
+DROP TABLE IF EXISTS `sys_tenant`;
+CREATE TABLE `sys_tenant`  (
+   `id` int(5) NOT NULL COMMENT '租户编码',
+   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户名称',
+   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+   `create_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+   `begin_date` datetime NULL DEFAULT NULL COMMENT '开始时间',
+   `end_date` datetime NULL DEFAULT NULL COMMENT '结束时间',
+   `status` int(1) NULL DEFAULT NULL COMMENT '状态 1正常 0冻结',
+   PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '多租户信息表' ROW_FORMAT = Dynamic;
+
+/* 8、新建系统字典表 sys_dict */
+DROP TABLE IF EXISTS `sys_dict`;
+CREATE TABLE `sys_dict`  (
+     `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+     `dict_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典名称',
+     `dict_code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典编码',
+     `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+     `del_flag` int(1) NULL DEFAULT NULL COMMENT '删除状态',
+     `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+     `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+     `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
+     `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+     `type` int(1) UNSIGNED ZEROFILL NULL DEFAULT 0 COMMENT '字典类型0为string,1为number',
+     PRIMARY KEY (`id`) USING BTREE,
+     UNIQUE INDEX `indextable_dict_code`(`dict_code`) USING BTREE,
+     UNIQUE INDEX `uk_sd_dict_code`(`dict_code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+/* 9、新建字典明细表 sys_dict_item */
+DROP TABLE IF EXISTS `sys_dict_item`;
+CREATE TABLE `sys_dict_item`  (
+      `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+      `dict_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典id',
+      `item_text` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典项文本',
+      `item_value` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典项值',
+      `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+      `sort_order` int(10) NULL DEFAULT NULL COMMENT '排序',
+      `status` int(11) NULL DEFAULT NULL COMMENT '状态（1启用 0不启用）',
+      `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+      `create_time` datetime NULL DEFAULT NULL,
+      `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+      `update_time` datetime NULL DEFAULT NULL,
+      PRIMARY KEY (`id`) USING BTREE,
+      INDEX `index_table_dict_id`(`dict_id`) USING BTREE,
+      INDEX `index_table_sort_order`(`sort_order`) USING BTREE,
+      INDEX `index_table_dict_status`(`status`) USING BTREE,
+      INDEX `idx_sdi_role_dict_id`(`dict_id`) USING BTREE,
+      INDEX `idx_sdi_role_sort_order`(`sort_order`) USING BTREE,
+      INDEX `idx_sdi_status`(`status`) USING BTREE,
+      INDEX `idx_sdi_dict_val`(`dict_id`, `item_value`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;

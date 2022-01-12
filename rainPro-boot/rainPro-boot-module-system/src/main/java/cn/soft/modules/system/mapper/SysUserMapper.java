@@ -18,4 +18,11 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
      */
     public SysUser getUserByName(@Param("username") String username);
 
+    /**
+     * 根据用户名设置部门ID
+     * @param username 用户名
+     * @param orgCode 部门ID
+     */
+    void updateUserDepart(@Param("username") String username, @Param("orgCode") String orgCode);
+
 }

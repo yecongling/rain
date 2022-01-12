@@ -2,7 +2,7 @@ package cn.soft.modules.base.mapper;
 
 import cn.soft.common.api.dto.LogDTO;
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,5 +16,5 @@ public interface BaseCommonMapper {
      * @param dto 日志对象
      */
     @InterceptorIgnore(illegalSql = "true", tenantLine = "true")
-    void saveLog(LogDTO dto);
+    void saveLog(@Param("dto") LogDTO dto);
 }
