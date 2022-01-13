@@ -2,12 +2,23 @@ package cn.soft.modules.system.service.impl;
 
 import cn.soft.common.api.dto.OnlineAuthDTO;
 import cn.soft.common.api.dto.message.*;
+import cn.soft.common.constant.CacheConstant;
 import cn.soft.common.system.vo.*;
+import cn.soft.common.util.ConvertUtils;
+import cn.soft.modules.system.entity.SysPermission;
+import cn.soft.modules.system.entity.SysUser;
+import cn.soft.modules.system.mapper.SysPermissionMapper;
+import cn.soft.modules.system.mapper.SysUserMapper;
+import cn.soft.modules.system.mapper.SysUserRoleMapper;
 import cn.soft.modules.system.service.ISysBaseAPI;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,14 +30,46 @@ import java.util.Set;
 @Service
 public class SysBaseApiImpl implements ISysBaseAPI {
 
-    @Override
-    public Set<String> queryUserRoles(String username) {
-        return null;
+    private SysUserRoleMapper userRoleMapper;
+
+    @Autowired
+    public void setUserRoleMapper(SysUserRoleMapper userRoleMapper) {
+        this.userRoleMapper = userRoleMapper;
     }
 
+    private SysPermissionMapper permissionMapper;
+
+    @Autowired
+    public void setPermissionMapper(SysPermissionMapper permissionMapper) {
+        this.permissionMapper = permissionMapper;
+    }
+
+    private SysUserMapper userMapper;
+    @Autowired
+    public void setUserMapper(SysUserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
+    /**
+     * 查询用户角色信息
+     *
+     * @param username /
+     * @return /
+     */
+    @Override
+    public Set<String> queryUserRoles(String username) {
+        return getUserRoleSet(username);
+    }
+
+    /**
+     * 查询用户拥有的权限集合 common api 里面的接口实现
+     *
+     * @param username 用户
+     * @return /
+     */
     @Override
     public Set<String> queryUserAuths(String username) {
-        return null;
+        return getUserPermissionSet(username);
     }
 
     @Override
@@ -39,9 +82,25 @@ public class SysBaseApiImpl implements ISysBaseAPI {
         return null;
     }
 
+    /**
+     * 查询用户
+     *
+     * @param username /
+     * @return /
+     */
     @Override
+    @Cacheable(cacheNames = CacheConstant.SYS_USERS_CACHE, key = "#username")
     public LoginUser getUserByName(String username) {
-        return null;
+        if (ConvertUtils.isEmpty(username)) {
+            return null;
+        }
+        LoginUser loginUser = new LoginUser();
+        SysUser sysUser = userMapper.getUserByName(username);
+        if (sysUser == null) {
+            return null;
+        }
+        BeanUtils.copyProperties(sysUser, loginUser);
+        return loginUser;
     }
 
     @Override
@@ -219,14 +278,37 @@ public class SysBaseApiImpl implements ISysBaseAPI {
         return null;
     }
 
+    /**
+     * 查询用户拥有的角色集合
+     *
+     * @param username 用户账号
+     * @return /
+     */
     @Override
     public Set<String> getUserRoleSet(String username) {
-        return null;
+        // 查询用户拥有的角色集合
+        List<String> roles = userRoleMapper.getRoleByUserName(username);
+        log.info("-------通过数据库读取用户拥有的角色Rules------username： " + username + ",Roles size: " + (roles == null ? 0 : roles.size()));
+        return new HashSet<>(roles);
     }
 
+    /**
+     * 查询用户拥有的权限集合
+     *
+     * @param username 用户
+     * @return /
+     */
     @Override
     public Set<String> getUserPermissionSet(String username) {
-        return null;
+        Set<String> permissionSet = new HashSet<>();
+        List<SysPermission> permissionList = permissionMapper.queryByUser(username);
+        for (SysPermission po : permissionList) {
+            if (ConvertUtils.isNotEmpty(po.getPerms())) {
+                permissionSet.add(po.getPerms());
+            }
+        }
+        log.info("-------通过数据库读取用户拥有的权限Perms------username： " + username + ",Perms size: " + permissionSet.size());
+        return permissionSet;
     }
 
     @Override

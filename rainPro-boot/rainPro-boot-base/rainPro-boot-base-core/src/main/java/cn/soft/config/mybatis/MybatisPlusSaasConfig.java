@@ -1,6 +1,6 @@
 package cn.soft.config.mybatis;
 
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -43,7 +43,7 @@ public class MybatisPlusSaasConfig {
         interceptor.addInnerInterceptor(new TenantLineInnerInterceptor(new TenantLineHandler() {
             @Override
             public Expression getTenantId() {
-                String tenant_id = oConvertUtils.getString(TenantContext.getTenant(), "0");
+                String tenant_id = ConvertUtils.getString(TenantContext.getTenant(), "0");
                 return new LongValue(tenant_id);
             }
 

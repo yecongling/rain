@@ -8,7 +8,7 @@ import cn.soft.common.system.vo.LoginUser;
 import cn.soft.common.system.vo.SysUserCacheInfo;
 import cn.soft.common.util.DateUtils;
 import cn.soft.common.util.SpringContextUtils;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -116,7 +116,7 @@ public class JWTUtil {
     public static String getUserNameByToken(HttpServletRequest request) throws RainBootException {
         String accessToken = request.getHeader("X-Access-Token");
         String username = getUsername(accessToken);
-        if (oConvertUtils.isEmpty(username)) {
+        if (ConvertUtils.isEmpty(username)) {
             throw new RainBootException("未获取到用户");
         }
         return username;
@@ -139,7 +139,7 @@ public class JWTUtil {
         if (key.contains("#{")) {
             key = key.substring(2, key.indexOf("}"));
         }
-        if (oConvertUtils.isNotEmpty(key)) {
+        if (ConvertUtils.isNotEmpty(key)) {
             HttpSession session = SpringContextUtils.getHttpServletRequest().getSession();
             returnValue = (String) session.getAttribute(key);
         }
@@ -229,7 +229,7 @@ public class JWTUtil {
         //update-begin-author:taoyan date:20210330 for:多租户ID作为系统变量
         else if (key.equals(DataBaseConstant.TENANT_ID) || key.toLowerCase().equals(DataBaseConstant.TENANT_ID_TABLE)) {
             returnValue = sysUser.getRelTenantIds();
-            if (oConvertUtils.isEmpty(returnValue) || (returnValue != null && returnValue.indexOf(",") > 0)) {
+            if (ConvertUtils.isEmpty(returnValue) || (returnValue != null && returnValue.indexOf(",") > 0)) {
                 returnValue = SpringContextUtils.getHttpServletRequest().getHeader(CommonConstant.TENANT_ID);
             }
         }

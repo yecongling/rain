@@ -7,7 +7,7 @@ import cn.soft.common.system.util.RainDataAuthorUtils;
 import cn.soft.common.system.vo.SysPermissionDataRuleModel;
 import cn.soft.common.system.vo.SysUserCacheInfo;
 import cn.soft.common.util.SpringContextUtils;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -81,7 +81,7 @@ public class PermissionDataAspect {
      */
     private String filterUrl(String requestPath) {
         String url = "";
-        if (oConvertUtils.isNotEmpty(requestPath)) {
+        if (ConvertUtils.isNotEmpty(requestPath)) {
             url = requestPath.replace("\\", "/");
             url = url.replace("//", "/");
             if (url.contains("//")) {
@@ -100,7 +100,7 @@ public class PermissionDataAspect {
     private String getJgAuthRequestPath(HttpServletRequest request) {
         String queryString = request.getQueryString();
         String requestPath = request.getRequestURI();
-        if (oConvertUtils.isNotEmpty(queryString)) {
+        if (ConvertUtils.isNotEmpty(queryString)) {
             requestPath += "?" + queryString;
         }
         // 去掉其他参数(保留一个参数) 例如：loginController.do?login

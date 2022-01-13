@@ -8,7 +8,7 @@ import cn.soft.common.system.vo.LoginUser;
 import cn.soft.common.util.MD5Util;
 import cn.soft.common.util.PasswordUtil;
 import cn.soft.common.util.RedisUtil;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
 import cn.soft.modules.system.entity.SysDepart;
 import cn.soft.modules.system.entity.SysTenant;
@@ -207,14 +207,14 @@ public class SysLoginController {
         } else {
             // 查询当前是否有登录部门
             SysUser sysUserById = sysUserService.getById(sysUser.getId());
-            if (oConvertUtils.isEmpty(sysUserById.getOrgCode())) {
+            if (ConvertUtils.isEmpty(sysUserById.getOrgCode())) {
                 sysUserService.updateUserDepart(username, departs.get(0).getOrgCode());
                 object.put("multi_depart", 2);
             }
         }
         // 获取用户租户信息
         String tenantIds = sysUser.getRelTenantIds();
-        if (oConvertUtils.isNotEmpty(tenantIds)) {
+        if (ConvertUtils.isNotEmpty(tenantIds)) {
             List<String> tenantIdList = Arrays.asList(tenantIds.split(","));
             // 该方法仅查询有效租户，如果返回0就说嘛所有租户均无效
             List<SysTenant> tenantList = sysTenantService.queryEffectiveTenant(tenantIdList);

@@ -1,12 +1,11 @@
 package cn.soft.config.shiro;
 
 import cn.soft.common.constant.CommonConstant;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import cn.soft.config.shiro.filter.CustomShiroFilterFactoryBean;
 import cn.soft.config.shiro.filter.JwtFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
@@ -61,7 +60,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         // 拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        if (oConvertUtils.isNotEmpty(excludeUrls)) {
+        if (ConvertUtils.isNotEmpty(excludeUrls)) {
             String[] permissionUrl = excludeUrls.split(",");
             for (String url : permissionUrl) {
                 filterChainDefinitionMap.put(url, "anon");
@@ -240,7 +239,7 @@ public class ShiroConfig {
             Set<HostAndPort> portSet = new HashSet<>();
             lettuceConnectionFactory.getClusterConfiguration().getClusterNodes().forEach(node -> portSet.add(new HostAndPort(node.getHost(), node.getPort())));
             //update-begin--Author:scott Date:20210531 for：修改集群模式下未设置redis密码的bug issues/I3QNIC
-            if (oConvertUtils.isNotEmpty(lettuceConnectionFactory.getPassword())) {
+            if (ConvertUtils.isNotEmpty(lettuceConnectionFactory.getPassword())) {
                 JedisCluster jedisCluster = new JedisCluster(portSet, 2000, 2000, 5,
                         lettuceConnectionFactory.getPassword(), new GenericObjectPoolConfig());
                 redisManager.setPassword(lettuceConnectionFactory.getPassword());

@@ -5,7 +5,7 @@ import cn.soft.common.api.vo.Result;
 import cn.soft.common.aspect.annotation.Dict;
 import cn.soft.common.constant.CommonConstant;
 import cn.soft.common.system.vo.DictModel;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -119,9 +119,9 @@ public class DictAspect {
                     }
                     JSONObject item = JSONObject.parseObject(json);
                     // 遍历所有字段，把字典code取出来，放到map里
-                    for (Field field : oConvertUtils.getAllFields(record)) {
+                    for (Field field : ConvertUtils.getAllFields(record)) {
                         String value = item.getString(field.getName());
-                        if (oConvertUtils.isEmpty(value)) {
+                        if (ConvertUtils.isEmpty(value)) {
                             continue;
                         }
                         if (field.getAnnotation(Dict.class) != null) {
@@ -164,7 +164,7 @@ public class DictAspect {
                         }
 
                         String value = record.getString(field.getName());
-                        if (oConvertUtils.isNotEmpty(value)) {
+                        if (ConvertUtils.isNotEmpty(value)) {
                             List<DictModel> dictModels = translText.get(fieldDictCode);
                             if(dictModels==null || dictModels.size()==0){
                                 continue;
@@ -231,7 +231,7 @@ public class DictAspect {
                     String keyString = String.format("sys:cache:dictTable::SimpleKey [%s,%s]", dictCode, data);
                     if (redisTemplate.hasKey(keyString)) {
                         try {
-                            String text = oConvertUtils.getString(redisTemplate.opsForValue().get(keyString));
+                            String text = ConvertUtils.getString(redisTemplate.opsForValue().get(keyString));
                             List<DictModel> list = translText.computeIfAbsent(dictCode, k -> new ArrayList<>());
                             list.add(new DictModel(data, text));
                         } catch (Exception e) {
@@ -245,7 +245,7 @@ public class DictAspect {
                     String keyString = String.format("sys:cache:dict::%s:%s", dictCode, data);
                     if (redisTemplate.hasKey(keyString)) {
                         try {
-                            String text = oConvertUtils.getString(redisTemplate.opsForValue().get(keyString));
+                            String text = ConvertUtils.getString(redisTemplate.opsForValue().get(keyString));
                             List<DictModel> list = translText.computeIfAbsent(dictCode, k -> new ArrayList<>());
                             list.add(new DictModel(data, text));
                         } catch (Exception e) {
@@ -351,7 +351,7 @@ public class DictAspect {
      */
     @Deprecated
     private String translateDictValue(String code, String text, String table, String key) {
-        if (oConvertUtils.isEmpty(key)) {
+        if (ConvertUtils.isEmpty(key)) {
             return null;
         }
         StringBuilder textValue = new StringBuilder();
@@ -367,7 +367,7 @@ public class DictAspect {
                 String keyString = String.format("sys:cache:dictTable::SimpleKey [%s,%s,%s,%s]", table, text, code, k.trim());
                 if (redisTemplate.hasKey(keyString)) {
                     try {
-                        tmpValue = oConvertUtils.getString(redisTemplate.opsForValue().get(keyString));
+                        tmpValue = ConvertUtils.getString(redisTemplate.opsForValue().get(keyString));
                     } catch (Exception e) {
                         log.warn(e.getMessage());
                     }
@@ -378,7 +378,7 @@ public class DictAspect {
                 String keyString = String.format("sys:cache:dict::%s:%s", code, k.trim());
                 if (redisTemplate.hasKey(keyString)) {
                     try {
-                        tmpValue = oConvertUtils.getString(redisTemplate.opsForValue().get(keyString));
+                        tmpValue = ConvertUtils.getString(redisTemplate.opsForValue().get(keyString));
                     } catch (Exception e) {
                         log.warn(e.getMessage());
                     }

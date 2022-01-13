@@ -2,7 +2,7 @@ package cn.soft.config.shiro.filter;
 
 import cn.soft.common.constant.CommonConstant;
 import cn.soft.common.system.util.JWTUtil;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import cn.soft.config.shiro.JwtToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
@@ -63,7 +63,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String token = httpServletRequest.getHeader(CommonConstant.X_ACCESS_TOKEN);
-        if (oConvertUtils.isEmpty(token)) {
+        if (ConvertUtils.isEmpty(token)) {
             token = httpServletRequest.getParameter("token");
         }
         JwtToken jwtToken = new JwtToken(token);

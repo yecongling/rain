@@ -4,7 +4,7 @@ import cn.soft.common.api.dto.LogDTO;
 import cn.soft.common.system.vo.LoginUser;
 import cn.soft.common.util.IPUtils;
 import cn.soft.common.util.SpringContextUtils;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import cn.soft.modules.base.mapper.BaseCommonMapper;
 import cn.soft.modules.base.service.BaseCommonService;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
@@ -13,7 +13,6 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
@@ -38,7 +37,7 @@ public class BaseCommonServiceImpl implements BaseCommonService {
      */
     @Override
     public void addLog(LogDTO logDTO) {
-        if (oConvertUtils.isEmpty(logDTO.getId())) {
+        if (ConvertUtils.isEmpty(logDTO.getId())) {
             logDTO.setId(String.valueOf(IdWorker.getId()));
         }
         // 保存日志（异常捕获处理，防止数据太大存储失败，导致业务失败）

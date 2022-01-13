@@ -201,11 +201,12 @@
         var userId = store.getters.userInfo.id;
         var url = window._CONFIG['domianURL'].replace("https://","wss://").replace("http://","ws://")+"/websocket/"+userId;
         //console.log(url);
-        this.websock = new WebSocket(url);
-        this.websock.onopen = this.websocketOnopen;
-        this.websock.onerror = this.websocketOnerror;
-        this.websock.onmessage = this.websocketOnmessage;
-        this.websock.onclose = this.websocketOnclose;
+        // 这里暂时禁用websocket
+        // this.websock = new WebSocket(url);
+        // this.websock.onopen = this.websocketOnopen;
+        // this.websock.onerror = this.websocketOnerror;
+        // this.websock.onmessage = this.websocketOnmessage;
+        // this.websock.onclose = this.websocketOnclose;
       },
       websocketOnopen: function () {
         console.log("WebSocket连接成功");

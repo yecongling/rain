@@ -4,6 +4,8 @@ import cn.soft.common.api.vo.Result;
 import cn.soft.modules.system.entity.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * 用户表服务类
  */
@@ -36,5 +38,12 @@ public interface ISysUserService extends IService<SysUser> {
      * @param orgCode 部门
      */
     void updateUserDepart(String username, String orgCode);
+
+    /**
+     * 获取用户的授权角色
+     * @param username 用户
+     * @return 角色
+     */
+    public List<String> getRole(String username);
 
 }

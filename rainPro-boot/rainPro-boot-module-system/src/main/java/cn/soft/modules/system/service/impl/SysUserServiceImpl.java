@@ -3,7 +3,7 @@ package cn.soft.modules.system.service.impl;
 import cn.soft.common.api.vo.Result;
 import cn.soft.common.constant.CacheConstant;
 import cn.soft.common.constant.CommonConstant;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
 import cn.soft.modules.system.entity.SysUser;
 import cn.soft.modules.system.entity.SysUserRole;
@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -109,7 +111,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     public void addUserWithRole(SysUser user, String roles) {
         this.save(user);
-        if (oConvertUtils.isNotEmpty(roles)) {
+        if (ConvertUtils.isNotEmpty(roles)) {
             String[] arr = roles.split(",");
             for (String roleId : arr) {
                 SysUserRole userRole = new SysUserRole(user.getId(), roleId);
@@ -127,5 +129,15 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @CacheEvict(value = {CacheConstant.SYS_USERS_CACHE}, key = "#username")
     public void updateUserDepart(String username, String orgCode) {
         baseMapper.updateUserDepart(username, orgCode);
+    }
+
+    /**
+     * 获取用户的授权角色
+     * @param username 用户
+     * @return 角色
+     */
+    @Override
+    public List<String> getRole(String username) {
+        return userRoleMapper.getRoleByUserName(username);
     }
 }

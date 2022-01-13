@@ -1,12 +1,11 @@
 package cn.soft.common.es;
 
 import cn.soft.common.util.RestUtil;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.HttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -239,7 +238,7 @@ public class RainElasticsearchTemplate {
         String url = this.getBaseUrl(indexName, typeName).append("/_mapping?").append(FORMAT_JSON).toString();
         // 针对 es 7.x 版本做兼容
         this.getElasticsearchVersion();
-        if (oConvertUtils.isNotEmpty(this.version) && this.version.startsWith("7")) {
+        if (ConvertUtils.isNotEmpty(this.version) && this.version.startsWith("7")) {
             url += "&include_type_name=true";
         }
         log.info("getIndexMapping-url:" + url);
@@ -361,11 +360,11 @@ public class RainElasticsearchTemplate {
             for (String key : keys) {
                 String value = data.getString(key);
                 //1、剔除空值
-                if (oConvertUtils.isEmpty(value) || "[]".equals(value)) {
+                if (ConvertUtils.isEmpty(value) || "[]".equals(value)) {
                     emptyKeys.add(key);
                 }
                 //2、剔除上传控件值(会导致ES同步失败，报异常failed to parse field [ge_pic] of type [text] )
-                if (oConvertUtils.isNotEmpty(value) && value.contains("[{")) {
+                if (ConvertUtils.isNotEmpty(value) && value.contains("[{")) {
                     emptyKeys.add(key);
                     log.info("-------剔除上传控件字段------------key: " + key);
                 }

@@ -4,7 +4,7 @@ import cn.soft.common.api.vo.Result;
 import cn.soft.common.constant.CommonConstant;
 import cn.soft.common.util.PasswordUtil;
 import cn.soft.common.util.RedisUtil;
-import cn.soft.common.util.oConvertUtils;
+import cn.soft.common.util.ConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
 import cn.soft.modules.system.entity.SysUser;
 import cn.soft.modules.system.service.ISysUserService;
@@ -95,7 +95,7 @@ public class SysUserController {
         try {
             // 设置创建时间
             user.setCreateTime(new Date());
-            String salt = oConvertUtils.randomGen(8);
+            String salt = ConvertUtils.randomGen(8);
             String encrypt = PasswordUtil.encrypt(username, password, salt);
             user.setSalt(salt);
             user.setUsername(username);

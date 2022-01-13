@@ -1,6 +1,5 @@
 /* 1、新建系统日志表  sys_log */
-DROP TABLE IF EXISTS `sys_log`;
-CREATE TABLE `sys_log`
+CREATE TABLE if not exists  `sys_log`
 (
     `id`            varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci   NOT NULL,
     `log_type`      int(2)                                                   NULL DEFAULT NULL COMMENT '日志类型（1登录日志，2操作日志）',
@@ -33,8 +32,7 @@ CREATE TABLE `sys_log`
   ROW_FORMAT = Dynamic;
 
 /* 2、新建系统用户表  sys_user */
-DROP TABLE IF EXISTS `sys_user`;
-CREATE TABLE `sys_user`  (
+CREATE TABLE if not exists  `sys_user`  (
      `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
      `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '登录账号',
      `real_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '真实姓名',
@@ -78,8 +76,7 @@ CREATE TABLE `sys_user`  (
 INSERT INTO `sys_user` VALUES ('a75d45a015c44384a04449ee80dc3503', 'jeecg', 'jeecg', '58a714412072f0b9', 'mIgiYJow', 'https://static.jeecg.com/temp/国炬软件logo_1606575029126.png', NULL, 1, NULL, NULL, 'A02A01', 1, 0, NULL, NULL, 1, '00002', 'devleader', NULL, 'admin', '2019-02-13 16:02:36', 'admin', '2020-11-26 15:16:05', 1, '', NULL, NULL);
 
 /* 3、 新建系统角色表  sys_role */
-DROP TABLE IF EXISTS `sys_role`;
-CREATE TABLE `sys_role`  (
+CREATE TABLE if not exists  `sys_role`  (
      `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
      `role_name` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称',
      `role_code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '角色编码',
@@ -94,8 +91,7 @@ CREATE TABLE `sys_role`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
 
 /* 4、 新建用户角色表 用户和角色的关联表 sys_user_role */
-DROP TABLE IF EXISTS `sys_user_role`;
-CREATE TABLE `sys_user_role`  (
+CREATE TABLE if not exists  `sys_user_role`  (
       `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
       `user_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户id',
       `role_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色id',
@@ -109,8 +105,7 @@ CREATE TABLE `sys_user_role`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户角色表' ROW_FORMAT = Dynamic;
 
 /* 5、新建系统部门表  sys_depart */
-DROP TABLE IF EXISTS `sys_depart`;
-CREATE TABLE `sys_depart`  (
+CREATE TABLE if not exists  `sys_depart`  (
        `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ID',
        `parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父机构ID',
        `depart_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '机构/部门名称',
@@ -143,8 +138,7 @@ CREATE TABLE `sys_depart`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '组织机构表' ROW_FORMAT = Dynamic;
 
 /* 6、新建用户部门关系表  sys_user_depart */
-DROP TABLE IF EXISTS `sys_user_depart`;
-CREATE TABLE `sys_user_depart`  (
+CREATE TABLE if not exists  `sys_user_depart`  (
         `ID` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'id',
         `user_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户id',
         `dep_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '部门id',
@@ -158,8 +152,7 @@ CREATE TABLE `sys_user_depart`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 /* 7、创建系统租户表 sys_tenant  */
-DROP TABLE IF EXISTS `sys_tenant`;
-CREATE TABLE `sys_tenant`  (
+CREATE TABLE if not exists  `sys_tenant`  (
    `id` int(5) NOT NULL COMMENT '租户编码',
    `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '租户名称',
    `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
@@ -171,8 +164,7 @@ CREATE TABLE `sys_tenant`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '多租户信息表' ROW_FORMAT = Dynamic;
 
 /* 8、新建系统字典表 sys_dict */
-DROP TABLE IF EXISTS `sys_dict`;
-CREATE TABLE `sys_dict`  (
+CREATE TABLE if not exists  `sys_dict`  (
      `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
      `dict_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典名称',
      `dict_code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典编码',
@@ -189,8 +181,7 @@ CREATE TABLE `sys_dict`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 /* 9、新建字典明细表 sys_dict_item */
-DROP TABLE IF EXISTS `sys_dict_item`;
-CREATE TABLE `sys_dict_item`  (
+CREATE TABLE if not exists `sys_dict_item`  (
       `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
       `dict_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '字典id',
       `item_text` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '字典项文本',
@@ -211,3 +202,68 @@ CREATE TABLE `sys_dict_item`  (
       INDEX `idx_sdi_status`(`status`) USING BTREE,
       INDEX `idx_sdi_dict_val`(`dict_id`, `item_value`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+/* 10、新建系统菜单表  sys_permission */
+CREATE TABLE if not exists `sys_permission`  (
+       `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
+       `parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父id',
+       `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单标题',
+       `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路径',
+       `component` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组件',
+       `component_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组件名字',
+       `redirect` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '一级菜单跳转地址',
+       `menu_type` int(11) NULL DEFAULT NULL COMMENT '菜单类型(0:一级菜单; 1:子菜单:2:按钮权限)',
+       `perms` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单权限编码',
+       `perms_type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '权限策略1显示2禁用',
+       `sort_no` double(8, 2) NULL DEFAULT NULL COMMENT '菜单排序',
+       `always_show` tinyint(1) NULL DEFAULT NULL COMMENT '聚合子路由: 1是0否',
+       `icon` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
+       `is_route` tinyint(1) NULL DEFAULT 1 COMMENT '是否路由菜单: 0:不是  1:是（默认值1）',
+       `is_leaf` tinyint(1) NULL DEFAULT NULL COMMENT '是否叶子节点:    1:是   0:不是',
+       `keep_alive` tinyint(1) NULL DEFAULT NULL COMMENT '是否缓存该页面:    1:是   0:不是',
+       `hidden` int(2) NULL DEFAULT 0 COMMENT '是否隐藏路由: 0否,1是',
+       `hide_tab` int(2) NULL DEFAULT NULL COMMENT '是否隐藏tab: 0否,1是',
+       `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
+       `create_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+       `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+       `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
+       `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+       `del_flag` int(1) NULL DEFAULT 0 COMMENT '删除状态 0正常 1已删除',
+       `rule_flag` int(3) NULL DEFAULT 0 COMMENT '是否添加数据权限1是0否',
+       `status` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '按钮权限状态(0无效1有效)',
+       `internal_or_external` tinyint(1) NULL DEFAULT NULL COMMENT '外链菜单打开方式 0/内部打开 1/外部打开',
+       PRIMARY KEY (`id`) USING BTREE,
+       INDEX `index_prem_pid`(`parent_id`) USING BTREE,
+       INDEX `index_prem_is_route`(`is_route`) USING BTREE,
+       INDEX `index_prem_is_leaf`(`is_leaf`) USING BTREE,
+       INDEX `index_prem_sort_no`(`sort_no`) USING BTREE,
+       INDEX `index_prem_del_flag`(`del_flag`) USING BTREE,
+       INDEX `index_menu_type`(`menu_type`) USING BTREE,
+       INDEX `index_menu_hidden`(`hidden`) USING BTREE,
+       INDEX `index_menu_status`(`status`) USING BTREE,
+       INDEX `idx_sp_parent_id`(`parent_id`) USING BTREE,
+       INDEX `idx_sp_is_route`(`is_route`) USING BTREE,
+       INDEX `idx_sp_is_leaf`(`is_leaf`) USING BTREE,
+       INDEX `idx_sp_sort_no`(`sort_no`) USING BTREE,
+       INDEX `idx_sp_del_flag`(`del_flag`) USING BTREE,
+       INDEX `idx_sp_menu_type`(`menu_type`) USING BTREE,
+       INDEX `idx_sp_hidden`(`hidden`) USING BTREE,
+       INDEX `idx_sp_status`(`status`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+
+/* 11、新建角色菜单关联信息表   sys_role_permission */
+CREATE TABLE if not exists `sys_role_permission`  (
+    `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+    `role_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色id',
+    `permission_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限id',
+    `data_rule_ids` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数据权限ids',
+    `operate_date` datetime NULL DEFAULT NULL COMMENT '操作时间',
+    `operate_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作ip',
+    PRIMARY KEY (`id`) USING BTREE,
+    INDEX `index_group_role_per_id`(`role_id`, `permission_id`) USING BTREE,
+    INDEX `index_group_role_id`(`role_id`) USING BTREE,
+    INDEX `index_group_per_id`(`permission_id`) USING BTREE,
+    INDEX `idx_srp_role_per_id`(`role_id`, `permission_id`) USING BTREE,
+    INDEX `idx_srp_role_id`(`role_id`) USING BTREE,
+    INDEX `idx_srp_permission_id`(`permission_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色权限表' ROW_FORMAT = Dynamic;

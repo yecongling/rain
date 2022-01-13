@@ -58,7 +58,7 @@ public class SpringContextUtils implements ApplicationContextAware {
         StringBuffer url = request.getRequestURL();
         //微服务情况下，获取gateway的basePath
         String basePath = request.getHeader(ServiceNameConstants.X_GATEWAY_BASE_PATH);
-        if (oConvertUtils.isNotEmpty(basePath)) {
+        if (ConvertUtils.isNotEmpty(basePath)) {
             return basePath;
         } else {
             return url.delete(url.length() - request.getRequestURI().length(), url.length()).toString();

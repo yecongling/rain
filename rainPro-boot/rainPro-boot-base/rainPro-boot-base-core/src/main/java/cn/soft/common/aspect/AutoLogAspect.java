@@ -8,8 +8,7 @@ import cn.soft.common.constant.enums.ModuleType;
 import cn.soft.common.system.vo.LoginUser;
 import cn.soft.common.util.IPUtils;
 import cn.soft.common.util.SpringContextUtils;
-import cn.soft.common.util.oConvertUtils;
-import cn.soft.modules.base.mapper.BaseCommonMapper;
+import cn.soft.common.util.ConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.PropertyFilter;
@@ -194,13 +193,13 @@ public class AutoLogAspect {
             Result res = (Result)obj;
             String msg = res.getMessage();
             String tableName = res.getOnlTable();
-            if(oConvertUtils.isNotEmpty(tableName)){
+            if(ConvertUtils.isNotEmpty(tableName)){
                 content+=",表名:"+tableName;
             }
             if(res.isSuccess()){
-                content+= ","+(oConvertUtils.isEmpty(msg)?"操作成功":msg);
+                content+= ","+(ConvertUtils.isEmpty(msg)?"操作成功":msg);
             }else{
-                content+= ","+(oConvertUtils.isEmpty(msg)?"操作失败":msg);
+                content+= ","+(ConvertUtils.isEmpty(msg)?"操作失败":msg);
             }
         }
         return content;

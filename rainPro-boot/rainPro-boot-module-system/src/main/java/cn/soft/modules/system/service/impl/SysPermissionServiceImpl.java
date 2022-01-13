@@ -28,7 +28,7 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
      */
     @Override
     public List<SysPermission> queryByUser(String username) {
-        return null;
+        return permissionMapper.queryByUser(username);
     }
 
     /**
