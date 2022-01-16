@@ -73,7 +73,6 @@ CREATE TABLE if not exists  `sys_user`  (
      INDEX `idx_su_del_flag`(`del_flag`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
-INSERT INTO `sys_user` VALUES ('a75d45a015c44384a04449ee80dc3503', 'jeecg', 'jeecg', '58a714412072f0b9', 'mIgiYJow', 'https://static.jeecg.com/temp/国炬软件logo_1606575029126.png', NULL, 1, NULL, NULL, 'A02A01', 1, 0, NULL, NULL, 1, '00002', 'devleader', NULL, 'admin', '2019-02-13 16:02:36', 'admin', '2020-11-26 15:16:05', 1, '', NULL, NULL);
 
 /* 3、 新建系统角色表  sys_role */
 CREATE TABLE if not exists  `sys_role`  (
