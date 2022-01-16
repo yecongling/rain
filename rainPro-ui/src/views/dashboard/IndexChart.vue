@@ -148,7 +148,7 @@
   import HeadInfo from '@/components/tools/HeadInfo.vue'
 
   import Trend from '@/components/Trend'
-  import { getLoginfo,getVisitInfo } from '@/api/api'
+  import { getLogInfo,getVisitInfo } from '@/api/api'
 
   const rankList = []
   for (let i = 0; i < 7; i++) {
@@ -188,7 +188,7 @@
         loginfo:{},
         visitFields:['ip','visit'],
         visitInfo:[],
-        indicator: <a-icon type="loading" style="font-size: 24px" spin />
+        indicator: '<a-icon type="loading" style="font-size: 24px" spin />'
       }
     },
     created() {
@@ -199,7 +199,7 @@
     },
     methods: {
       initLogInfo () {
-        getLoginfo(null).then((res)=>{
+        getLogInfo(null).then((res)=>{
           if(res.success){
             Object.keys(res.result).forEach(key=>{
               res.result[key] =res.result[key]+""

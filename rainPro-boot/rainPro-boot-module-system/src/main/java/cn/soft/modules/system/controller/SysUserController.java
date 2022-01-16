@@ -7,6 +7,7 @@ import cn.soft.common.util.RedisUtil;
 import cn.soft.common.util.ConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
 import cn.soft.modules.system.entity.SysUser;
+import cn.soft.modules.system.service.ISysLogService;
 import cn.soft.modules.system.service.ISysUserService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户前端控制器
@@ -34,6 +37,15 @@ public class SysUserController {
     @Autowired
     public void setUserService(ISysUserService userService) {
         this.userService = userService;
+    }
+
+    /**
+     * 注入日志服务实现类
+     */
+    private ISysLogService logService;
+    @Autowired
+    public void setLogService(ISysLogService logService) {
+        this.logService = logService;
     }
 
     /**
@@ -110,6 +122,25 @@ public class SysUserController {
             result.error500("注册失败，原因：" + e.getMessage());
             log.error("用户注册失败，原因：" + e.getMessage());
         }
+        return result;
+    }
+
+    /**
+     * 获取访问量
+     * @return 返回数据
+     */
+    @GetMapping("/logInfo")
+    public Result<JSONObject> logInfo() {
+        Result<JSONObject> result = new Result<>();
+        return result;
+    }
+
+    /**
+     * 获取访问量
+     * @return 返回数据
+     */
+    public Result<List<Map<String, Object>>> visitInfo() {
+        Result<List<Map<String, Object>>> result = new Result<>();
         return result;
     }
 }

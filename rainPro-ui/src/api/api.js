@@ -1,6 +1,6 @@
-import { getAction, deleteAction, putAction, postAction, httpAction } from '@/api/manage'
+import {deleteAction, getAction, httpAction, postAction, putAction} from '@/api/manage'
 import Vue from 'vue'
-import {UI_CACHE_DB_DICT_DATA } from "@/store/mutation-types"
+import {UI_CACHE_DB_DICT_DATA} from "@/store/mutation-types"
 
 //角色管理
 const addRole = (params)=>postAction("/sys/role/add",params);
@@ -58,7 +58,7 @@ const deleteLogList = (params)=>deleteAction("/sys/log/deleteBatch",params);
 
 //数据字典
 const addDict = (params)=>postAction("/sys/dict/add",params);
-const editDict = (params)=>putAction("/sys/dict/edit",params);
+const editDict = (params)=>putAction("/sys/dict/edit",parms);
 const treeList = (params)=>getAction("/sys/dict/treeList",params);
 const addDictItem = (params)=>postAction("/sys/dictItem/add",params);
 const editDictItem = (params)=>putAction("/sys/dictItem/edit",params);
@@ -68,9 +68,8 @@ export const ajaxGetDictItems = (code, params)=>getAction(`/sys/dict/getDictItem
 //从缓存中获取字典配置
 function getDictItemsFromCache(dictCode) {
   if (Vue.ls.get(UI_CACHE_DB_DICT_DATA) && Vue.ls.get(UI_CACHE_DB_DICT_DATA)[dictCode]) {
-    let dictItems = Vue.ls.get(UI_CACHE_DB_DICT_DATA)[dictCode];
     //console.log("-----------getDictItemsFromCache----------dictCode="+dictCode+"---- dictItems=",dictItems)
-    return dictItems;
+    return Vue.ls.get(UI_CACHE_DB_DICT_DATA)[dictCode];
   }
 }
 
@@ -78,7 +77,7 @@ function getDictItemsFromCache(dictCode) {
 const doReleaseData = (params)=>getAction("/sys/annountCement/doReleaseData",params);
 const doReovkeData = (params)=>getAction("/sys/annountCement/doReovkeData",params);
 //获取系统访问量
-const getLoginfo = (params)=>getAction("/sys/loginfo",params);
+const getLogInfo = (params)=>getAction("/sys/logInfo",params);
 const getVisitInfo = (params)=>getAction("/sys/visitInfo",params);
 
 // 根据部门主键查询用户信息
@@ -140,7 +139,7 @@ export {
   editDictItem,
   doReleaseData,
   doReovkeData,
-  getLoginfo,
+  getLogInfo,
   getVisitInfo,
   queryUserByDepId,
   duplicateCheck,
