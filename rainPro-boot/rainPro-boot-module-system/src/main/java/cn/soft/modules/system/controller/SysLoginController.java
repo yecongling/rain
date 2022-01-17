@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户登录controller
@@ -236,6 +237,27 @@ public class SysLoginController {
         object.put("sysAllDictItems", sysDictService.queryAllDictItems());
         result.setResult(object);
         result.success("登录成功");
+        return result;
+    }
+
+
+    /**
+     * 获取访问量
+     * @return 返回数据
+     */
+    @GetMapping("/logInfo")
+    public Result<JSONObject> logInfo() {
+        Result<JSONObject> result = new Result<>();
+        return result;
+    }
+
+    /**
+     * 获取访问量
+     * @return 返回数据
+     */
+    @GetMapping("/visitInfo")
+    public Result<List<Map<String, Object>>> visitInfo() {
+        Result<List<Map<String, Object>>> result = new Result<>();
         return result;
     }
 }

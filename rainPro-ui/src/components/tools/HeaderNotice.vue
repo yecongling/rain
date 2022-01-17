@@ -93,9 +93,9 @@
       return {
         loadding: false,
         url:{
-          listCementByUser:"/sys/annountCement/listByUser",
+          listCementByUser:"/sys/announcement/listByUser",
           editCementSend:"/sys/sysAnnouncementSend/editByAnntIdAndUserId",
-          queryById:"/sys/annountCement/queryById",
+          queryById:"/sys/announcement/queryById",
         },
         hovered: false,
         announcement1:[],
@@ -131,7 +131,7 @@
         this.stopTimer = false;
         let myTimer = setInterval(()=>{
           // 停止定时器
-          if (this.stopTimer == true) {
+          if (this.stopTimer === true) {
             clearInterval(myTimer);
             return;
           }

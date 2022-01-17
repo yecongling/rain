@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.icon-zengchang {
+    color: #f75d5d;
+}
+
+.icon-xiajiang {
+    color: #00ff80;
+}
+
+html, body {
+    width: 100%;
+    min-width: 1920px;
+    min-height: 1080px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+/* 1920x1080分辨率下的显示 */
+body {
+    background-image: url('images/background2.png');
+}
+
+div.header {
+    width: 100%;
+    height: 10%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    text-align: center;
+}
+
+div.header div.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 10px;
+    display: inline-block;
+    background-image: -webkit-gradient( linear, 0 0, 0 bottom, from(rgb(25, 247, 228)), to(#2e6fc1) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+div.header div.currentTime {
+    text-align: right;
+    color: #cdcbcb;
+    font-size: 18px;
+    margin-right: 30px;
+    margin-top: 10px;
+    background-image: -webkit-gradient( linear, 0 0, 0 bottom, from(rgb(25, 247, 228)), to(#2e6fc1) );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+div.main {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0 1.5%;
+    display: flex;
+}
+
+div.areaLeft {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.areaCenter {
+    width: 50%;
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+div.areaRight {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+div.content1 {
+    width: 100%;
+    height: calc(65% - 8px);
+    margin-top: 6px;
+}
+
+div.content2 {
+    width: 100%;
+    height: calc(35% - 8px);
+    margin-top: 6px;
+}
+
+div.content3 {
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    height: 150px;
+}
+
+div.content4 {
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    margin-top: 10px;
+    height: calc(48% - 75px);
+}
+
+div.content5 {
+    width: calc(100% - 40px);
+    padding: 0 20px;
+    margin-top: 10px;
+    height: calc(48% - 75px);
+}
+
+div.content6 {
+    width: 100%;
+    height: calc(32% - 8px);
+    margin-top: 6px;
+}
+
+div.content7 {
+    width: 100%;
+    height: calc(32% - 8px);
+    margin-top: 6px;
+}
+
+div.content8 {
+    width: 100%;
+    height: calc(32% - 8px);
+    margin-top: 6px;
+}
+
+div.areaLeft div.subTitle, div.areaRight div.subTitle {
+    color: #d4fff7;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+div.areaCenter div.subTitle2 {
+    color: #d4fff7;
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 6px;
+}
+
+div.areaCenter div.content3 span.mainTitle {
+    color: #d4fff7;
+    font-size: 32px;
+    text-align: left;
+    margin-bottom: 6px;
+}
+
+div.areaCenter div.content3 span.ratioSpan {
+    color: #d4fff7;
+    font-size: 20px;
+    margin-bottom: 6px;
+    float: right;
+    margin-right: 30px;
+}
+
+div.areaCenter div.money {
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    margin-top: 6px;
+}
+
+div.areaCenter div.money div.unit {
+    width: 50px;
+    height: 80px;
+    border-radius: 4px;
+    margin: 6px 6px 16px 6px;
+    border: 2px solid #20a3f580;
+    font-size: 60px;
+    color: white;
+    text-align: center;
+    position: relative;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    overflow: hidden;
+}
+
+div.areaCenter div.money div.unit span {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: 10px;
+}
+
+div.areaCenter div.title {
+    color: #d4fff7;
+    font-size: 32px;
+    text-align: left;
+    margin: 6px 6px 16px 6px;
+}
+
+div.symbol {
+    font-size: 60px;
+    color: white;
+}
+
+div.areaLeft div.content1Block, div.areaLeft div.content2Block,div.areaCenter div.content4Block,div.areaCenter div.content5Block, div.areaRight div.content6Block, div.areaRight div.content7Block, div.areaRight div.content8Block{
+    width: calc(100% - 20px);
+    height: calc(100% - 60px);
+    border: 3px solid #20a3f580;
+    border-radius: 6px;
+    background-repeat: no-repeat;
+    padding: 10px;
+    background-size: contain;
+    position: relative;
+}
+
+div.content1Block::after, div.content2Block::after, div.content6Block::after, div.content7Block::after, div.content8Block::after{
+    content: url(images/divTitle.png);
+    top: -18px;
+    left: calc(50% - 105px);
+    float: left;
+    position: absolute;
+}
+
+div.angleBorder {
+    z-index: 2500;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: rgba(0,0,0,0);
+    border: 3px solid #23d5ff;
+}
+
+div.angleLeftTop {
+    top: -4px;
+    left: -4px;
+    border-right: none;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+}
+
+div.angleLeftBottom {
+    bottom: -4px;
+    left: -4px;
+    border-right: none;
+    border-top: none;
+    border-bottom-left-radius: 4px;
+}
+
+div.angleRightTop {
+    top: -4px;
+    right: -4px;
+    border-left: none;
+    border-bottom: none;
+    border-top-right-radius: 4px;
+}
+
+div.angleRightBottom {
+    bottom: -4px;
+    right: -4px;
+    border-left: none;
+    border-top: none;
+    border-bottom-right-radius: 4px;
+}
+
+div.content1Block {
+    display: flex;
+    flex-direction: column;
+}
+/* 门诊 */
+div.content1Block div.OutpatientClinic {
+    width: 100%;
+    height: 32%;
+    display: flex;
+}
+
+div.content1Block div.icon {
+    width: 34px;
+    height: 100%;
+}
+
+div.content1Block div.icon div.title {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}
+
+div.content1Block div.icon span.iconfont {
+    color: white;
+    font-size: 30px;
+}
+
+div.content1Block div.index {
+    width: calc(100% - 40px);
+    margin-left: 20px;
+    height: 100%;
+    color: white;
+}
+
+div.content1Block div.index div.indexItem {
+    display: flex;
+    margin: 6px 0;
+}
+
+div.content1Block div.index div.indexItem>div.title{
+    width: 50%;
+}
+
+div.content1Block div.index div.indexItem>div.data{
+    /*width: 40%;*/
+}
+
+div.content1Block div.index div.indexItem>div.trend{
+    width: 40px;
+    text-align: center;
+}
+
+
+/* 住院 */
+div.content1Block div.hospitalized {
+    width: 100%;
+    height: 35%;
+    display: flex;
+}
+
+/* 手术 */
+div.content1Block div.surgery {
+    width: 100%;
+    height: 32%;
+    display: flex;
+}

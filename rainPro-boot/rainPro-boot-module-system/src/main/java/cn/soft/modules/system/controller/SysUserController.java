@@ -124,23 +124,4 @@ public class SysUserController {
         }
         return result;
     }
-
-    /**
-     * 获取访问量
-     * @return 返回数据
-     */
-    @GetMapping("/logInfo")
-    public Result<JSONObject> logInfo() {
-        Result<JSONObject> result = new Result<>();
-        return result;
-    }
-
-    /**
-     * 获取访问量
-     * @return 返回数据
-     */
-    public Result<List<Map<String, Object>>> visitInfo() {
-        Result<List<Map<String, Object>>> result = new Result<>();
-        return result;
-    }
 }
