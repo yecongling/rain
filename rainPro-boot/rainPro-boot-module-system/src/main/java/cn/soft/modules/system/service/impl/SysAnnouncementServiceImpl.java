@@ -56,11 +56,15 @@ public class SysAnnouncementServiceImpl extends ServiceImpl<SysAnnouncementMappe
      * 根据用户查询起分页系统通告数据
      * @param page 分页对象
      * @param userId 用户ID
-     * @param msgContent 内容
+     * @param msgCategory 类别
      * @return /
      */
     @Override
-    public Page<SysAnnouncement> querySysAnnouncementPageByUserId(Page<SysAnnouncement> page, String userId, String msgContent) {
-        return null;
+    public Page<SysAnnouncement> querySysAnnouncementPageByUserId(Page<SysAnnouncement> page, String userId, String msgCategory) {
+        if (page.getSize() == -1) {
+            return page.setRecords(announcementMapper.querySysAnnouncementListByUserId(null, userId, msgCategory));
+        } else {
+            return page.setRecords(announcementMapper.querySysAnnouncementListByUserId(page, userId, msgCategory));
+        }
     }
 }

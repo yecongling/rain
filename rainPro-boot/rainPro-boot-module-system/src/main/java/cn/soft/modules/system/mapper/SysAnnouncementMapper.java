@@ -18,9 +18,9 @@ public interface SysAnnouncementMapper extends BaseMapper<SysAnnouncement> {
      * 根据用户查询对应的通告数据
      * @param page 分页数据
      * @param userId 用户ID
-     * @param msgContent 内容
+     * @param msgCategory 内容
      * @return /
      */
-    List<SysAnnouncement> querySysAnnouncementListByUserId(Page<SysAnnouncement> page, @Param("userId")String userId, @Param("msgContent")String msgContent);
+    List<SysAnnouncement> querySysAnnouncementListByUserId(Page<SysAnnouncement> page, @Param("userId")String userId, @Param("msgCategory")String msgCategory);
 
 }

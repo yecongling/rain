@@ -33,8 +33,8 @@ public interface ISysAnnouncementService extends IService<SysAnnouncement> {
      * 根据用户查询起分页系统通告数据
      * @param page 分页对象
      * @param userId 用户ID
-     * @param msgContent 内容
+     * @param msgCategory 消息类别
      * @return /
      */
-    public Page<SysAnnouncement> querySysAnnouncementPageByUserId(Page<SysAnnouncement> page, String userId, String msgContent);
+    public Page<SysAnnouncement> querySysAnnouncementPageByUserId(Page<SysAnnouncement> page, String userId, String msgCategory);
 }

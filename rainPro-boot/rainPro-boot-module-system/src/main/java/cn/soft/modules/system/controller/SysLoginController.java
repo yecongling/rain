@@ -25,9 +25,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 用户登录controller
@@ -248,6 +246,25 @@ public class SysLoginController {
     @GetMapping("/logInfo")
     public Result<JSONObject> logInfo() {
         Result<JSONObject> result = new Result<>();
+        JSONObject object = new JSONObject();
+        // 获取一天的开始时间和结束时间
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date dayStart = calendar.getTime();
+        calendar.add(Calendar.DATE, 1);
+        Date dayEnd = calendar.getTime();
+        // 获取系统访问记录
+        Long totalVisitCount = sysLogService.findTotalVisitCount();
+        object.put("totalVisitCount", totalVisitCount);
+        Long todayVisitCount = sysLogService.findTodayVisitCount(dayStart, dayEnd);
+        object.put("todayVisitCount", todayVisitCount);
+        Long todayIp = sysLogService.findTodayIp(dayStart, dayEnd);
+        object.put("todayIp", todayIp);
+        result.setResult(object);
+        result.success("登录成功");
         return result;
     }
 
@@ -258,6 +275,17 @@ public class SysLoginController {
     @GetMapping("/visitInfo")
     public Result<List<Map<String, Object>>> visitInfo() {
         Result<List<Map<String, Object>>> result = new Result<>();
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(Calendar.HOUR_OF_DAY,0);
+        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Date dayEnd = calendar.getTime();
+        calendar.add(Calendar.DAY_OF_MONTH, -7);
+        Date dayStart = calendar.getTime();
+        List<Map<String,Object>> list = sysLogService.findVisitCount(dayStart, dayEnd);
+        result.setResult(ConvertUtils.toLowerCasePageList(list));
         return result;
     }
 }

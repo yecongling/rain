@@ -198,8 +198,8 @@
 
       initWebSocket: function () {
         // WebSocket与普通的请求所用协议有所不同，ws等同于http，wss等同于https
-        var userId = store.getters.userInfo.id;
-        var url = window._CONFIG['domianURL'].replace("https://","wss://").replace("http://","ws://")+"/websocket/"+userId;
+        let userId = store.getters.userInfo.id;
+        let url = window._CONFIG['domianURL'].replace("https://","wss://").replace("http://","ws://")+"/websocket/"+userId;
         //console.log(url);
         // 这里暂时禁用websocket
         // this.websock = new WebSocket(url);
@@ -219,7 +219,7 @@
       },
       websocketOnmessage: function (e) {
         console.log("-----接收消息-------",e.data);
-        var data = eval("(" + e.data + ")"); //解析对象
+        let data = eval("(" + e.data + ")"); //解析对象
         if(data.cmd == "topic"){
             //系统通知
           this.loadData();
@@ -246,7 +246,7 @@
       },
 
       openNotification (data) {
-        var text = data.msgTxt;
+        let text = data.msgTxt;
         const key = `open${Date.now()}`;
         this.$notification.open({
           message: '消息提醒',
@@ -268,7 +268,7 @@
       },
 
       reconnect() {
-        var that = this;
+        let that = this;
         if(that.lockReconnect) return;
         that.lockReconnect = true;
         //没连接上会一直重连，设置延迟避免请求过多
@@ -279,7 +279,7 @@
         }, 5000);
       },
       heartCheckFun(){
-        var that = this;
+        let that = this;
         //心跳检测,每20s心跳一次
         that.heartCheck = {
           timeout: 20000,
@@ -291,7 +291,7 @@
             return this;
           },
           start: function(){
-            var self = this;
+            let self = this;
             this.timeoutObj = setTimeout(function(){
               //这里发送一个心跳，后端收到后，返回一个心跳消息，
               //onmessage拿到返回的心跳就说明连接正常
@@ -308,10 +308,10 @@
 
       showDetail(key,data){
         this.$notification.close(key);
-        var id = data.msgId;
+        let id = data.msgId;
         getAction(this.url.queryById,{id:id}).then((res) => {
           if (res.success) {
-            var record = res.result;
+            let record = res.result;
             this.showAnnouncement(record);
           }
         })
