@@ -1,6 +1,7 @@
 package cn.soft.modules.system.controller;
 
 import cn.soft.common.api.vo.Result;
+import cn.soft.common.aspect.annotation.PermissionData;
 import cn.soft.common.constant.CommonConstant;
 import cn.soft.common.util.PasswordUtil;
 import cn.soft.common.util.RedisUtil;
@@ -11,10 +12,12 @@ import cn.soft.modules.system.service.ISysLogService;
 import cn.soft.modules.system.service.ISysUserService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +31,14 @@ import java.util.Map;
 public class SysUserController {
 
     private RedisUtil redisUtil;
+
     @Autowired
     public void setRedisUtil(RedisUtil redisUtil) {
         this.redisUtil = redisUtil;
     }
 
     private ISysUserService userService;
+
     @Autowired
     public void setUserService(ISysUserService userService) {
         this.userService = userService;
@@ -43,6 +48,7 @@ public class SysUserController {
      * 注入日志服务实现类
      */
     private ISysLogService logService;
+
     @Autowired
     public void setLogService(ISysLogService logService) {
         this.logService = logService;
@@ -52,6 +58,7 @@ public class SysUserController {
      * 基础通用服务实现
      */
     private BaseCommonService baseCommonService;
+
     @Autowired
     public void setBaseCommonService(BaseCommonService baseCommonService) {
         this.baseCommonService = baseCommonService;
@@ -59,6 +66,7 @@ public class SysUserController {
 
     /**
      * 检测用户账号是否唯一
+     *
      * @param sysUser 用户信息
      * @return 返回是否唯一
      */
@@ -87,8 +95,9 @@ public class SysUserController {
 
     /**
      * 用户注册接口
+     *
      * @param jsonObject 参数
-     * @param user 用户信息
+     * @param user       用户信息
      * @return 返回注册结果
      */
     @PostMapping("/register")
@@ -123,5 +132,24 @@ public class SysUserController {
             log.error("用户注册失败，原因：" + e.getMessage());
         }
         return result;
+    }
+
+    /**
+     * 获取用户列表数据
+     * PermissionData判断该组件拥有怎样的数据权限（例如修改或者添加菜单）
+     *
+     * @param user     用户对象（掺杂了需要显示的字段名）
+     * @param pageNo   分页数
+     * @param pageSize 分页大小（每页数据行数）
+     * @param request  请求对象
+     * @return 返回回去到的用户列表数据
+     */
+    @PermissionData(pageComponent = "system/UserList")
+    @GetMapping("/list")
+    public Result<IPage<SysUser>> queryPageList(SysUser user, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+                                                @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, HttpServletRequest request) {
+        Result<IPage<SysUser>> result = new Result<>();
+
+        return null;
     }
 }
