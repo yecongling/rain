@@ -333,3 +333,49 @@ div.content1Block div.surgery {
     height: 32%;
     display: flex;
 }
+
+div.trendChart {
+    width: 100%;
+    height: 100%;
+}
+
+/* 诊区动态表格 */
+div.clinicArea {
+    width: 100%;
+    height: 100%;
+}
+
+/* 疾病诊断分析柱形图 */
+div.diagnosis {
+    width: 100%;
+    height: 100%;
+}
+
+div.patientPie {
+    width: 100%;
+    height: calc(100% - 20px);
+}
+
+div.content7Block div.divide {
+    display: flex;
+}
+
+div.content7Block div.divide>div{
+    width: 50%;
+    height: 20px;
+    color: whitesmoke;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+div.content7Block div.divide>div>input[type="radio"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* 科室床位使用率以及住院日分析面积折线图 */
+div.bedAndHospitalDayChart {
+    width: 100%;
+    height: 100%;
+}
