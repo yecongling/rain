@@ -11,6 +11,7 @@ import cn.soft.modules.system.mapper.SysPermissionMapper;
 import cn.soft.modules.system.mapper.SysUserMapper;
 import cn.soft.modules.system.mapper.SysUserRoleMapper;
 import cn.soft.modules.system.service.ISysBaseAPI;
+import cn.soft.modules.system.service.ISysDictService;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -18,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 底层共通业务API，提供其他独立模块调用
@@ -48,6 +46,12 @@ public class SysBaseApiImpl implements ISysBaseAPI {
     @Autowired
     public void setUserMapper(SysUserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+    private ISysDictService sysDictService;
+    @Autowired
+    public void setSysDictService(ISysDictService sysDictService) {
+        this.sysDictService = sysDictService;
     }
 
     /**
@@ -138,14 +142,32 @@ public class SysBaseApiImpl implements ISysBaseAPI {
         return null;
     }
 
+    /**
+     * 14 普通字典的翻译，根据多个dictCode和多条数据，多个以逗号分割
+     *
+     * @param dictCodes 例如：user_status,sex
+     * @param keys      例如：1,2,0
+     * @return /
+     */
     @Override
     public Map<String, List<DictModel>> translateManyDict(String dictCodes, String keys) {
-        return null;
+        List<String> dictCodeList = Arrays.asList(dictCodes.split(","));
+        List<String> values = Arrays.asList(keys.split(","));
+        return sysDictService.queryManyDictByKeys(dictCodeList, values);
     }
 
+    /**
+     * 15 字典表的 翻译，可批量
+     *
+     * @param table /
+     * @param text /
+     * @param code /
+     * @param keys  多个用逗号分割
+     * @return
+     */
     @Override
     public List<DictModel> translateDictFromTableByKeys(String table, String text, String code, String keys) {
-        return null;
+        return sysDictService.queryTableDictTextByKeys(table, text, code, Arrays.asList(keys.split(",")));
     }
 
     @Override

@@ -70,7 +70,7 @@
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
-      <j-third-app-button biz-type="user" :selected-row-keys="selectedRowKeys" syncToApp syncToLocal @sync-finally="onSyncFinally"/>
+      <!--<j-third-app-button biz-type="user" :selected-row-keys="selectedRowKeys" syncToApp syncToLocal @sync-finally="onSyncFinally"/>-->
       <a-button type="primary" icon="hdd" @click="recycleBinVisible=true">回收站</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay" @click="handleMenuClick">
@@ -187,13 +187,13 @@
   import JInput from '@/components/jeecg/JInput'
   import UserRecycleBinModal from './modules/UserRecycleBinModal'
   import JSuperQuery from '@/components/jeecg/JSuperQuery'
-  import JThirdAppButton from '@/components/jeecgbiz/thirdApp/JThirdAppButton'
+  /*import JThirdAppButton from '@/components/jeecgbiz/thirdApp/JThirdAppButton'*/
 
   export default {
     name: "UserList",
     mixins: [JeecgListMixin],
     components: {
-      JThirdAppButton,
+      /*JThirdAppButton,*/
       SysUserAgentModal,
       UserModal,
       PasswordModal,

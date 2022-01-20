@@ -3,6 +3,7 @@ package cn.soft.modules.system.controller;
 import cn.soft.common.api.vo.Result;
 import cn.soft.common.aspect.annotation.PermissionData;
 import cn.soft.common.constant.CommonConstant;
+import cn.soft.common.system.query.QueryGenerator;
 import cn.soft.common.util.PasswordUtil;
 import cn.soft.common.util.RedisUtil;
 import cn.soft.common.util.ConvertUtils;
@@ -13,6 +14,7 @@ import cn.soft.modules.system.service.ISysUserService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 用户前端控制器
@@ -149,7 +152,22 @@ public class SysUserController {
     public Result<IPage<SysUser>> queryPageList(SysUser user, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
                                                 @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, HttpServletRequest request) {
         Result<IPage<SysUser>> result = new Result<>();
+        QueryWrapper<SysUser> queryWrapper = QueryGenerator.initQueryWrapper(user, request.getParameterMap());
+        queryWrapper.ne("username", "_reserve_user_external");
+        Page<SysUser> page = new Page<>(pageNo, pageSize);
+        IPage<SysUser> pageList = userService.page(page, queryWrapper);
 
-        return null;
+        // 批量查询用户的所属部门
+        // step.1 先拿到全部的 useids
+        // step.2 通过 useids，一次性查询用户的所属部门名字
+        List<String> userIds = pageList.getRecords().stream().map(SysUser::getId).collect(Collectors.toList());
+        if (userIds.size() > 0) {
+            Map<String, String> userDepNames = userService.getDepNamesByUserIds(userIds);
+            pageList.getRecords().forEach(item -> item.setOrgCodeTxt(userDepNames.get(item.getId())));
+        }
+        result.setSuccess(true);
+        result.setResult(pageList);
+        log.info(pageList.toString());
+        return result;
     }
 }

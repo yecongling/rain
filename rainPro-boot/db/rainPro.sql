@@ -308,3 +308,19 @@ CREATE TABLE if not exists `sys_announcement_send`  (
       `update_by` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
       `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户通告阅读标记表' ROW_FORMAT = Dynamic;
+
+/* 14、新建职务表 sys_position */
+CREATE TABLE if not exists `sys_position`  (
+     `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+     `code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '职务编码',
+     `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '职务名称',
+     `post_rank` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '职级',
+     `company_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '公司id',
+     `create_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
+     `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+     `update_by` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '修改人',
+     `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+     `sys_org_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '组织机构编码',
+     PRIMARY KEY (`id`) USING BTREE,
+     UNIQUE INDEX `uniq_code`(`code`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;

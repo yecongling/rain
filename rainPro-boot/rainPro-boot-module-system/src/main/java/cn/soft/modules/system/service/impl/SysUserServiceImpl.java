@@ -11,13 +11,16 @@ import cn.soft.modules.system.mapper.SysUserMapper;
 import cn.soft.modules.system.mapper.SysUserRoleMapper;
 import cn.soft.modules.system.service.ISysTenantService;
 import cn.soft.modules.system.service.ISysUserService;
+import cn.soft.modules.system.vo.SysUserDepVo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -32,6 +35,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * 用户mapper
      */
     private SysUserMapper userMapper;
+
     @Autowired
     public void setUserMapper(SysUserMapper userMapper) {
         this.userMapper = userMapper;
@@ -41,6 +45,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * 用户角色mapper
      */
     private SysUserRoleMapper userRoleMapper;
+
     @Autowired
     public void setUserRoleMapper(SysUserRoleMapper userRoleMapper) {
         this.userRoleMapper = userRoleMapper;
@@ -50,6 +55,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * 基础服务实现
      */
     private BaseCommonService baseCommonService;
+
     @Autowired
     public void setBaseCommonService(BaseCommonService baseCommonService) {
         this.baseCommonService = baseCommonService;
@@ -59,6 +65,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * 租户实现类
      */
     private ISysTenantService sysTenantService;
+
     @Autowired
     public void setSysTenantService(ISysTenantService sysTenantService) {
         this.sysTenantService = sysTenantService;
@@ -66,6 +73,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * 验证用户是否有效
+     *
      * @param sysUser 用户
      * @return 返回验证结果
      */
@@ -95,6 +103,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * 根据用户名获取用户信息
+     *
      * @param username 用户名
      * @return /
      */
@@ -105,7 +114,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * 添加用户角色关系
-     * @param user 用户
+     *
+     * @param user  用户
      * @param roles 角色
      */
     @Override
@@ -122,8 +132,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * 根据用户ID设置部门ID
+     *
      * @param username 用户名
-     * @param orgCode 部门
+     * @param orgCode  部门
      */
     @Override
     @CacheEvict(value = {CacheConstant.SYS_USERS_CACHE}, key = "#username")
@@ -133,11 +144,30 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     /**
      * 获取用户的授权角色
+     *
      * @param username 用户
      * @return 角色
      */
     @Override
     public List<String> getRole(String username) {
         return userRoleMapper.getRoleByUserName(username);
+    }
+
+    /**
+     * 根据 userIds查询，查询用户所属部门的名称（多个部门名逗号隔开）
+     *
+     * @param
+     * @return
+     */
+    @Override
+    public Map<String, String> getDepNamesByUserIds(List<String> userIds) {
+        List<SysUserDepVo> list = this.baseMapper.getDepNamesByUserIds(userIds);
+
+        Map<String, String> res = new HashMap<String, String>();
+        list.forEach(item -> {
+                    res.merge(item.getUserId(), item.getDepartName(), (a, b) -> a + "," + b);
+                }
+        );
+        return res;
     }
 }

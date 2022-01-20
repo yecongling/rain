@@ -154,7 +154,7 @@ public class JWTUtil {
      * 从当前用户中获取变量
      *
      * @param key  变量key
-     * @param user 用后
+     * @param user 用户
      * @return 返回变量
      */
     //TODO 急待改造

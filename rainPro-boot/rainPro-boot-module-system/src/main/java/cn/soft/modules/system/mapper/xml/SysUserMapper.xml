@@ -11,4 +11,12 @@
         update sys_user set org_code = #{orgCode} where username = #{username}
     </update>
 
+    <!-- 查询用户的所属部门名称信息 -->
+    <select id="getDepNamesByUserIds" resultType="cn.soft.modules.system.vo.SysUserDepVo">
+        select d.depart_name,ud.user_id from sys_user_depart ud,sys_depart d where d.id = ud.dep_id and ud.user_id in
+        <foreach collection="userIds" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
 </mapper>

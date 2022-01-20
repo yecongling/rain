@@ -205,8 +205,8 @@
     created () {
       const token = Vue.ls.get(ACCESS_TOKEN);
       this.headers = {"X-Access-Token":token}
-      this.initRoleList()
-      this.initTenantList()
+      /*this.initRoleList()*/
+      /*this.initTenantList()*/
     },
     computed:{
       uploadAction:function () {
