@@ -85,6 +85,8 @@ spring:
     charset: UTF-8
     # 设置页面缓存
     cache: false
+    # 不检测模板位置（后续放开该配置）
+    checkTemplateLocation: false
     prefer-file-system-access: false
     # 设置ftl文件路径
     template-loader-path:
