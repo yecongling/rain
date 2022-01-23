@@ -1,11 +1,11 @@
 <template>
-  <a-drawer
+  <a-modal
     :title="title"
     :maskClosable="true"
     :width="drawerWidth"
     placement="right"
     :closable="true"
-    @close="handleCancel"
+    @cancel="handleCancel"
     :visible="visible"
     style="height: 100%;overflow: auto;padding-bottom: 53px;">
 
@@ -127,13 +127,13 @@
     </a-spin>
 
 
-    <div class="drawer-bootom-button" v-show="!disableSubmit">
-      <a-popconfirm title="确定放弃编辑？" @confirm="handleCancel" okText="确定" cancelText="取消">
-        <a-button style="margin-right: .8rem">取消</a-button>
-      </a-popconfirm>
-      <a-button @click="handleSubmit" type="primary" :loading="confirmLoading">提交</a-button>
-    </div>
-  </a-drawer>
+<!--    <div class="drawer-bootom-button" v-show="!disableSubmit">-->
+<!--      <a-popconfirm title="确定放弃编辑？" @confirm="handleCancel" okText="确定" cancelText="取消">-->
+<!--        <a-button style="margin-right: .8rem">取消</a-button>-->
+<!--      </a-popconfirm>-->
+<!--      <a-button @click="handleSubmit" type="primary" :loading="confirmLoading">提交</a-button>-->
+<!--    </div>-->
+  </a-modal>
 </template>
 
 <script>
@@ -154,7 +154,7 @@
         departDisabled: false, //是否是我的部门调用该页面
         roleDisabled: false, //是否是角色维护调用该页面
         modalWidth:800,
-        drawerWidth:700,
+        drawerWidth:1000,
         modaltoggleFlag:true,
         confirmDirty: false,
         userId:"", //保存用户id
@@ -246,7 +246,7 @@
         if(this.modaltoggleFlag){
           this.modalWidth = window.innerWidth;
         }else{
-          this.modalWidth = 800;
+          this.modalWidth = 1000;
         }
         this.modaltoggleFlag = !this.modaltoggleFlag;
       },
@@ -256,7 +256,7 @@
         if(screenWidth < 500){
           this.drawerWidth = screenWidth;
         }else{
-          this.drawerWidth = 700;
+          this.drawerWidth = 1000;
         }
       },
       //初始化租户字典
