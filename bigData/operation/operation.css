@@ -24,6 +24,49 @@ body {
     background-image: url('images/background2.png');
 }
 
+/* 滚动动画 */
+@-webkit-keyframes scrollText1 {
+    0%{
+        -webkit-transform: translateY(0px);
+    }
+    20%{
+        -webkit-transform: translateY(-20px);
+    }
+    40%{
+        -webkit-transform: translateY(-40px);
+    }
+    60%{
+        -webkit-transform: translateY(-60px);
+    }
+    80%{
+        -webkit-transform: translateY(-80px);
+    }
+    100%{
+        -webkit-transform: translateY(-100px);
+    }
+}
+
+@keyframes scrollText1 {
+    0%{
+        transform: translateY(0px);
+    }
+    20%{
+        transform: translateY(-20px);
+    }
+    40%{
+        transform: translateY(-40px);
+    }
+    60%{
+        transform: translateY(-60px);
+    }
+    80%{
+        transform: translateY(-80px);
+    }
+    100%{
+        transform: translateY(-100px);
+    }
+}
+
 div.header {
     width: 100%;
     height: 10%;
@@ -343,6 +386,157 @@ div.trendChart {
 div.clinicArea {
     width: 100%;
     height: 100%;
+    border: 1px solid #1d4183;
+    overflow: hidden;
+}
+
+div.clinicArea ul {
+    display: flex;
+    color: white;
+    height: 40px;
+    padding: 0 20px;
+    align-items: center;
+}
+
+div.clinicArea>ul.header {
+    background-color: #1d4183;
+}
+
+div.clinicArea>ul.header li.dynamic span.dz {
+    background-color: #4bc4ff;
+    padding: 2px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+div.clinicArea>ul.header li.dynamic span.yz {
+    background-color: #41db25;
+    padding: 2px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+div.clinicArea div.body {
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow: hidden;
+}
+
+div.clinicArea div.body ul.rolling li.dynamic {
+    display: flex;
+}
+
+div.clinicArea div.body ul.rolling li.dynamic div.dz {
+    background-color: #4bc4ff;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+div.clinicArea div.body ul.rolling li.dynamic div.yz {
+    background-color: #41db25;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+div.clinicArea div.body ul.rolling li.dynamic div {
+    height: 100%;
+}
+
+div.clinicArea>ul.header li.dynamic span.ratio {
+    float: right;
+}
+
+div.clinicArea div.body ul.rolling {
+    border-bottom: 1px dashed #1d4183;
+    animation: scrollText1 10s infinite  cubic-bezier(1, 0, 0.5, 0);
+}
+
+div.clinicArea ul li {
+    list-style: none;
+}
+
+div.clinicArea ul li.department, div.clinicArea ul li.seeDoctor, div.clinicArea ul li.await, div.clinicArea ul li.diagnosed {
+    width: 15%;
+}
+
+div.clinicArea ul li.dynamic {
+    width: 40%;
+    height: 20px;
+}
+
+div.clinicArea ul.rolling li.await {
+    color: #4bc4ff;
+}
+
+div.clinicArea ul.rolling li.diagnosed {
+    color: #41db25;
+}
+
+/* 实时床位表格区域样式 */
+div.bedArea {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #1d4183;
+    overflow: hidden;
+}
+
+div.bedArea ul {
+    display: flex;
+    color: white;
+    height: 40px;
+    padding: 0 20px;
+    align-items: center;
+}
+
+div.bedArea>ul.header {
+    background-color: #1d4183;
+}
+
+div.bedArea div.body ul.rolling {
+    border-bottom: 1px dashed #1d4183;
+    animation: scrollText1 12s infinite  cubic-bezier(1, 0, 0.5, 0);
+}
+
+div.bedArea ul li {
+    list-style: none;
+}
+
+div.bedArea ul li.ward, div.bedArea ul li.beds, div.bedArea ul li.addBeds, div.bedArea ul li.usedBeds {
+    width: 15%;
+}
+
+div.bedArea ul li.ratio {
+    width: 40%;
+    height: 20px;
+}
+
+div.bedArea ul:not(.header) li.ratio{
+    background-color: #fdfeff40;
+    border-radius: 4px;
+}
+
+div.bedArea ul:not(.header) li.ratio div {
+    height: 100%;
+    background: linear-gradient(to right, #67bce8, #00A0E9);
+    border-radius: 4px;
+}
+
+div.bedArea ul:not(.header) li.addBeds {
+    color: #fb2727;
+}
+
+div.bedArea ul:not(.header) li.usedBeds {
+    color: #fb9527;
+}
+
+div.bedArea ul.all {
+    border: 1px dashed #1d4183;
+}
+
+div.bedArea div.body {
+    width: 100%;
+    height: calc(100% - 80px);
+    overflow: hidden;
 }
 
 /* 疾病诊断分析柱形图 */
