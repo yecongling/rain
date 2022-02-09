@@ -35,6 +35,12 @@
             <groupId>cn.soft</groupId>
             <artifactId>rainPro-system-local-api</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+
         <!-- jeewx api -->
 <!--        <dependency>-->
 <!--            <groupId>org.jeecgframework</groupId>-->
