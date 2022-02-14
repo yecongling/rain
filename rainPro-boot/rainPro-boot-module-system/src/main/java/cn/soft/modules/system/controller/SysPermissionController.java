@@ -8,6 +8,7 @@ import cn.soft.common.util.ConvertUtils;
 import cn.soft.common.util.MD5Util;
 import cn.soft.config.RainProBaseConfig;
 import cn.soft.modules.system.entity.SysPermission;
+import cn.soft.modules.system.model.SysPermissionTree;
 import cn.soft.modules.system.service.ISysPermissionService;
 import cn.soft.modules.system.service.ISysUserService;
 import cn.soft.modules.system.util.PermissionDataUtil;
@@ -20,8 +21,10 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,6 +64,30 @@ public class SysPermissionController {
     @Autowired
     public void setPermissionService(ISysPermissionService permissionService) {
         this.permissionService = permissionService;
+    }
+
+    /**
+     * 列出所有菜单
+     *
+     * @return 返回构建成菜单树形结构的数据
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Result<List<SysPermissionTree>> list() {
+        Result<List<SysPermissionTree>> result = new Result<>();
+        try {
+            LambdaQueryWrapper<SysPermission> query = new LambdaQueryWrapper<>();
+            query.eq(SysPermission::getDelFlag, CommonConstant.DEL_FLAG_0);
+            query.orderByAsc(SysPermission::getSortNo);
+            List<SysPermission> list = permissionService.list(query);
+            ArrayList<SysPermissionTree> trees = new ArrayList<>();
+            getTreeList(trees, list, null);
+            result.setResult(trees);
+            result.setSuccess(true);
+            return result;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return result;
     }
 
     /**
@@ -351,4 +378,29 @@ public class SysPermissionController {
             return null;
         }
     }
+
+    /**
+     * 将打平的list构建成树形结构的list
+     * @param treeList 树形结构list
+     * @param metaList 打平的数据list
+     * @param temp 临时树对象
+     */
+    private void getTreeList(List<SysPermissionTree> treeList, List<SysPermission> metaList, SysPermissionTree temp) {
+        for (SysPermission permission : metaList) {
+            String tempPid = permission.getParentId();
+            SysPermissionTree tree = new SysPermissionTree(permission);
+            if (temp == null && ConvertUtils.isEmpty(tempPid)) {
+                treeList.add(tree);
+                if (!tree.getIsLeaf()) {
+                    getTreeList(treeList, metaList, tree);
+                }
+            } else if (temp != null && tempPid != null && tempPid.equals(temp.getId())) {
+                temp.getChildren().add(tree);
+                if (!tree.getIsLeaf()) {
+                    getTreeList(treeList, metaList, tree);
+                }
+            }
+        }
+    }
+
 }

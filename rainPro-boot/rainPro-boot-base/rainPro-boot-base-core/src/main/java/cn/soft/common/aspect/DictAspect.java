@@ -292,10 +292,7 @@ public class DictAspect {
             List<String> filterDictCodes = dictCodeList.stream().filter(key -> !key.contains(",")).collect(Collectors.toList());
             String dictCodes = String.join(",", filterDictCodes);
             String values = String.join(",", needTranslData);
-            log.info("translateManyDict.dictCodes:" + dictCodes);
-            log.info("translateManyDict.values:" + values);
             Map<String, List<DictModel>> manyDict = commonAPI.translateManyDict(dictCodes, values);
-            log.info("translateManyDict.result:" + manyDict);
             for (String dictCode : manyDict.keySet()) {
                 List<DictModel> list = translText.computeIfAbsent(dictCode, k -> new ArrayList<>());
                 List<DictModel> newList = manyDict.get(dictCode);
@@ -358,12 +355,10 @@ public class DictAspect {
         String[] keys = key.split(",");
         for (String k : keys) {
             String tmpValue = null;
-            log.debug(" 字典 key : " + k);
             if (k.trim().length() == 0) {
                 continue; //跳过循环
             }
             if (!StringUtils.isEmpty(table)) {
-                log.info("--DictAspect------dicTable=" + table + " ,dicText= " + text + " ,dicCode=" + code);
                 String keyString = String.format("sys:cache:dictTable::SimpleKey [%s,%s,%s,%s]", table, text, code, k.trim());
                 if (redisTemplate.hasKey(keyString)) {
                     try {
