@@ -79,7 +79,7 @@ const err = (error) => {
         if (token) {
           store.dispatch('Logout').then(() => {
             setTimeout(() => {
-              // window.location.reload()
+              window.location.reload()
             }, 1500)
           })
         }
