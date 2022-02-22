@@ -247,7 +247,6 @@ export default {
       this.model = Object.assign({}, record);
 
       //根据菜单类型，动态展示页面字段
-      console.log('record: ', record)
       this.show = record.menuType !== 2;
       this.menuLabel = record.menuType === 2 ? '按钮/权限' : '菜单名称';
 
@@ -326,7 +325,7 @@ export default {
       }
     },
     onChangeMenuType(e) {
-      if (this.model.menuType == 2) {
+      if (this.model.menuType === 2) {
         this.show = false;
         this.menuLabel = '按钮/权限';
       } else {
@@ -348,7 +347,7 @@ export default {
       this.model.icon = value
       this.iconChooseVisible = false
     },
-    // 根据屏幕变化,设置抽屉尺寸
+    // 根据屏幕变化,设置弹窗尺寸
     resetScreenSize() {
       let screenWidth = document.body.clientWidth;
       if (screenWidth < 900) {

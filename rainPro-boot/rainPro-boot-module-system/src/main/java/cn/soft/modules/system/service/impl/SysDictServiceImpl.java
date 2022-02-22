@@ -2,6 +2,7 @@ package cn.soft.modules.system.service.impl;
 
 import cn.soft.common.system.vo.DictModel;
 import cn.soft.common.system.vo.DictModelMany;
+import cn.soft.common.util.SqlInjectionUtil;
 import cn.soft.modules.system.entity.SysDict;
 import cn.soft.modules.system.entity.SysDictItem;
 import cn.soft.modules.system.mapper.SysDictItemMapper;
@@ -27,19 +28,33 @@ import java.util.stream.Collectors;
 public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> implements ISysDictService {
 
     private SysDictMapper dictMapper;
+
     @Autowired
     public void setDictMapper(SysDictMapper dictMapper) {
         this.dictMapper = dictMapper;
     }
 
     private SysDictItemMapper dictItemMapper;
+
     @Autowired
     public void setDictItemMapper(SysDictItemMapper dictItemMapper) {
         this.dictItemMapper = dictItemMapper;
     }
 
     /**
+     * 通过编码查询字典
+     *
+     * @param code
+     * @return
+     */
+    @Override
+    public List<DictModel> queryDictItemsByCode(String code) {
+        return dictMapper.queryDictItemsByCode(code);
+    }
+
+    /**
      * 查询所有字典条目
+     *
      * @return 返回所有字典条目
      */
     @Override
@@ -81,8 +96,9 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
 
     /**
      * 可通过多个字典code查询翻译文本
+     *
      * @param dictCodeList 多个字典code
-     * @param keys 数据列表
+     * @param keys         数据列表
      * @return
      */
     @Override
@@ -94,5 +110,66 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
             dictItemList.add(new DictModel(dict.getValue(), dict.getText()));
         }
         return dictMap;
+    }
+
+    /**
+     * 获取字典数据
+     *
+     * @param dictCode 字典编码
+     * @return /
+     */
+    @Override
+    public List<DictModel> getDictItems(String dictCode) {
+        List<DictModel> list;
+        if (dictCode.contains(",")) {
+            // 关联表字典
+            String[] params = dictCode.split(",");
+            if (params.length < 3) {
+                // 字典code格式不正确
+                return null;
+            }
+            // SQL注入校验（只限制非法串改数据库）
+            final String[] sqlInjCheck = {params[0], params[1], params[2]};
+            SqlInjectionUtil.filterContent(sqlInjCheck);
+            if (params.length == 4) {
+                list = this.queryTableDictItemsByCodeAndFilter(params[0], params[1], params[2], params[3]);
+            } else if (params.length == 3) {
+                list = this.queryTableDictItemsByCode(params[0], params[1], params[2]);
+            } else {
+                // 字典格式不正确
+                return null;
+            }
+        } else {
+            list = this.queryDictItemsByCode(dictCode);
+        }
+        return list;
+    }
+
+    /**
+     * 通过查询指定table的 text code 获取字典
+     * dictTableCache采用redis缓存有效期10分钟
+     *
+     * @param table
+     * @param text
+     * @param code
+     * @return
+     */
+    @Override
+    public List<DictModel> queryTableDictItemsByCode(String table, String text, String code) {
+        return dictMapper.queryTableDictItemsByCode(table, text, code);
+    }
+
+    /**
+     * 通过查询指定table的 text code 获取字典（指定条件）
+     * dictTableCache采用redis缓存有效期10分钟
+     *
+     * @param table
+     * @param text
+     * @param code
+     * @return
+     */
+    @Override
+    public List<DictModel> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql) {
+        return dictMapper.queryTableDictItemsByCodeAndFilter(table, text, code, filterSql);
     }
 }

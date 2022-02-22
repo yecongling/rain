@@ -132,7 +132,6 @@
               checkKey: this.currdatetime,
               remember_me: rememberMe,
             }
-            console.log("登录参数", loginParams)
             this.Login(loginParams).then((res) => {
               this.$emit('success', res.result)
             }).catch((err) => {

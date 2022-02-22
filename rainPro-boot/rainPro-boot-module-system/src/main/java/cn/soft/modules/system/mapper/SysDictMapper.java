@@ -14,6 +14,15 @@ import java.util.List;
  */
 @Repository
 public interface SysDictMapper extends BaseMapper<SysDict> {
+
+    /**
+     * 通过编码查询字典
+     *
+     * @param code
+     * @return
+     */
+    public List<DictModel> queryDictItemsByCode(@Param("code") String code);
+
     /**
      * 通过查询指定table的 text code key 获取字典值，可批量查询
      *
@@ -23,7 +32,6 @@ public interface SysDictMapper extends BaseMapper<SysDict> {
      * @param keys
      * @return
      */
-    @Deprecated
     List<DictModel> queryTableDictTextByKeys(@Param("table") String table, @Param("text") String text, @Param("code") String code, @Param("keys") List<String> keys);
 
     /**
@@ -34,4 +42,26 @@ public interface SysDictMapper extends BaseMapper<SysDict> {
      * @return
      */
     List<DictModelMany> queryManyDictByKeys(@Param("dictCodeList") List<String> dictCodeList, @Param("keys") List<String> keys);
+
+    /**
+     * 查询指定table的  text code 获取字典
+     *
+     * @param table 表名
+     * @param text /
+     * @param code /
+     * @return /
+     */
+    public List<DictModel> queryTableDictItemsByCode(@Param("table") String table,@Param("text") String text,@Param("code") String code);
+
+    /**
+     * 通过查询指定table的 text code 获取字典（指定查询条件）
+     *
+     * @param table 表名
+     * @param text /
+     * @param code /
+     * @param filterSql 过滤条件
+     * @return
+     */
+    public List<DictModel> queryTableDictItemsByCodeAndFilter(@Param("table") String table,@Param("text") String text,@Param("code") String code,@Param("filterSql") String filterSql);
+
 }

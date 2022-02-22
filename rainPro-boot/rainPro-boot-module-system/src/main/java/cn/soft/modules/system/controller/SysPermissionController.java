@@ -9,6 +9,7 @@ import cn.soft.common.util.MD5Util;
 import cn.soft.config.RainProBaseConfig;
 import cn.soft.modules.system.entity.SysPermission;
 import cn.soft.modules.system.model.SysPermissionTree;
+import cn.soft.modules.system.model.TreeModel;
 import cn.soft.modules.system.service.ISysPermissionService;
 import cn.soft.modules.system.service.ISysUserService;
 import cn.soft.modules.system.util.PermissionDataUtil;
@@ -19,13 +20,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -88,6 +88,64 @@ public class SysPermissionController {
             log.error(e.getMessage(), e);
         }
         return result;
+    }
+
+    /**
+     * 获取全部的权限树
+     *
+     * @return \
+     */
+    @GetMapping("/queryTreeList")
+    public Result<Map<String, Object>> queryTreeList() {
+        Result<Map<String, Object>> result = new Result<>();
+        // 全部权限ids
+        List<String> ids = new ArrayList<>();
+        try {
+            LambdaQueryWrapper<SysPermission> query = new LambdaQueryWrapper<>();
+            query.eq(SysPermission::getDelFlag, CommonConstant.DEL_FLAG_0);
+            query.orderByAsc(SysPermission::getSortNo);
+            List<SysPermission> list = permissionService.list(query);
+            for (SysPermission permission : list) {
+                ids.add(permission.getId());
+            }
+            List<TreeModel> treeList = new ArrayList<>();
+            getTreeModeList(treeList, list, null);
+            Map<String, Object> map = new HashMap<>();
+            map.put("treeList", treeList);
+            map.put("ids", ids);
+            result.setResult(map);
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setSuccess(false);
+            result.setMessage(e.getMessage());
+            result.setCode(CommonConstant.SC_INTERNAL_SERVER_ERROR_500);
+        }
+        return result;
+    }
+
+    /**
+     * 将权限菜单的平级结构构建成树形结构
+     *
+     * @param treeList 树形列表
+     * @param metaList 系统权限菜单列表
+     * @param temp     临时替换变量
+     */
+    private void getTreeModeList(List<TreeModel> treeList, List<SysPermission> metaList, TreeModel temp) {
+        for (SysPermission permission : metaList) {
+            String parentId = permission.getParentId();
+            TreeModel treeModel = new TreeModel(permission);
+            if (temp == null && ConvertUtils.isEmpty(parentId)) {
+                treeList.add(treeModel);
+                if (!treeModel.getIsLeaf()) {
+                    getTreeModeList(treeList, metaList, treeModel);
+                }
+            } else if (temp != null && parentId != null && parentId.equals(temp.getKey())) {
+                temp.getChildren().add(treeModel);
+                if (!treeModel.getIsLeaf()) {
+                    getTreeModeList(treeList, metaList, treeModel);
+                }
+            }
+        }
     }
 
     /**
@@ -381,9 +439,10 @@ public class SysPermissionController {
 
     /**
      * 将打平的list构建成树形结构的list
+     *
      * @param treeList 树形结构list
      * @param metaList 打平的数据list
-     * @param temp 临时树对象
+     * @param temp     临时树对象
      */
     private void getTreeList(List<SysPermissionTree> treeList, List<SysPermission> metaList, SysPermissionTree temp) {
         for (SysPermission permission : metaList) {
