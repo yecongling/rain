@@ -96,11 +96,7 @@
         this.edit({})
       },
       edit(record) {
-        if (record.id) {
-          this.visiblekey = true
-        } else {
-          this.visiblekey = false
-        }
+        this.visiblekey = !!record.id;
         this.model = Object.assign({}, record)
         this.visible = true
       },

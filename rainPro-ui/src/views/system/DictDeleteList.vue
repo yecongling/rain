@@ -110,10 +110,10 @@
       handleDelete(id){
         this.$confirm({
           title: '彻底删除字典',
-          content: (<div>
-            <p>您确定要彻底删除这个字典项吗？</p>
-            <p style="color:red;">注意：彻底删除后将无法恢复，请谨慎操作！</p>
-            </div>),
+          content: '(<div>'+
+            '<p>您确定要彻底删除这个字典项吗？</p>'+
+            '<p style="color:red;">注意：彻底删除后将无法恢复，请谨慎操作！</p>'+
+            '</div>)',
           centered: false,
           onOk: () => {
           var that = this;

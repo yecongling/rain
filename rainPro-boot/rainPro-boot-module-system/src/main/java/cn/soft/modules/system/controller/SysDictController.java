@@ -1,9 +1,14 @@
 package cn.soft.modules.system.controller;
 
 import cn.soft.common.api.vo.Result;
+import cn.soft.common.system.query.QueryGenerator;
 import cn.soft.common.system.vo.DictModel;
+import cn.soft.modules.system.entity.SysDict;
 import cn.soft.modules.system.service.ISysDictItemService;
 import cn.soft.modules.system.service.ISysDictService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -44,6 +49,31 @@ public class SysDictController {
     @Autowired
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
+    }
+
+    /**
+     * 分页查询字典列表数据
+     *
+     * @param sysDict  字典对象
+     * @param pageNo   页数
+     * @param pageSize 每页条数
+     * @param request  请求
+     * @return /
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Result<IPage<SysDict>> queryPageList(SysDict sysDict, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+                                                @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize, HttpServletRequest request) {
+        Result<IPage<SysDict>> result = new Result<>();
+        QueryWrapper<SysDict> queryWrapper = QueryGenerator.initQueryWrapper(sysDict, request.getParameterMap());
+        Page<SysDict> page = new Page<>(pageNo, pageSize);
+        Page<SysDict> pageList = sysDictService.page(page, queryWrapper);
+        log.debug("查询当前页：" + pageList.getCurrent());
+        log.debug("查询当前页数量：" + pageList.getSize());
+        log.debug("查询结果数量：" + pageList.getRecords().size());
+        log.debug("数据总数：" + pageList.getTotal());
+        result.setResult(pageList);
+        result.setSuccess(true);
+        return result;
     }
 
     /**
