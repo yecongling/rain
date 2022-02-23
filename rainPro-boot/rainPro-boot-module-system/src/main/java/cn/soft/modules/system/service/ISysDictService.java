@@ -74,4 +74,10 @@ public interface ISysDictService extends IService<SysDict> {
      */
     public List<DictModel> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql);
 
+    /**
+     * 查询被逻辑删除的数据
+     *
+     * @return
+     */
+    public List<SysDict> queryDeleteList();
 }

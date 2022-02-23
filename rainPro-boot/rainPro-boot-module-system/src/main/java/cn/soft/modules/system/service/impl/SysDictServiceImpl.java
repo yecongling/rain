@@ -172,4 +172,14 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     public List<DictModel> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql) {
         return dictMapper.queryTableDictItemsByCodeAndFilter(table, text, code, filterSql);
     }
+
+    /**
+     *  查询被逻辑删除的字典数据
+     *
+     * @return
+     */
+    @Override
+    public List<SysDict> queryDeleteList() {
+        return dictMapper.queryDeleteList();
+    }
 }

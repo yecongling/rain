@@ -1,6 +1,8 @@
 package cn.soft.modules.system.controller;
 
 import cn.soft.common.api.vo.Result;
+import cn.soft.common.constant.CacheConstant;
+import cn.soft.common.constant.CommonConstant;
 import cn.soft.common.system.query.QueryGenerator;
 import cn.soft.common.system.vo.DictModel;
 import cn.soft.modules.system.entity.SysDict;
@@ -11,10 +13,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -102,4 +106,82 @@ public class SysDictController {
         }
         return result;
     }
+
+    /**
+     * 新增字典
+     *
+     * @param sysDict 前台传过来的封装的字典对象
+     * @return /
+     */
+    @PostMapping("/add")
+    public Result<SysDict> add(@RequestBody SysDict sysDict) {
+        Result<SysDict> result = new Result<>();
+        try {
+            sysDict.setCreateTime(new Date());
+            sysDict.setDelFlag(CommonConstant.DEL_FLAG_0);
+            sysDictService.save(sysDict);
+            result.success("操作成功");
+        } catch (Exception e) {
+            result.error500("操作失败");
+        }
+        return result;
+    }
+
+    /**
+     * 编辑字典
+     *
+     * @param sysDict 字典对象
+     * @return /
+     */
+    @RequestMapping(value = "/edit", method = {RequestMethod.PUT, RequestMethod.POST})
+    public Result<SysDict> edit(@RequestBody SysDict sysDict) {
+        Result<SysDict> result = new Result<>();
+        SysDict dict = sysDictService.getById(sysDict.getId());
+        if (dict == null) {
+            result.error500("未找到对应的字典数据");
+        } else {
+            sysDict.setUpdateTime(new Date());
+            boolean ok = sysDictService.updateById(sysDict);
+            if (ok) {
+                result.success("编辑成功！");
+            } else {
+                result.error500("编辑失败！");
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 删除
+     *
+     * @param id 字典id
+     * @return /
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @CacheEvict(value = {CacheConstant.SYS_DICT_CACHE, CacheConstant.SYS_ENABLE_DICT_CACHE}, allEntries = true)
+    public Result<SysDict> delete(@RequestParam(name = "id", required = true) String id) {
+        Result<SysDict> result = new Result<>();
+        boolean ok = sysDictService.removeById(id);
+        if (ok) {
+            result.success("删除成功!");
+        } else {
+            result.error500("删除失败!");
+        }
+        return result;
+    }
+
+    /**
+     * 获取被删除的字典
+     *
+     * @return
+     */
+    @RequestMapping(value = "/deleteList", method = RequestMethod.GET)
+    public Result<List<SysDict>> deleteList() {
+        Result<List<SysDict>> result = new Result<>();
+        List<SysDict> list = sysDictService.queryDeleteList();
+        result.setSuccess(true);
+        result.setResult(list);
+        return result;
+    }
+
 }

@@ -51,4 +51,14 @@
             where ${filterSql}
         </if>
     </select>
+
+    <!-- 重复校验 sql语句 -->
+    <select id="duplicateCheckCountSql" resultType="Long" parameterType="cn.soft.modules.system.model.DuplicateCheckVo">
+        SELECT COUNT(*) FROM ${tableName} WHERE ${fieldName} = #{fieldVal} and id &lt;&gt; #{dataId}
+    </select>
+
+    <!-- 重复校验 sql语句 -->
+    <select id="duplicateCheckCountSqlNoDataId" resultType="Long" parameterType="cn.soft.modules.system.model.DuplicateCheckVo">
+        SELECT COUNT(*) FROM ${tableName} WHERE ${fieldName} = #{fieldVal}
+    </select>
 </mapper>

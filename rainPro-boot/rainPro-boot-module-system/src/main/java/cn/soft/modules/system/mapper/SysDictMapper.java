@@ -3,8 +3,10 @@ package cn.soft.modules.system.mapper;
 import cn.soft.common.system.vo.DictModel;
 import cn.soft.common.system.vo.DictModelMany;
 import cn.soft.modules.system.entity.SysDict;
+import cn.soft.modules.system.model.DuplicateCheckVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -47,21 +49,43 @@ public interface SysDictMapper extends BaseMapper<SysDict> {
      * 查询指定table的  text code 获取字典
      *
      * @param table 表名
-     * @param text /
-     * @param code /
+     * @param text  /
+     * @param code  /
      * @return /
      */
-    public List<DictModel> queryTableDictItemsByCode(@Param("table") String table,@Param("text") String text,@Param("code") String code);
+    public List<DictModel> queryTableDictItemsByCode(@Param("table") String table, @Param("text") String text, @Param("code") String code);
 
     /**
      * 通过查询指定table的 text code 获取字典（指定查询条件）
      *
-     * @param table 表名
-     * @param text /
-     * @param code /
+     * @param table     表名
+     * @param text      /
+     * @param code      /
      * @param filterSql 过滤条件
      * @return
      */
-    public List<DictModel> queryTableDictItemsByCodeAndFilter(@Param("table") String table,@Param("text") String text,@Param("code") String code,@Param("filterSql") String filterSql);
+    public List<DictModel> queryTableDictItemsByCodeAndFilter(@Param("table") String table, @Param("text") String text, @Param("code") String code, @Param("filterSql") String filterSql);
 
+    /**
+     * 重复检查SQL
+     *
+     * @return 校验对象
+     */
+    public Long duplicateCheckCountSql(DuplicateCheckVo duplicateCheckVo);
+
+    /**
+     * 重复校验SQL
+     *
+     * @param duplicateCheckVo 校验对象
+     * @return
+     */
+    public Long duplicateCheckCountSqlNoDataId(DuplicateCheckVo duplicateCheckVo);
+
+    /**
+     * 查询被逻辑删除的数据
+     *
+     * @return
+     */
+    @Select("select * from sys_dict where del_flag = 1")
+    public List<SysDict> queryDeleteList();
 }
