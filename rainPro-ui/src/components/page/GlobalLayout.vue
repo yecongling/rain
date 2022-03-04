@@ -69,7 +69,7 @@
       />
 
       <!-- layout content -->
-      <a-layout-content :style="{ height: '100%', paddingTop: fixedHeader ? '59px' : '0' }">
+      <a-layout-content :style="{ height: '100%', paddingTop: fixedHeader ? '59px' : '0' , overflow: 'hidden'}">
         <slot></slot>
       </a-layout-content>
 
