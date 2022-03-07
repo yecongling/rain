@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @ClassName SysDictController
@@ -99,7 +100,6 @@ public class SysDictController {
             }
             result.setSuccess(true);
             result.setResult(list);
-            log.debug(result.toString());
         } catch (Exception e) {
             result.error500("操作失败");
             return result;
@@ -173,7 +173,7 @@ public class SysDictController {
     /**
      * 获取被删除的字典
      *
-     * @return
+     * @return /
      */
     @RequestMapping(value = "/deleteList", method = RequestMethod.GET)
     public Result<List<SysDict>> deleteList() {
@@ -181,6 +181,30 @@ public class SysDictController {
         List<SysDict> list = sysDictService.queryDeleteList();
         result.setSuccess(true);
         result.setResult(list);
+        return result;
+    }
+
+    /**
+     * 刷新缓存
+     *
+     * @return /
+     */
+    @RequestMapping("/refreshCache")
+    public Result<?> refreshCache() {
+        Result<?> result = new Result<>();
+        // 清空字典缓存
+        Set<String> keys = redisTemplate.keys(CacheConstant.SYS_DICT_CACHE + "*");
+        Set<String> keys1 = redisTemplate.keys(CacheConstant.SYS_ENABLE_DICT_CACHE + "*");
+        Set<String> keys2 = redisTemplate.keys(CacheConstant.SYS_DICT_TABLE_CACHE + "*");
+        Set<String> keys3 = redisTemplate.keys(CacheConstant.SYS_DICT_TABLE_BY_KEYS_CACHE + "*");
+        Set<String> keys4 = redisTemplate.keys(CacheConstant.SYS_DEPARTS_CACHE + "*");
+        Set<String> keys5 = redisTemplate.keys(CacheConstant.SYS_DEPART_IDS_CACHE + "*");
+        redisTemplate.delete(keys);
+        redisTemplate.delete(keys1);
+        redisTemplate.delete(keys2);
+        redisTemplate.delete(keys3);
+        redisTemplate.delete(keys4);
+        redisTemplate.delete(keys5);
         return result;
     }
 

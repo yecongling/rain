@@ -30,7 +30,7 @@
         <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
           <a-button type="primary" icon="import">导入</a-button>
         </a-upload>
-        <a-button type="primary" icon="sync" @click="refleshCache()">刷新缓存</a-button>
+        <a-button type="primary" icon="sync" @click="refreshCache()">刷新缓存</a-button>
 
         <a-button type="primary" icon="hdd" @click="openDeleteList">回收站</a-button>
       </div>
@@ -136,7 +136,7 @@
           delete: "/sys/dict/delete",
           exportXlsUrl: "sys/dict/exportXls",
           importExcelUrl: "sys/dict/importExcel",
-          refleshCache: "sys/dict/refleshCache",
+          refreshCache: "sys/dict/refreshCache",
           queryAllDictItems: "sys/dict/queryAllDictItems",
         },
       }
@@ -178,8 +178,8 @@
       openDeleteList(){
         this.$refs.dictDeleteList.show()
       },
-      refleshCache(){
-        getAction(this.url.refleshCache).then((res) => {
+      refreshCache(){
+        getAction(this.url.refreshCache).then((res) => {
           if (res.success) {
             //重新加载缓存
             getAction(this.url.queryAllDictItems).then((res) => {

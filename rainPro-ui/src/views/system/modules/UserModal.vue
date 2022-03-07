@@ -6,6 +6,7 @@
     placement="right"
     :closable="true"
     @cancel="handleCancel"
+    @ok="handleSubmit"
     :visible="visible"
     style="height: 100%;overflow: auto;padding-bottom: 53px;">
 
@@ -63,14 +64,14 @@
         </a-form-model-item>
 
         <!--租户分配-->
-        <a-form-model-item label="租户分配" :labelCol="labelCol" :wrapperCol="wrapperCol" v-show="!departDisabled">
+<!--        <a-form-model-item label="租户分配" :labelCol="labelCol" :wrapperCol="wrapperCol" v-show="!departDisabled">
           <j-multi-select-tag
             :disabled="disableSubmit"
             v-model="model.relTenantIds"
             :options="tenantsOptions"
             placeholder="请选择租户">
           </j-multi-select-tag>
-        </a-form-model-item>
+        </a-form-model-item>-->
 
         <a-form-model-item label="身份" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-radio-group  v-model="model.userIdentity"  @change="identityChange">
@@ -205,7 +206,7 @@
     created () {
       const token = Vue.ls.get(ACCESS_TOKEN);
       this.headers = {"X-Access-Token":token}
-      /*this.initRoleList()*/
+      // this.initRoleList();
       /*this.initTenantList()*/
     },
     computed:{
@@ -226,7 +227,7 @@
         that.userId = record.id;
         that.model = Object.assign({},{selectedroles:'',selecteddeparts:''}, record);
         //身份为上级显示负责部门，否则不显示
-        if(this.model.userIdentity==2){
+        if(this.model.userIdentity===2){
           this.departIdShow=true;
         }else{
           this.departIdShow=false;
@@ -486,6 +487,10 @@
 </script>
 
 <style scoped>
+
+  .ant-form-item {
+    margin-bottom: 10px;
+  }
   .avatar-uploader > .ant-upload {
     width:104px;
     height:104px;
