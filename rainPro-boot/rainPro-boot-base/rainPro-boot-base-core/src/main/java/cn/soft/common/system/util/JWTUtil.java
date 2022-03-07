@@ -103,7 +103,8 @@ public class JWTUtil {
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         Algorithm algorithm = Algorithm.HMAC256(secret);
         // 附带username信息
-        return JWT.create().withClaim("username", username).withExpiresAt(date).sign(algorithm);
+        return JWT.create().withClaim("username", username).sign(algorithm);
+//        return JWT.create().withClaim("username", username).withExpiresAt(date).sign(algorithm);
     }
 
     /**
