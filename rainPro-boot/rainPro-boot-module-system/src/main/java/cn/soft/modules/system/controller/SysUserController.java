@@ -9,7 +9,10 @@ import cn.soft.common.util.RedisUtil;
 import cn.soft.common.util.ConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
 import cn.soft.modules.system.entity.SysUser;
+import cn.soft.modules.system.entity.SysUserRole;
+import cn.soft.modules.system.model.DepartIdModel;
 import cn.soft.modules.system.service.ISysLogService;
+import cn.soft.modules.system.service.ISysUserRoleService;
 import cn.soft.modules.system.service.ISysUserService;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -20,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +49,13 @@ public class SysUserController {
     @Autowired
     public void setUserService(ISysUserService userService) {
         this.userService = userService;
+    }
+
+    private ISysUserRoleService sysUserRoleService;
+
+    @Autowired
+    public void setSysUserRoleService(ISysUserRoleService sysUserRoleService) {
+        this.sysUserRoleService = sysUserRoleService;
     }
 
     /**
@@ -170,4 +181,41 @@ public class SysUserController {
         log.info(pageList.toString());
         return result;
     }
+
+    /**
+     * 根据用户ID查询用户的角色信息
+     *
+     * @param userid 用户ID
+     * @return 返回角色列表
+     */
+    @GetMapping("/queryUserRole")
+    public Result<List<String>> queryUserRole(@RequestParam(name = "userid") String userid) {
+        Result<List<String>> result = new Result<>();
+        List<String> list = new ArrayList<>();
+        List<SysUserRole> userRole = sysUserRoleService.list(new QueryWrapper<SysUserRole>().lambda().eq(SysUserRole::getUserId, userid));
+        if (userRole == null || userRole.isEmpty()) {
+            result.error500("未找到用户相关角色信息");
+        } else {
+            for (SysUserRole role : userRole) {
+                list.add(role.getRoleId());
+            }
+            result.setSuccess(true);
+            result.setResult(list);
+        }
+        return result;
+    }
+
+    /**
+     * 查询指定用户和部门关联的数据
+     *
+     * @param userId 用户ID
+     * @return 返回部门关联数据
+     */
+    @GetMapping("/userDepartList")
+    public Result<List<DepartIdModel>> getUserDepartList(@RequestParam(name = "userId") String userId) {
+        Result<List<DepartIdModel>> result = new Result<>();
+        return result;
+    }
+
+
 }

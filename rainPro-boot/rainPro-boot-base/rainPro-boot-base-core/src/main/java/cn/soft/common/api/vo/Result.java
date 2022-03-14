@@ -50,12 +50,6 @@ public class Result<T> implements Serializable {
     public Result() {
     }
 
-    /**
-     * 兼容VUE3版token失效不跳转登录页面
-     *
-     * @param code
-     * @param message
-     */
     public Result(Integer code, String message) {
         this.code = code;
         this.message = message;
