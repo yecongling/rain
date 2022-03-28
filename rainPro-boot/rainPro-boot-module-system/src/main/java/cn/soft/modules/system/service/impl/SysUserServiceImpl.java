@@ -5,10 +5,8 @@ import cn.soft.common.constant.CacheConstant;
 import cn.soft.common.constant.CommonConstant;
 import cn.soft.common.util.ConvertUtils;
 import cn.soft.modules.base.service.BaseCommonService;
-import cn.soft.modules.system.entity.SysUser;
-import cn.soft.modules.system.entity.SysUserRole;
-import cn.soft.modules.system.mapper.SysUserMapper;
-import cn.soft.modules.system.mapper.SysUserRoleMapper;
+import cn.soft.modules.system.entity.*;
+import cn.soft.modules.system.mapper.*;
 import cn.soft.modules.system.service.ISysTenantService;
 import cn.soft.modules.system.service.ISysUserService;
 import cn.soft.modules.system.vo.SysUserDepVo;
@@ -18,10 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -60,6 +61,33 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Autowired
     public void setBaseCommonService(BaseCommonService baseCommonService) {
         this.baseCommonService = baseCommonService;
+    }
+
+    /**
+     * 用户部门mapper
+     */
+    private SysUserDepartMapper sysUserDepartMapper;
+    @Autowired
+    public void setSysUserDepartMapper(SysUserDepartMapper sysUserDepartMapper) {
+        this.sysUserDepartMapper = sysUserDepartMapper;
+    }
+
+    /**
+     * 部门角色mapper
+     */
+    public SysDepartRoleMapper sysDepartRoleMapper;
+    @Autowired
+    public void setSysDepartRoleMapper(SysDepartRoleMapper sysDepartRoleMapper) {
+        this.sysDepartRoleMapper = sysDepartRoleMapper;
+    }
+
+    /**
+     * 部门角色用户mapper
+     */
+    public SysDepartRoleUserMapper departRoleUserMapper;
+    @Autowired
+    public void setDepartRoleUserMapper(SysDepartRoleUserMapper departRoleUserMapper) {
+        this.departRoleUserMapper = departRoleUserMapper;
     }
 
     /**
@@ -180,6 +208,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * @param departs 部门信息
      */
     @Override
+    @Transactional
+    @CacheEvict(value = {CacheConstant.SYS_USERS_CACHE}, allEntries = true)
     public void editUser(SysUser user, String roles, String departs) {
         // 1、修改用户的基础信息
         this.updateById(user);
@@ -194,5 +224,31 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             }
         }
         // 3、修改部门
+        String[] arr = {};
+        if (ConvertUtils.isNotEmpty(departs)) {
+            arr = departs.split(",");
+        }
+        // 查询已关联的部门
+        List<SysUserDepart> userDepartList = sysUserDepartMapper.selectList(new QueryWrapper<SysUserDepart>().lambda().eq(SysUserDepart::getUserId, user.getId()));
+        if (userDepartList != null && userDepartList.size() > 0) {
+            for (SysUserDepart depart : userDepartList) {
+                // 修改已关联部门删除部门用户角色关系
+                if (!Arrays.asList(arr).contains(depart.getDepId())) {
+                    List<SysDepartRole> sysDepartRoleList = sysDepartRoleMapper.selectList(new QueryWrapper<SysDepartRole>().lambda().eq(SysDepartRole::getDepartId, depart.getDepId()));
+                    List<String> roleIds = sysDepartRoleList.stream().map(SysDepartRole::getId).collect(Collectors.toList());
+                    if (roleIds.size() > 0) {
+                        departRoleUserMapper.delete(new QueryWrapper<SysDepartRoleUser>().lambda().eq(SysDepartRoleUser::getId, user.getId()).in(SysDepartRoleUser::getDroleId, roleIds));
+                    }
+                }
+            }
+        }
+        // 先删后加
+        sysUserDepartMapper.delete(new QueryWrapper<SysUserDepart>().lambda().eq(SysUserDepart::getUserId, user.getId()));
+        if (ConvertUtils.isNotEmpty(departs)) {
+            for (String departId : arr) {
+                SysUserDepart sysUserDepart = new SysUserDepart(user.getId(), departId);
+                sysUserDepartMapper.insert(sysUserDepart);
+            }
+        }
     }
 }

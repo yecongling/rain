@@ -240,7 +240,8 @@ public class SysUserController {
                 if (ConvertUtils.isEmpty(selectedDeparts)) {
                     selectedDeparts = user.getDepartIds();
                 }
-
+                // 修改用户信息走一个service  保证事物
+                userService.editUser(user, selectedRoles, selectedDeparts);
                 result.success("修改成功！");
             }
         } catch (Exception e) {
