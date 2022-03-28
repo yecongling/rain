@@ -26,7 +26,7 @@ public interface ISysUserService extends IService<SysUser> {
      * @param username 用户名
      * @return 返回用户
      */
-    public SysUser getUserByName(String username);
+    SysUser getUserByName(String username);
 
     /**
      * 添加用户和用户角色关系
@@ -34,7 +34,7 @@ public interface ISysUserService extends IService<SysUser> {
      * @param user  用户
      * @param roles 角色
      */
-    public void addUserWithRole(SysUser user, String roles);
+    void addUserWithRole(SysUser user, String roles);
 
     /**
      * 根据用户ID设置部门ID
@@ -50,7 +50,7 @@ public interface ISysUserService extends IService<SysUser> {
      * @param username 用户
      * @return 角色
      */
-    public List<String> getRole(String username);
+    List<String> getRole(String username);
 
     /**
      * 根据 userIds查询，查询用户所属部门的名称（多个部门名逗号隔开）
@@ -58,6 +58,14 @@ public interface ISysUserService extends IService<SysUser> {
      * @param
      * @return
      */
-    public Map<String, String> getDepNamesByUserIds(List<String> userIds);
+    Map<String, String> getDepNamesByUserIds(List<String> userIds);
 
+    /**
+     * 编辑用户信息
+     *
+     * @param user 用户对象
+     * @param roles 角色信息
+     * @param departs 部门信息
+     */
+    void editUser(SysUser user, String roles, String departs);
 }

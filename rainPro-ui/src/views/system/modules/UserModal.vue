@@ -52,7 +52,7 @@
         <a-form-model-item label="角色分配" :labelCol="labelCol" :wrapperCol="wrapperCol" v-show="!roleDisabled" >
           <j-multi-select-tag
             :disabled="disableSubmit"
-            v-model="model.selectedroles"
+            v-model="model.selectedRoles"
             :options="rolesOptions"
             placeholder="请选择角色">
           </j-multi-select-tag>
@@ -60,7 +60,7 @@
 
         <!--部门分配-->
         <a-form-model-item label="部门分配" :labelCol="labelCol" :wrapperCol="wrapperCol" v-show="!departDisabled">
-          <j-select-depart v-model="model.selecteddeparts" :multi="true" @back="backDepartInfo" :backDepart="true" :treeOpera="true">></j-select-depart>
+          <j-select-depart v-model="model.selectedDeparts" :multi="true" @back="backDepartInfo" :backDepart="true" :treeOpera="true">></j-select-depart>
         </a-form-model-item>
 
         <!--租户分配-->
@@ -225,7 +225,7 @@
         //根据屏幕宽度自适应抽屉宽度
         this.resetScreenSize();
         that.userId = record.id;
-        that.model = Object.assign({},{selectedroles:'',selecteddeparts:''}, record);
+        that.model = Object.assign({},{selectedRoles:'',selectedDeparts:''}, record);
         //身份为上级显示负责部门，否则不显示
         if(this.model.userIdentity===2){
           this.departIdShow=true;
@@ -287,8 +287,8 @@
       getUserRoles(userid){
         queryUserRole({userid:userid}).then((res)=>{
           if(res.success){
-            this.model.selectedroles = res.result.join(",");
-            console.log('that.model.selectedroles=',this.model.selectedroles)
+            this.model.selectedRoles = res.result.join(",");
+            console.log('that.model.selectedRoles=',this.model.selectedRoles)
           }
         });
       },
@@ -306,14 +306,14 @@
                 label: res.result[i].title
               })
             }
-            that.model.selecteddeparts = selectDepartKeys.join(",")
+            that.model.selectedDeparts = selectDepartKeys.join(",")
             that.nextDepartOptions=departOptions;
             console.log('that.nextDepartOptions=',that.nextDepartOptions)
           }
         })
       },
       backDepartInfo(info) {
-        this.model.departIds = this.model.selecteddeparts;
+        this.model.departIds = this.model.selectedDeparts;
         this.nextDepartOptions = info.map((item,index,arr)=>{
           let c = {label:item.text, value: item.value+""}
           return c;

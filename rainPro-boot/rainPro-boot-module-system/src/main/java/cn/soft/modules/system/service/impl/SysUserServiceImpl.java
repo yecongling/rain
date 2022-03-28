@@ -12,6 +12,7 @@ import cn.soft.modules.system.mapper.SysUserRoleMapper;
 import cn.soft.modules.system.service.ISysTenantService;
 import cn.soft.modules.system.service.ISysUserService;
 import cn.soft.modules.system.vo.SysUserDepVo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,5 +170,29 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
                 }
         );
         return res;
+    }
+
+    /**
+     * 编辑用户信息
+     *
+     * @param user    用户对象
+     * @param roles   角色信息
+     * @param departs 部门信息
+     */
+    @Override
+    public void editUser(SysUser user, String roles, String departs) {
+        // 1、修改用户的基础信息
+        this.updateById(user);
+        // 2、修改用户角色信息  采用先删除后添加的方法
+        userRoleMapper.delete(new QueryWrapper<SysUserRole>().lambda().eq(SysUserRole::getUserId, user.getId()));
+        if (ConvertUtils.isNotEmpty(roles)) {
+            // 依次插入角色信息
+            String[] arr = roles.split(",");
+            for (String roleId : arr) {
+                SysUserRole userRole = new SysUserRole(user.getId(), roleId);
+                userRoleMapper.insert(userRole);
+            }
+        }
+        // 3、修改部门
     }
 }

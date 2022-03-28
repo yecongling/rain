@@ -217,5 +217,36 @@ public class SysUserController {
         return result;
     }
 
+    /**
+     * 编辑用户信息
+     *
+     * @param jsonObject 用户JSON对象（内部包含的是修改后的数据）
+     * @return 返回编辑后的user对象
+     */
+    @RequestMapping(value = "/edit", method = {RequestMethod.PUT, RequestMethod.POST})
+    public Result<SysUser> edit(@RequestBody JSONObject jsonObject) {
+        Result<SysUser> result = new Result<>();
+        try {
+            SysUser sysUser = userService.getById(jsonObject.getString("id"));
+            baseCommonService.addLog("编辑用户，id：" + jsonObject.getString("id"), CommonConstant.LOG_TYPE_2, 2);
+            if (sysUser == null) {
+                result.error500("未找到对应的用户信息！");
+            } else {
+                SysUser user = JSONObject.parseObject(jsonObject.toJSONString(), SysUser.class);
+                user.setUpdateTime(new Date());
+                user.setPassword(sysUser.getPassword());
+                String selectedRoles = jsonObject.getString("selectedRoles");
+                String selectedDeparts = jsonObject.getString("selectedDeparts");
+                if (ConvertUtils.isEmpty(selectedDeparts)) {
+                    selectedDeparts = user.getDepartIds();
+                }
+
+                result.success("修改成功！");
+            }
+        } catch (Exception e) {
+            result.error500("操作失败！原因：" + e.getMessage());
+        }
+        return result;
+    }
 
 }
