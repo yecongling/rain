@@ -244,8 +244,8 @@ public class SysLoginController {
         String token = JWTUtil.sign(username, password);
         // 设置token缓存有效时间
         redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
-        // 暂时不设置token的失效日期
-//        redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JWTUtil.EXPIRE_TIME * 2 / 1000);
+        // 设置token的失效日期
+        redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JWTUtil.EXPIRE_TIME * 2 / 1000);
         object.put("token", token);
         object.put("userInfo", sysUser);
         object.put("sysAllDictItems", sysDictService.queryAllDictItems());
