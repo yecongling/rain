@@ -226,7 +226,7 @@ public class ShiroConfig {
         if (lettuceConnectionFactory.getClusterConfiguration() == null || lettuceConnectionFactory.getClusterConfiguration().getClusterNodes().isEmpty()) {
             RedisManager redisManager = new RedisManager();
             redisManager.setHost(lettuceConnectionFactory.getHostName());
-            redisManager.setPort(lettuceConnectionFactory.getPort());
+            //redisManager.setPort(lettuceConnectionFactory.getPort());
             redisManager.setDatabase(lettuceConnectionFactory.getDatabase());
             redisManager.setTimeout(0);
             if (!StringUtils.isEmpty(lettuceConnectionFactory.getPassword())) {
