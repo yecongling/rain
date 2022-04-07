@@ -228,7 +228,7 @@
             title: '用户姓名',
             align: "center",
             width: 100,
-            dataIndex: 'realname',
+            dataIndex: 'realName',
           },
           {
             title: '头像',

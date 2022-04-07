@@ -1,3 +1,4 @@
+<!-- 字典标签选择组件 -->
 <template>
   <a-radio-group v-if="tagType==='radio'" @change="handleInput" :value="getValueSting" :disabled="disabled">
     <a-radio v-for="(item, key) in dictOptions" :key="key" :value="item.value">{{ item.text }}</a-radio>
@@ -85,7 +86,7 @@
         }else{
           val = e
         }
-        console.log(val);
+        // console.log(val);
         this.$emit('change', val);
         //LOWCOD-2146 【菜单】数据规则，选择自定义SQL 规则值无法输入空格
         this.$emit('input', val);

@@ -58,7 +58,7 @@ const deleteLogList = (params)=>deleteAction("/sys/log/deleteBatch",params);
 
 //数据字典
 const addDict = (params)=>postAction("/sys/dict/add",params);
-const editDict = (params)=>putAction("/sys/dict/edit",parms);
+const editDict = (params)=>putAction("/sys/dict/edit",params);
 const treeList = (params)=>getAction("/sys/dict/treeList",params);
 const addDictItem = (params)=>postAction("/sys/dictItem/add",params);
 const editDictItem = (params)=>putAction("/sys/dictItem/edit",params);

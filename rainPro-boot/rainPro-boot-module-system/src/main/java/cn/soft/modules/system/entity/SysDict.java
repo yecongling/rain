@@ -50,7 +50,7 @@ public class SysDict implements Serializable {
     private String description;
 
     /**
-     * 删除状态
+     * 删除状态 （配置了@TableLogic注解的表示该字段作为逻辑删除的字段  因此数据库中的数据都是逻辑删除  并非真正的删除）
      */
     @TableLogic
     private Integer delFlag;

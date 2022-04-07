@@ -1,7 +1,11 @@
 server:
   port: 8080
-  tomcat:
-    max-swallow-size: -1
+  undertow:
+    threads:
+      io: 4
+      worker: 256
+    buffer-size: 1024
+    direct-buffers: true
   error:
     include-exception: true
     include-stacktrace: ALWAYS
@@ -135,7 +139,7 @@ spring:
         master:
           url: jdbc:mysql://127.0.0.1:3306/rainpro?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
           username: root
-          password: root
+          password: ycl123456
           driver-class-name: com.mysql.cj.jdbc.Driver
           # 多数据源配置
           #multi-datasource1:
