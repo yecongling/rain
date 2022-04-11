@@ -37,8 +37,8 @@
           </a-form-model-item>
         </template>
 
-        <a-form-model-item label="用户姓名" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="realname">
-          <a-input placeholder="请输入用户姓名" v-model="model.realname"/>
+        <a-form-model-item label="用户姓名" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="realName">
+          <a-input placeholder="请输入用户姓名" v-model="model.realName"/>
         </a-form-model-item>
 
         <a-form-model-item label="工号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="workNo">
@@ -141,15 +141,14 @@
 </template>
 
 <script>
-import moment from 'moment'
-import Vue from 'vue'
-import {ACCESS_TOKEN} from "@/store/mutation-types"
-import {getAction} from '@/api/manage'
-import {addUser, editUser, queryUserRole, queryall} from '@/api/api'
-import {disabledAuthFilter} from "@/utils/authFilter"
-import {duplicateCheck} from '@/api/api'
+  import moment from 'moment'
+  import Vue from 'vue'
+  import {ACCESS_TOKEN} from "@/store/mutation-types"
+  import {getAction} from '@/api/manage'
+  import {addUser, duplicateCheck, editUser, queryAllRole, queryUserRole} from '@/api/api'
+  import {disabledAuthFilter} from "@/utils/authFilter"
 
-export default {
+  export default {
   name: "UserModal",
   components: {},
   data() {
@@ -174,7 +173,7 @@ export default {
           {validator: this.validateToNextPassword, trigger: 'change'}],
         confirmpassword: [{required: true, message: '请重新输入登录密码!',},
           {validator: this.compareToFirstPassword,}],
-        realname: [{required: true, message: '请输入用户名称!'}],
+        realName: [{required: true, message: '请输入用户名称!'}],
         phone: [{required: true, message: '请输入手机号!'}, {validator: this.validatePhone}],
         email: [{validator: this.validateEmail}],
         roles: {},
@@ -212,7 +211,7 @@ export default {
   created() {
     const token = Vue.ls.get(ACCESS_TOKEN);
     this.headers = {"X-Access-Token": token}
-    // this.initRoleList();
+    this.initRoleList();
     /*this.initTenantList()*/
   },
   computed: {
@@ -279,11 +278,10 @@ export default {
     },
     //初始化角色字典
     initRoleList() {
-      queryall().then((res) => {
+      queryAllRole().then((res) => {
         if (res.success) {
           this.rolesOptions = res.result.map((item, index, arr) => {
-            let c = {label: item.roleName, value: item.id}
-            return c;
+            return {label: item.roleName, value: item.id};
           })
           console.log('this.rolesOptions: ', this.rolesOptions)
         }

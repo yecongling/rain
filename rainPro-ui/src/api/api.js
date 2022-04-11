@@ -6,7 +6,7 @@ import {UI_CACHE_DB_DICT_DATA} from "@/store/mutation-types"
 const addRole = (params)=>postAction("/sys/role/add",params);
 const editRole = (params)=>putAction("/sys/role/edit",params);
 const checkRoleCode = (params)=>getAction("/sys/role/checkRoleCode",params);
-const queryall = (params)=>getAction("/sys/role/queryall",params);
+const queryAllRole = (params)=>getAction("/sys/role/queryAllRole",params);
 
 //用户管理
 const addUser = (params)=>postAction("/sys/user/add",params);
@@ -109,7 +109,7 @@ export {
   editUser,
   queryUserRole,
   getUserList,
-  queryall,
+  queryAllRole,
   frozenBatch,
   checkOnlyUser,
   changePassword,

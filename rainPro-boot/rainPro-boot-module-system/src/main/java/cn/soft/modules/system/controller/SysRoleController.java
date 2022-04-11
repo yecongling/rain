@@ -9,12 +9,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @ClassName SysRoleController
@@ -53,6 +51,24 @@ public class SysRoleController {
         Page<SysRole> rolePage = sysRoleService.page(page, queryWrapper);
         result.setSuccess(true);
         result.setResult(rolePage);
+        return result;
+    }
+
+    /**
+     * 查询所有角色
+     *
+     * @return 角色集合
+     */
+    @GetMapping("/queryAllRole")
+    public Result<List<SysRole>> queryAll() {
+        Result<List<SysRole>> result = new Result<>();
+        List<SysRole> list = sysRoleService.list();
+        if (list == null || list.size() == 0) {
+            result.error500("未查询到对应的角色信息");
+        } else {
+            result.setResult(list);
+            result.setSuccess(true);
+        }
         return result;
     }
 }
