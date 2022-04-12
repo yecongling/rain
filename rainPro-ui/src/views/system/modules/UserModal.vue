@@ -32,8 +32,8 @@
             <a-input type="password" placeholder="请输入登录密码" v-model="model.password"/>
           </a-form-model-item>
 
-          <a-form-model-item label="确认密码" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="confirmpassword">
-            <a-input type="password" @blur="handleConfirmBlur" placeholder="请重新输入登录密码" v-model="model.confirmpassword"/>
+          <a-form-model-item label="确认密码" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="confirmPassword">
+            <a-input type="password" @blur="handleConfirmBlur" placeholder="请重新输入登录密码" v-model="model.confirmPassword"/>
           </a-form-model-item>
         </template>
 
@@ -123,7 +123,7 @@
         </a-form-model-item>
 
         <a-form-model-item label="工作流引擎" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-dict-select-tag v-model="model.activitiSync" placeholder="请选择是否同步工作流引擎" :type="'radio'"
+          <j-dict-select-tag v-model="model.activitySync" placeholder="请选择是否同步工作流引擎" :type="'radio'"
                              dictCode="activiti_sync"/>
         </a-form-model-item>
 
@@ -141,14 +141,14 @@
 </template>
 
 <script>
-  import moment from 'moment'
-  import Vue from 'vue'
-  import {ACCESS_TOKEN} from "@/store/mutation-types"
-  import {getAction} from '@/api/manage'
-  import {addUser, duplicateCheck, editUser, queryAllRole, queryUserRole} from '@/api/api'
-  import {disabledAuthFilter} from "@/utils/authFilter"
+import moment from 'moment'
+import Vue from 'vue'
+import {ACCESS_TOKEN} from "@/store/mutation-types"
+import {getAction} from '@/api/manage'
+import {addUser, duplicateCheck, editUser, queryAllRole, queryUserRole} from '@/api/api'
+import {disabledAuthFilter} from "@/utils/authFilter"
 
-  export default {
+export default {
   name: "UserModal",
   components: {},
   data() {
@@ -171,7 +171,7 @@
           message: '密码由8位数字、大小写字母和特殊符号组成!'
         },
           {validator: this.validateToNextPassword, trigger: 'change'}],
-        confirmpassword: [{required: true, message: '请重新输入登录密码!',},
+        confirmPassword: [{required: true, message: '请重新输入登录密码!',},
           {validator: this.compareToFirstPassword,}],
         realName: [{required: true, message: '请输入用户名称!'}],
         phone: [{required: true, message: '请输入手机号!'}, {validator: this.validatePhone}],
@@ -219,11 +219,23 @@
       return this.url.fileUpload;
     }
   },
+  /**
+   * 方法集合
+   */
   methods: {
+
+    /**
+     * 新增
+     */
     add() {
       this.refresh();
-      this.edit({activitiSync: '1', userIdentity: 1});
+      this.edit({activitySync: '1', userIdentity: 1});
     },
+
+    /**
+     * 编辑
+     * @param record 用户记录信息
+     */
     edit(record) {
       let that = this;
       that.visible = true;
@@ -232,21 +244,25 @@
       that.userId = record.id;
       that.model = Object.assign({}, {selectedRoles: '', selectedDeparts: ''}, record);
       //身份为上级显示负责部门，否则不显示
-      if (this.model.userIdentity === 2) {
-        this.departIdShow = true;
-      } else {
-        this.departIdShow = false;
-      }
-
+      this.departIdShow = this.model.userIdentity === 2;
       if (record.hasOwnProperty("id")) {
         that.getUserRoles(record.id);
         that.getUserDeparts(record.id);
       }
     },
+
+    /**
+     * 是否是禁用的授权
+     * @param code
+     * @returns {boolean|boolean|*}
+     */
     isDisabledAuth(code) {
       return disabledAuthFilter(code);
     },
-    //窗口最大化切换
+
+    /**
+     * 窗口最大化切换
+     */
     toggleScreen() {
       if (this.modaltoggleFlag) {
         this.modalWidth = window.innerWidth;
@@ -255,7 +271,10 @@
       }
       this.modaltoggleFlag = !this.modaltoggleFlag;
     },
-    // 根据屏幕变化,设置抽屉尺寸
+
+    /**
+     * 根据屏幕变化,设置弹窗尺寸
+     */
     resetScreenSize() {
       let screenWidth = document.body.clientWidth;
       if (screenWidth < 500) {
@@ -264,37 +283,49 @@
         this.drawerWidth = 1000;
       }
     },
-    //初始化租户字典
+
+    /**
+     * 初始化租户字典
+     */
     initTenantList() {
       getAction(this.url.queryTenantList).then(res => {
         if (res.success) {
           this.tenantsOptions = res.result.map((item, index, arr) => {
-            let c = {label: item.name, value: item.id + ""}
-            return c;
+            return {label: item.name, value: item.id + ""};
           })
-          console.log('this.tenantsOptions: ', this.tenantsOptions)
         }
       })
     },
-    //初始化角色字典
+
+    /**
+     * 初始化角色字典
+     */
     initRoleList() {
       queryAllRole().then((res) => {
         if (res.success) {
           this.rolesOptions = res.result.map((item, index, arr) => {
             return {label: item.roleName, value: item.id};
           })
-          console.log('this.rolesOptions: ', this.rolesOptions)
         }
       });
     },
+
+    /**
+     * 获取用户的角色
+     * @param userid
+     */
     getUserRoles(userid) {
       queryUserRole({userid: userid}).then((res) => {
         if (res.success) {
           this.model.selectedRoles = res.result.join(",");
-          console.log('that.model.selectedRoles=', this.model.selectedRoles)
         }
       });
     },
+
+    /**
+     * 获取用户的部门
+     * @param userid
+     */
     getUserDeparts(userid) {
       let that = this;
       getAction(that.url.userWithDepart, {userId: userid}).then((res) => {
@@ -313,22 +344,30 @@
           }
           that.model.selectedDeparts = selectDepartKeys.join(",")
           that.nextDepartOptions = departOptions;
-          console.log('that.nextDepartOptions=', that.nextDepartOptions)
         }
       })
     },
+
+
     backDepartInfo(info) {
       this.model.departIds = this.model.selectedDeparts;
       this.nextDepartOptions = info.map((item, index, arr) => {
-        let c = {label: item.text, value: item.value + ""}
-        return c;
+        return {label: item.text, value: item.value + ""};
       })
     },
+
+    /**
+     * 刷新
+     */
     refresh() {
       this.userId = ""
       this.nextDepartOptions = [];
       this.departIdShow = false;
     },
+
+    /**
+     * 关闭弹窗
+     */
     close() {
       this.$emit('close');
       this.visible = false;
@@ -337,7 +376,12 @@
       this.departIdShow = false;
       this.$refs.form.resetFields();
     },
+
     moment,
+
+    /**
+     * 提交按钮
+     */
     handleSubmit() {
       const that = this;
       // 触发表单验证
@@ -371,26 +415,51 @@
         }
       })
     },
+
+    /**
+     * 取消（关闭弹窗）
+     */
     handleCancel() {
       this.close()
     },
+
+    /**
+     * 密码验证
+     * @param rule
+     * @param value
+     * @param callback
+     */
     validateToNextPassword(rule, value, callback) {
-      const confirmpassword = this.model.confirmpassword;
-      if (value && confirmpassword && value !== confirmpassword) {
+      const confirmPassword = this.model.confirmpassword;
+      if (value && confirmPassword && value !== confirmPassword) {
         callback('两次输入的密码不一样！');
       }
       if (value && this.confirmDirty) {
-        this.$refs.form.validateField(['confirmpassword']);
+        this.$refs.form.validateField(['confirmPassword']);
       }
       callback();
     },
+
+    /**
+     * 与第一次密码做比对
+     * @param rule
+     * @param value
+     * @param callback
+     */
     compareToFirstPassword(rule, value, callback) {
       if (value && value !== this.model.password) {
         callback('两次输入的密码不一样！');
       } else {
-        callback()
+        callback();
       }
     },
+
+    /**
+     * 验证电话
+     * @param rule
+     * @param value
+     * @param callback
+     */
     validatePhone(rule, value, callback) {
       if (!value) {
         callback()
@@ -404,9 +473,9 @@
           };
           duplicateCheck(params).then((res) => {
             if (res.success) {
-              callback()
+              callback();
             } else {
-              callback("手机号已存在!")
+              callback("手机号已存在!");
             }
           })
         } else {
@@ -414,6 +483,13 @@
         }
       }
     },
+
+    /**
+     * 验证邮箱
+     * @param rule
+     * @param value
+     * @param callback
+     */
     validateEmail(rule, value, callback) {
       if (!value) {
         callback()
@@ -426,18 +502,24 @@
             dataId: this.userId
           };
           duplicateCheck(params).then((res) => {
-            console.log(res)
             if (res.success) {
-              callback()
+              callback();
             } else {
-              callback("邮箱已存在!")
+              callback("邮箱已存在!");
             }
           })
         } else {
-          callback("请输入正确格式的邮箱!")
+          callback("请输入正确格式的邮箱!");
         }
       }
     },
+
+    /**
+     * 验证用户名
+     * @param rule
+     * @param value
+     * @param callback
+     */
     validateUsername(rule, value, callback) {
       var params = {
         tableName: 'sys_user',
@@ -445,6 +527,7 @@
         fieldVal: value,
         dataId: this.userId
       };
+
       duplicateCheck(params).then((res) => {
         if (res.success) {
           callback()
@@ -453,6 +536,7 @@
         }
       })
     },
+
     validateWorkNo(rule, value, callback) {
       var params = {
         tableName: 'sys_user',
@@ -472,20 +556,22 @@
       const value = e.target.value;
       this.confirmDirty = this.confirmDirty || !!value
     },
+
+    /**
+     * 图片上传前
+     * @param file
+     * @returns {boolean}
+     */
     beforeUpload: function (file) {
       var fileType = file.type;
       if (fileType.indexOf('image') < 0) {
         this.$message.warning('请上传图片');
         return false;
       }
-      //TODO 验证文件大小
+      // 验证文件大小（暂未实现的功能）
     },
     identityChange(e) {
-      if (e.target.value === 1) {
-        this.departIdShow = false;
-      } else {
-        this.departIdShow = true;
-      }
+      this.departIdShow = e.target.value !== 1;
     }
   }
 }

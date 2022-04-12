@@ -12,6 +12,7 @@ import cn.soft.modules.system.entity.SysUser;
 import cn.soft.modules.system.entity.SysUserRole;
 import cn.soft.modules.system.model.DepartIdModel;
 import cn.soft.modules.system.service.ISysLogService;
+import cn.soft.modules.system.service.ISysUserDepartService;
 import cn.soft.modules.system.service.ISysUserRoleService;
 import cn.soft.modules.system.service.ISysUserService;
 import com.alibaba.fastjson.JSONObject;
@@ -56,6 +57,15 @@ public class SysUserController {
     @Autowired
     public void setSysUserRoleService(ISysUserRoleService sysUserRoleService) {
         this.sysUserRoleService = sysUserRoleService;
+    }
+
+    /**
+     * 注入用户组织机构service
+     */
+    private ISysUserDepartService sysUserDepartService;
+    @Autowired
+    public void setSysUserDepartService(ISysUserDepartService sysUserDepartService) {
+        this.sysUserDepartService = sysUserDepartService;
     }
 
     /**
@@ -214,7 +224,23 @@ public class SysUserController {
     @GetMapping("/userDepartList")
     public Result<List<DepartIdModel>> getUserDepartList(@RequestParam(name = "userId") String userId) {
         Result<List<DepartIdModel>> result = new Result<>();
-        return result;
+        try {
+            List<DepartIdModel> departIdModelList = this.sysUserDepartService.queryDepartIdsOfUser(userId);
+            if (departIdModelList != null && departIdModelList.size() > 0) {
+                result.setSuccess(true);
+                result.setMessage("查找成功");
+                result.setResult(departIdModelList);
+            } else {
+                result.setSuccess(false);
+                result.setMessage("未查询到用户对应的部门信息");
+            }
+            return result;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            result.setSuccess(false);
+            result.setMessage("查询过程中出现了异常：" + e.getMessage());
+            return result;
+        }
     }
 
     /**
