@@ -199,7 +199,7 @@
       initWebSocket: function () {
         // WebSocket与普通的请求所用协议有所不同，ws等同于http，wss等同于https
         let userId = store.getters.userInfo.id;
-        let url = window._CONFIG['domianURL'].replace("https://","wss://").replace("http://","ws://")+"/websocket/"+userId;
+        let url = window._CONFIG['domainURL'].replace("https://","wss://").replace("http://","ws://")+"/websocket/"+userId;
         //console.log(url);
         // 这里暂时禁用websocket
         // this.websock = new WebSocket(url);

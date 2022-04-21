@@ -75,12 +75,12 @@
     watch: {
       url (val) {
         if(val){
-         this.uploadAction = window._CONFIG['domianURL']+val
+         this.uploadAction = window._CONFIG['domainURL']+val
         }
       }
     },
     created () {
-      this.uploadAction = window._CONFIG['domianURL']+this.url
+      this.uploadAction = window._CONFIG['domainURL']+this.url
     },
 
     methods:{
@@ -142,7 +142,7 @@
       // 错误信息提示
       errorTip(tipMessage, fileUrl) {
         const h = this.$createElement;
-        let href = window._CONFIG['domianURL'] + fileUrl
+        let href = window._CONFIG['domainURL'] + fileUrl
         this.$warning({
           title: '导入成功,但是有错误数据!',
           content: h('div', {}, [

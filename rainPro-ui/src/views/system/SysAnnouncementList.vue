@@ -257,7 +257,7 @@
     },
     computed: {
       importExcelUrl: function(){
-        return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
+        return `${window._CONFIG['domainURL']}/${this.url.importExcelUrl}`;
       }
     },
     methods: {
@@ -291,7 +291,7 @@
         getAction("sys/annountCement/syncNotic",{anntId:anntId})
       },
       handleDetail:function(record){
-        const domain = window._CONFIG['domianURL']
+        const domain = window._CONFIG['domainURL']
         const token = this.$ls.get(ACCESS_TOKEN)
         this.detailModal.url = `${domain}/sys/annountCement/show/${record.id}?token=${token}`
         this.detailModal.visible = true

@@ -2871,7 +2871,7 @@
       /** 上传请求地址 */
       getUploadAction(value) {
         if (!value) {
-          return window._CONFIG['domianURL'] + '/sys/common/upload'
+          return window._CONFIG['domainURL'] + '/sys/common/upload'
         } else {
           return value
         }

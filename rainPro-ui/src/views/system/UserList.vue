@@ -301,7 +301,7 @@
     },
     computed: {
       importExcelUrl: function(){
-        return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
+        return `${window._CONFIG['domainURL']}/${this.url.importExcelUrl}`;
       }
     },
     methods: {
@@ -388,5 +388,5 @@
   }
 </script>
 <style scoped>
-  @import '~@assets/less/common.less'
+  @import '~@assets/less/common.less';
 </style>

@@ -116,7 +116,7 @@ export default {
 
     /** 后台构造oauth2登录地址 */
     sysOAuth2Login(source) {
-      let url = `${window._CONFIG['domianURL']}/sys/thirdLogin/oauth2/${source}/login`
+      let url = `${window._CONFIG['domainURL']}/sys/thirdLogin/oauth2/${source}/login`
       url += `?state=${encodeURIComponent(window.location.origin)}`
       window.location.href = url
     },
