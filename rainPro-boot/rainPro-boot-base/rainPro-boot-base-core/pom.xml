@@ -11,29 +11,7 @@
 
     <artifactId>rainPro-boot-base-core</artifactId>
 
-
-    <repositories>
-        <repository>
-            <id>aliyun</id>
-            <name>aliyun Repository</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>jeecg</id>
-            <name>jeecg Repository</name>
-            <url>https://maven.jeecg.org/nexus/content/repositories/jeecg</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-
     <dependencies>
-        <!--jeecg-tools-->
         <dependency>
             <groupId>cn.soft</groupId>
             <artifactId>rainPro-boot-base-tools</artifactId>
@@ -128,19 +106,19 @@
             <scope>runtime</scope>
         </dependency>
         <!--  sqlserver-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>sqljdbc4</artifactId>
             <version>${sqljdbc4.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <!-- oracle驱动 -->
+        &lt;!&ndash; oracle驱动 &ndash;&gt;
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>${ojdbc6.version}</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
         <!-- postgresql驱动 -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -148,12 +126,6 @@
             <version>${postgresql.version}</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- Quartz定时任务 -->
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-quartz</artifactId>
-        </dependency>-->
 
         <!--JWT-->
         <dependency>
@@ -186,14 +158,6 @@
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>${knife4j-spring-boot-starter.version}</version>
-        </dependency>
-
-        <!-- 代码生成器 -->
-        <!-- 如下载失败，请参考此文档  http://doc.jeecg.com/2043876 -->
-        <dependency>
-            <groupId>org.jeecgframework.boot</groupId>
-            <artifactId>codegenerate</artifactId>
-            <version>${codegenerate.version}</version>
         </dependency>
 
         <!-- AutoPoi Excel工具类-->

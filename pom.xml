@@ -53,41 +53,7 @@
 
     <modules>
         <module>rainPro-boot</module>
-        <!--需要微服务，请打开
-        <module>jeecg-boot-starter</module>
-        <module>jeecg-cloud-module</module>-->
     </modules>
-
-    <distributionManagement>
-        <repository>
-            <id>jeecg</id>
-            <name>jeecg Repository</name>
-            <url>http://maven.jeecg.com:8090/nexus/content/repositories/jeecg</url>
-        </repository>
-        <snapshotRepository>
-            <id>jeecg-snapshots</id>
-            <name>jeecg Snapshot Repository</name>
-            <url>http://maven.jeecg.com:8090/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-    <repositories>
-        <repository>
-            <id>aliyun</id>
-            <name>aliyun Repository</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>jeecg</id>
-            <name>jeecg Repository</name>
-            <url>https://maven.jeecg.org/nexus/content/repositories/jeecg</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -150,7 +116,6 @@
                 <version>${rainPro.version}</version>
             </dependency>
 
-            <!-- jeecg tools -->
             <dependency>
                 <groupId>cn.soft</groupId>
                 <artifactId>rainPro-boot-base-tools</artifactId>
@@ -175,60 +140,12 @@
                 <version>${rainPro.version}</version>
             </dependency>
 
-            <!--微服务模块-->
-            <!--<dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-boot-starter-cloud</artifactId>
-                <version>${jeecgboot.version}</version>
-            </dependency>-->
-
-            <!--xxl-job定时任务-->
-            <!--<dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-boot-starter-job</artifactId>
-                <version>${jeecgboot.version}</version>
-            </dependency>-->
-
-            <!--redis分布式锁-->
-            <!--<dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-boot-starter-lock</artifactId>
-                <version>${jeecgboot.version}</version>
-            </dependency>-->
-
-            <!--rabbitmq消息队列-->
-            <!--<dependency>
-                <groupId>org.jeecgframework.boot</groupId>
-                <artifactId>jeecg-boot-starter-rabbitmq</artifactId>
-                <version>${jeecgboot.version}</version>
-            </dependency>-->
-
-
-            <!-- 七牛云SDK -->
-            <!--<dependency>
-                <groupId>com.qiniu</groupId>
-                <artifactId>qiniu-java-sdk</artifactId>
-                <version>${qiniu-java-sdk.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>okhttp</artifactId>
-                        <groupId>com.squareup.okhttp3</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>-->
             <!-- dom4j -->
             <dependency>
                 <groupId>dom4j</groupId>
                 <artifactId>dom4j</artifactId>
                 <version>${dom4j.version}</version>
             </dependency>
-            <!-- redisson -->
-            <!--<dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson</artifactId>
-                <version>${redisson.version}</version>
-            </dependency>-->
-
             <!-- guava工具类 -->
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -309,11 +226,7 @@
 
     <build>
         <plugins>
-            <!--<plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-             指定JDK编译版本 -->
+            <!--指定JDK编译版本 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
