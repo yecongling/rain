@@ -15,25 +15,26 @@
 </template>
 
 <script>
-  import IndexChart from './IndexChart'
-  import IndexTask from "./IndexTask"
-  import IndexBdc from './IndexBdc'
+import IndexChart from './IndexChart'
+import IndexTask from "./IndexTask"
+import IndexBdc from './IndexBdc'
 
-  export default {
-    name: "Analysis",
-    components: {
-      IndexChart,
-      IndexTask,
-      IndexBdc
-    },
-    data() {
-      return {
-        indexStyle: 3
-      }
-    },
-    created() {
+export default {
+  name: "Analysis",
+  components: {
+    IndexChart,
+    IndexTask,
+    IndexBdc
+  },
+  data() {
+    return {
+      // 默认选中第二个统计图表
+      indexStyle: 2
+    }
+  },
+  created() {
 
-    },
-    methods: {}
-  }
+  },
+  methods: {}
+}
 </script>
