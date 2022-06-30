@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.soft</groupId>
-    <artifactId>rainPro</artifactId>
+    <artifactId>rain</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -13,7 +13,7 @@
     </parent>
 
     <properties>
-        <rainPro.version>1.0-SNAPSHOT</rainPro.version>
+        <rain.version>1.0-SNAPSHOT</rain.version>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
@@ -52,7 +52,7 @@
     </properties>
 
     <modules>
-        <module>rainPro-boot</module>
+        <module>rain-boot</module>
     </modules>
 
     <dependencies>
@@ -112,32 +112,32 @@
             <!-- system 模块-->
             <dependency>
                 <groupId>cn.soft</groupId>
-                <artifactId>rainPro-boot-module-system</artifactId>
-                <version>${rainPro.version}</version>
+                <artifactId>rain-boot-module-system</artifactId>
+                <version>${rain.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cn.soft</groupId>
-                <artifactId>rainPro-boot-base-tools</artifactId>
-                <version>${rainPro.version}</version>
+                <artifactId>rain-boot-base-tools</artifactId>
+                <version>${rain.version}</version>
             </dependency>
             <!-- jeecg core -->
             <dependency>
                 <groupId>cn.soft</groupId>
-                <artifactId>rainPro-boot-base-core</artifactId>
-                <version>${rainPro.version}</version>
+                <artifactId>rain-boot-base-core</artifactId>
+                <version>${rain.version}</version>
             </dependency>
             <!-- system 单体 api -->
             <dependency>
                 <groupId>cn.soft</groupId>
-                <artifactId>rainPro-system-local-api</artifactId>
-                <version>${rainPro.version}</version>
+                <artifactId>rain-system-local-api</artifactId>
+                <version>${rain.version}</version>
             </dependency>
             <!-- system 微服务 api -->
             <dependency>
                 <groupId>cn.soft</groupId>
-                <artifactId>rainPro-system-cloud-api</artifactId>
-                <version>${rainPro.version}</version>
+                <artifactId>rain-system-cloud-api</artifactId>
+                <version>${rain.version}</version>
             </dependency>
 
             <!-- dom4j -->
@@ -287,7 +287,7 @@
                 <!--当前环境-->
                 <profile.name>dev</profile.name>
                 <!--配置文件前缀-->
-                <prefix.name>rainPro</prefix.name>
+                <prefix.name>rain</prefix.name>
                 <!--Nacos配置中心地址-->
 <!--                <config.server-addr>127.0.0.1:8848</config.server-addr>-->
 <!--                &lt;!&ndash;Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空&ndash;&gt;-->
