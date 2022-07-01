@@ -1,3 +1,4 @@
+use rainpro;
 /* 1、新建系统日志表  sys_log */
 CREATE TABLE if not exists  `sys_log`
 (
