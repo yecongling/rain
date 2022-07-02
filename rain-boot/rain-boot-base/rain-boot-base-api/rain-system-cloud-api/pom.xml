@@ -16,12 +16,12 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <!-- feign -->
+    <!--<dependencies>
+        &lt;!&ndash; feign &ndash;&gt;
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-    </dependencies>
+    </dependencies>-->
 
 </project>
