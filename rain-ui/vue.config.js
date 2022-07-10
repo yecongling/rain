@@ -93,7 +93,7 @@ module.exports = {
           '/jeecg-boot': ''  //默认所有请求都加了jeecg-boot前缀，需要去掉
         }
       }, */
-      '/rainpro-boot': {
+      '/rain-boot': {
         target: 'http://localhost:8080', // 请求本地 需要jeecg-boot后台项目
         ws: false,
         changeOrigin: true

@@ -11,7 +11,7 @@ server:
     include-stacktrace: ALWAYS
     include-message: ALWAYS
   servlet:
-    context-path: /rainpro-boot
+    context-path: /rain-boot
   compression:
     enabled: true
     min-response-size: 1024

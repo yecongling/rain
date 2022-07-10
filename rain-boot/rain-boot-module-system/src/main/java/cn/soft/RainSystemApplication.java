@@ -16,15 +16,15 @@ import java.net.UnknownHostException;
 @Slf4j
 @EnableAsync
 @SpringBootApplication
-public class RainProSystemApplication extends SpringBootServletInitializer {
+public class RainSystemApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(RainProSystemApplication.class);
+        return application.sources(RainSystemApplication.class);
     }
 
     public static void main(String[] args) throws UnknownHostException {
-        ConfigurableApplicationContext application = SpringApplication.run(RainProSystemApplication.class, args);
+        ConfigurableApplicationContext application = SpringApplication.run(RainSystemApplication.class, args);
 
     }
 
