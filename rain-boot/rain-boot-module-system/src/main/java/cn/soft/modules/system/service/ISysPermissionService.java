@@ -1,5 +1,7 @@
 package cn.soft.modules.system.service;
 
+import cn.soft.common.api.vo.Result;
+import cn.soft.common.exception.RainBootException;
 import cn.soft.modules.system.entity.SysPermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -23,4 +25,11 @@ public interface ISysPermissionService extends IService<SysPermission> {
      * @return 返回授权角色集合
      */
     public List<String> getRole(String username);
+
+    /**
+     * 编辑菜单
+     *
+     * @param permission 菜单对象
+     */
+    public Result<SysPermission> editPermission(SysPermission permission) throws RainBootException;
 }

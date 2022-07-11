@@ -1,5 +1,7 @@
 package cn.soft.modules.system.service.impl;
 
+import cn.soft.common.api.vo.Result;
+import cn.soft.common.exception.RainBootException;
 import cn.soft.modules.system.entity.SysPermission;
 import cn.soft.modules.system.mapper.SysPermissionMapper;
 import cn.soft.modules.system.service.ISysPermissionService;
@@ -38,6 +40,16 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
      */
     @Override
     public List<String> getRole(String username) {
+        return null;
+    }
+
+    /**
+     * 编辑菜单
+     *
+     * @param permission 菜单对象
+     */
+    @Override
+    public Result<SysPermission> editPermission(SysPermission permission) throws RainBootException {
         return null;
     }
 }
