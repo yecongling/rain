@@ -470,6 +470,15 @@ public class SysPermissionController {
      */
     @RequestMapping(value = "/edit", method = {RequestMethod.POST, RequestMethod.PUT})
     public Result<SysPermission> edit(@RequestBody SysPermission permission) {
-        return permissionService.editPermission(permission);
+        Result<SysPermission> result = new Result<>();
+        try {
+            permission = PermissionDataUtil.intelligentProcessData(permission);
+            permissionService.editPermission(permission);
+            result.success("修改成功");
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            result.error500("操作失败");
+        }
+        return result;
     }
 }

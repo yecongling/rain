@@ -118,7 +118,7 @@ public interface CommonConstant {
      */
     public static final String NO_SEND = "0";
     public static final String HAS_SEND = "1";
-    public static final String HAS_CANCLE = "2";
+    public static final String HAS_CANCEL = "2";
 
     /**
      * 阅读状态（0未读，1已读）
