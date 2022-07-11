@@ -462,4 +462,14 @@ public class SysPermissionController {
         }
     }
 
+    /**
+     * 编辑菜单
+     *
+     * @param permission 菜单对象
+     * @return 返回结果
+     */
+    @RequestMapping(value = "/edit", method = {RequestMethod.POST, RequestMethod.PUT})
+    public Result<SysPermission> edit(@RequestBody SysPermission permission) {
+        return permissionService.editPermission(permission);
+    }
 }
